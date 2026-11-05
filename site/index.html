@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Microsoft Foundry 데모 — Contoso AI</title>
+  <meta name="description" content="azd up 한 번으로 모델·에이전트·가드레일·평가를 실제 Azure에 배포하고, 직원은 ChatGPT 같은 앱으로, 관리자는 Foundry 포털에서 운영하는 과정을 담은 한국어 데모 영상과 소스 코드.">
+  <meta name="theme-color" content="#0a0f1d">
+  <link rel="canonical" href="{{base_url}}">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="ko_KR">
+  <meta property="og:title" content="Microsoft Foundry 데모 — Contoso AI">
+  <meta property="og:description" content="배포부터 운영까지 {{duration}} — 한국어 내레이션·자막이 있는 데모 영상과 소스 코드">
+  <meta property="og:url" content="{{base_url}}">
+  <meta property="og:image" content="{{base_url}}thumbnail.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preload" href="fonts/PretendardVariable.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="assets/site.css">
+  <script src="assets/site.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">본문으로 건너뛰기</a>
+
+<header class="nav">
+  <div class="container nav-in">
+    <a class="brand" href="./" aria-label="처음으로"><span class="logo" aria-hidden="true">{{icon:sparkles}}</span><span>Foundry 데모</span></a>
+    <nav aria-label="주 메뉴">
+      <a href="#video">영상</a>
+      <a href="#features">데모 내용</a>
+      <a href="#arch">구조</a>
+      <a href="#start">시작하기</a>
+      <a href="#docs">문서</a>
+    </nav>
+    <a class="btn small" href="{{repo_url}}" target="_blank" rel="noopener">{{icon:github}}<span>GitHub</span></a>
+  </div>
+</header>
+
+<main id="main">
+  <section class="container hero">
+    <p class="eyebrow">Contoso AI · Microsoft Foundry · 한국어 데모</p>
+    <h1>배포부터 운영까지,<br><span class="grad">Microsoft Foundry</span> 한 편으로</h1>
+    <p class="lead"><code>azd up</code> 한 번으로 모델·에이전트·가드레일·평가·관측을 실제 Azure에 배포하고, 직원은 ChatGPT 같은 앱으로 일하고 관리자는 Foundry 포털에서 운영하는 모습을 그대로 녹화했습니다.</p>
+    <div class="cta">
+      <a class="btn primary" href="#video" data-t="0">{{icon:play}}<span>영상 보기 · {{duration}}</span></a>
+      <a class="btn" href="#start">{{icon:terminal}}<span>직접 배포해 보기</span></a>
+      <a class="btn" href="{{repo_url}}" target="_blank" rel="noopener">{{icon:github}}<span>소스 코드</span></a>
+    </div>
+  </section>
+
+  <section id="video" class="container" aria-labelledby="video-h">
+    <h2 id="video-h" class="sr">데모 영상</h2>
+    <div class="player">
+      <div class="player-main">
+        <video id="demo" controls preload="metadata" playsinline poster="poster.jpg">
+          <source src="{{video_file}}" type="video/mp4">
+          <track kind="subtitles" srclang="ko" label="한국어 (자막 파일)" src="{{vtt_file}}">
+          <p>이 브라우저는 영상 재생을 지원하지 않습니다. <a href="{{video_file}}">영상 파일을 내려받아</a> 보세요.</p>
+        </video>
+        <p class="now" id="now" aria-live="polite"></p>
+        <ul class="facts">
+          <li>{{icon:clock}}<span>{{duration}}</span></li>
+          <li><span>1080p · 한국어 내레이션 · 자막</span></li>
+          <li><span>챕터 {{chapter_count}}개</span></li>
+        </ul>
+        <div class="links">
+          <button type="button" id="share">{{icon:link}}<span>현재 시점 링크 복사</span></button>
+          <a href="{{video_file}}" download>{{icon:download}}<span>영상 내려받기 ({{size_mb}})</span></a>
+          <a href="{{srt_file}}" download>{{icon:file-text}}<span>자막 파일(SRT)</span></a>
+        </div>
+      </div>
+      <aside class="chapters" aria-label="챕터 목록">
+        <div class="chapters-in">
+          <h3>챕터 <small>눌러서 이동</small></h3>
+          <div class="chapters-scroll">
+            <ol id="chapter-list">
+      {{chapters_html}}
+            </ol>
+          </div>
+        </div>
+      </aside>
+    </div>
+    <details class="transcript">
+      <summary>{{icon:scan-text}}<span>대본 전체 보기</span><small>시각을 누르면 그 장면으로 이동합니다</small></summary>
+      <div class="transcript-body">
+{{transcript_html}}
+      </div>
+    </details>
+  </section>
+
+  <section id="features" class="container section">
+    <header class="sec-head">
+      <p class="eyebrow">무엇을 보여 주나요</p>
+      <h2>한 편에 담긴 Foundry의 핵심 기능</h2>
+      <p>카드를 누르면 영상의 해당 장면으로 이동합니다.</p>
+    </header>
+    <div class="cards">
+      <a class="card blue" href="#t={{t:deploy}}" data-t="{{t:deploy}}">
+        <span class="ci">{{icon:rocket}}</span>
+        <h3>명령어 하나로 전체 배포</h3>
+        <p><code>azd up</code> 실제 실행 기록. Foundry·모델 9개·가드레일·Application Insights·웹 앱이 Bicep 한 벌로 배포됩니다.</p>
+        <div class="foot"><span class="tag">Bicep · azd</span><span class="when">▶ {{mmss:deploy}}</span></div>
+      </a>
+      <a class="card indigo" href="#t={{t:guide}}" data-t="{{t:guide}}">
+        <span class="ci">{{icon:book-open}}</span>
+        <h3>출처와 함께 답하는 사내 도우미</h3>
+        <p>Contoso Guide가 사규 PDF 8개를 검색해 답하고, 근거가 된 문서를 함께 보여 줍니다.</p>
+        <div class="foot"><span class="tag">파일 검색 · 벡터 스토어</span><span class="when">▶ {{mmss:guide}}</span></div>
+      </a>
+      <a class="card green" href="#t={{t:pay}}" data-t="{{t:pay}}">
+        <span class="ci">{{icon:receipt}}</span>
+        <h3>영수증 → 규정 검토 → 사람 승인</h3>
+        <p>Contoso Pay가 사진을 읽고 규정에 맞는 금액을 계산한 뒤, 사람이 승인해야만 정산을 상신합니다.</p>
+        <div class="foot"><span class="tag">비전 · 함수 호출 · 승인</span><span class="when">▶ {{mmss:pay}}</span></div>
+      </a>
+      <a class="card violet" href="#t={{t:analyst}}" data-t="{{t:analyst}}">
+        <span class="ci">{{icon:chart-column}}</span>
+        <h3>코드를 짜서 실행하는 분석가</h3>
+        <p>Contoso Analyst가 CSV를 분석하고 차트를 그립니다. 작성한 코드를 열어 검증할 수 있습니다.</p>
+        <div class="foot"><span class="tag">Code Interpreter</span><span class="when">▶ {{mmss:analyst}}</span></div>
+      </a>
+      <a class="card cyan" href="#t={{t:architect}}" data-t="{{t:architect}}">
+        <span class="ci">{{icon:cloud}}</span>
+        <h3>공식 문서를 검색해 답변</h3>
+        <p>Contoso Architect가 Microsoft Learn MCP 서버로 방금 검색한 문서를 근거로 답합니다.</p>
+        <div class="foot"><span class="tag">MCP 도구</span><span class="when">▶ {{mmss:architect}}</span></div>
+      </a>
+      <a class="card amber" href="#t={{t:chat}}" data-t="{{t:chat}}">
+        <span class="ci">{{icon:message-square}}</span>
+        <h3>모델을 바꿔 가며 대화</h3>
+        <p>같은 화면에서 GPT-6.1·DeepSeek 등을 고르고, Model Router가 알맞은 모델을 대신 고르게 합니다.</p>
+        <div class="foot"><span class="tag">모델 카탈로그 · Model Router</span><span class="when">▶ {{mmss:chat}}</span></div>
+      </a>
+      <a class="card red" href="#t={{t:safety}}" data-t="{{t:safety}}">
+        <span class="ci">{{icon:shield-check}}</span>
+        <h3>개인정보 마스킹과 탈옥 차단</h3>
+        <p>주민등록번호 같은 개인정보는 가려서 보내고, 탈옥 시도는 가드레일이 모델을 부르기 전에 막습니다.</p>
+        <div class="foot"><span class="tag">가드레일 · Prompt Shields</span><span class="when">▶ {{mmss:safety}}</span></div>
+      </a>
+      <a class="card pink" href="#t={{t:admin}}" data-t="{{t:admin}}">
+        <span class="ci">{{icon:sliders-horizontal}}</span>
+        <h3>앱이 아니라 Foundry 포털에서 운영</h3>
+        <p>모델·에이전트·가드레일·추적·평가·할당량을 실제 포털 화면으로 보여 줍니다.</p>
+        <div class="foot"><span class="tag">Foundry 포털</span><span class="when">▶ {{mmss:admin}}</span></div>
+      </a>
+    </div>
+  </section>
+
+  <section id="arch" class="container section">
+    <header class="sec-head">
+      <p class="eyebrow">구조</p>
+      <h2>한 리전, 한 프로젝트, 키 없는 접속</h2>
+      <p>모든 것이 한국 중부(Korea Central) 리전의 Foundry 프로젝트 하나에 있습니다. (<a href="#t={{t:arch}}" data-t="{{t:arch}}">▶ {{mmss:arch}} 구조 설명 보기</a>)</p>
+    </header>
+    <div class="arch" role="group" aria-label="아키텍처 도식">
+      <div class="arch-main">
+        <div class="node"><b>{{icon:user}} 직원</b><small>브라우저 · 접속 코드</small></div>
+        <div class="arrow" aria-hidden="true"><b>→</b></div>
+        <div class="node"><b>{{icon:globe}} 웹 앱</b><small>Azure Container Apps<br>FastAPI + 정적 프런트엔드</small></div>
+        <div class="arrow" aria-hidden="true"><small>관리 ID<br>Entra ID</small><b>→</b></div>
+        <div class="foundry">
+          <div class="f-head"><b>Microsoft Foundry · 프로젝트 contoso-ai</b><span>Korea Central</span></div>
+          <div class="f-grid">
+            <div><b>{{icon:cpu}} 모델 ×9</b><small>GPT-6.1 sol·terra · Model Router · 임베딩<br>DeepSeek · Kimi · Llama · Mistral · Grok</small></div>
+            <div><b>{{icon:bot}} 에이전트 ×4</b><small>Guide · Pay · Analyst · Architect<br>(Agent Service, 버전 관리)</small></div>
+            <div><b>{{icon:shield-check}} 가드레일</b><small>콘텐츠 필터 · Prompt Shields<br>모델 배포에 연결</small></div>
+            <div><b>{{icon:flask-conical}} 평가 · 추적</b><small>내장 평가기 · 단계별 트레이스<br>Application Insights 연결</small></div>
+          </div>
+          <div class="f-tools"><span>{{icon:database}} 벡터 스토어(사규 PDF 8개)</span><span>{{icon:code}} Code Interpreter</span><span>{{icon:plug}} Microsoft Learn MCP</span></div>
+        </div>
+      </div>
+      <div class="arch-foot">
+        <div class="node admin"><b>{{icon:sliders-horizontal}} 관리자</b><small>Foundry 포털에서 같은 프로젝트를 운영</small></div>
+        <div class="node"><b>{{icon:fingerprint}} Azure AI Language</b><small>개인정보 마스킹 (웹 앱이 호출)</small></div>
+        <div class="node"><b>{{icon:activity}} Application Insights</b><small>요청 추적 · 지연 · 토큰 사용량</small></div>
+      </div>
+    </div>
+    <ul class="points">
+      <li>{{icon:key-round}}<span><b>키 없이 접속</b> — 앱은 사용자 할당 관리 ID와 역할(RBAC)로만 Foundry를 호출하고, Foundry 리소스는 키 인증을 꺼 두었습니다.</span></li>
+      <li>{{icon:layers}}<span><b>한 프로젝트에 모두</b> — 모델 9개·에이전트 4개·가드레일·평가·추적이 같은 프로젝트에서 같은 방식으로 관리됩니다.</span></li>
+      <li>{{icon:server}}<span><b>Docker 없이 배포</b> — 앱 이미지는 Azure Container Registry 원격 빌드로 만들고, 관리 ID로 가져옵니다.</span></li>
+    </ul>
+  </section>
+
+  <section id="start" class="container section">
+    <header class="sec-head">
+      <p class="eyebrow">직접 해 보기</p>
+      <h2>내 구독에 배포하기</h2>
+      <p>Docker 없이 명령어 하나로, 약 8~10분이면 끝납니다.</p>
+    </header>
+    <div class="start-grid">
+      <div class="code">
+        <div class="code-bar"><span>터미널</span><button type="button" class="copy" aria-label="명령어 복사">{{icon:copy}}<span>복사</span></button></div>
+        <pre><code>git clone {{repo_url}}.git
+cd {{repo}}
+
+az login
+azd auth login
+azd up                          # 환경 이름 예: contoso-demo
+
+azd env get-value WEB_URI           # 직원용 앱 주소
+azd env get-value DEMO_ACCESS_CODE  # 접속 코드
+
+azd down --purge --force        # 다 쓰고 나면 정리</code></pre>
+      </div>
+      <ul class="checks">
+        <li>{{icon:list-checks}}<span><b>준비물</b> Azure 구독(소유자, 또는 기여자 + 사용자 액세스 관리자), Azure CLI, Azure Developer CLI(azd). Docker는 필요 없습니다.</span></li>
+        <li>{{icon:gauge}}<span><b>모델 쿼터</b> 선택한 리전에 GPT-6.1 등의 쿼터가 있어야 합니다. 부족하면 <code>infra/main.bicep</code>에서 용량을 줄이거나 멀티벤더 모델을 끄세요.</span></li>
+        <li>{{icon:info}}<span><b>시연용 구성</b> 공개 엔드포인트와 접속 코드로 단순하게 만든 데모입니다. 운영에서는 Entra ID 로그인·프라이빗 엔드포인트 등을 켜세요. <a href="{{repo_url}}#이-데모와-운영-환경의-차이" target="_blank" rel="noopener">운영과의 차이 표</a></span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="docs" class="container section">
+    <header class="sec-head">
+      <p class="eyebrow">문서</p>
+      <h2>더 읽을거리</h2>
+    </header>
+    <div class="doc-cards">
+      {{docs_cards}}
+      <a class="doc-card" href="{{repo_url}}#readme" target="_blank" rel="noopener"><h3>README</h3><p>아키텍처, 빠른 시작, 로컬 실행, 평가, 문제 해결.</p><span>GitHub에서 보기 ↗</span></a>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <p>샘플 문서·영수증·판매/VOC 수치와 회사 ‘Contoso’는 모두 <b>가상</b>입니다.</p>
+    <p><a href="{{repo_url}}" target="_blank" rel="noopener">GitHub 저장소</a> · <a href="doc.html?p=third-party-notices">오픈소스 고지</a> · 빌드 <code>{{commit}}</code> · {{build_date}}</p>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>문서 — Microsoft Foundry 데모</title>
+  <meta name="theme-color" content="#0a0f1d">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="fonts/PretendardVariable.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+<a class="skip" href="#doc">본문으로 건너뛰기</a>
+
+<header class="nav">
+  <div class="container nav-in">
+    <a class="brand" href="./" aria-label="데모 홈"><span class="logo" aria-hidden="true">{{icon:sparkles}}</span><span>Foundry 데모</span></a>
+    <nav aria-label="주 메뉴">
+      <a href="./#video">영상</a>
+      <a href="./#features">데모 내용</a>
+      <a href="./#arch">구조</a>
+      <a href="./#start">시작하기</a>
+      <a href="./#docs">문서</a>
+    </nav>
+    <a class="btn small" href="{{repo_url}}" target="_blank" rel="noopener">{{icon:github}}<span>GitHub</span></a>
+  </div>
+</header>
+
+<main class="container doc-layout">
+  <div>
+    <p class="crumbs" id="crumbs"><a href="./">← 데모 홈</a></p>
+    <article class="prose" id="doc" aria-live="polite"><p>불러오는 중…</p></article>
+  </div>
+  <nav class="toc" id="toc" aria-label="이 문서의 목차" hidden></nav>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <p><a href="{{repo_url}}" target="_blank" rel="noopener">GitHub 저장소</a> · <a href="./">데모 홈</a> · 빌드 <code>{{commit}}</code> · {{build_date}}</p>
+  </div>
+</footer>
+
+<script type="module">
+  import { marked } from './vendor/marked.mjs';
+  import DOMPurify from './vendor/purify.mjs';
+
+  const REPO = '{{repo_url}}';
+  const DOCS = {{docs_json}};
+  const slug = (new URLSearchParams(location.search).get('p') || '').trim();
+  const doc = document.getElementById('doc');
+  const crumbs = document.getElementById('crumbs');
+
+  const names = { ...DOCS, 'third-party-notices': '오픈소스 고지' };
+  crumbs.innerHTML = '<a href="./">← 데모 홈</a>' + Object.entries(names).map(([k, v]) => {
+    const a = document.createElement('a');
+    a.href = 'doc.html?p=' + k; a.textContent = v;
+    if (k === slug) a.setAttribute('aria-current', 'page'), a.style.color = 'var(--ink)';
+    return a.outerHTML;
+  }).join('');
+
+  async function load() {
+    if (!/^[a-z0-9_-]+$/i.test(slug)) {
+      doc.innerHTML = '<h1>문서를 고르세요</h1><ul>' + Object.entries(names).map(([k, v]) => `<li><a href="doc.html?p=${k}">${v}</a></li>`).join('') + '</ul>';
+      return;
+    }
+    let md;
+    try {
+      const r = await fetch(`docs/${slug}.md`);
+      if (!r.ok) throw new Error(r.status);
+      md = await r.text();
+    } catch {
+      doc.innerHTML = '<h1>문서를 찾을 수 없습니다</h1><p><a href="./">데모 홈으로 돌아가기</a></p>';
+      return;
+    }
+    doc.innerHTML = DOMPurify.sanitize(marked.parse(md, { gfm: true }));
+
+    // 상대 링크: 다른 문서는 이 뷰어로, 그 밖의 파일은 GitHub 의 해당 파일로 보낸다
+    doc.querySelectorAll('a[href]').forEach((a) => {
+      const href = a.getAttribute('href');
+      if (/^(https?:|mailto:|#)/i.test(href)) { if (!href.startsWith('#')) { a.target = '_blank'; a.rel = 'noopener'; } return; }
+      const path = href.replace(/^\.\//, '').replace(/^\.\.\//, '');
+      const md = /(?:^|\/)([a-z0-9_-]+)\.md(?:#.*)?$/i.exec(path);
+      if (md && md[1].toLowerCase() !== 'readme') { a.href = 'doc.html?p=' + md[1]; return; }
+      a.href = `${REPO}/blob/main/${path.replace(/^docs\//, 'docs/')}`; a.target = '_blank'; a.rel = 'noopener';
+    });
+    doc.querySelectorAll('table').forEach((t) => {
+      const w = document.createElement('div'); w.className = 'table-wrap'; t.replaceWith(w); w.append(t);
+    });
+
+    const h1 = doc.querySelector('h1');
+    if (h1) document.title = h1.textContent + ' — Microsoft Foundry 데모';
+
+    const heads = [...doc.querySelectorAll('h2')];
+    heads.forEach((h, i) => { h.id = 's' + (i + 1); });
+    if (heads.length > 2) {
+      const toc = document.getElementById('toc');
+      toc.innerHTML = '<b>이 문서에서</b>' + heads.map((h) => `<a href="#${h.id}">${h.textContent}</a>`).join('');
+      toc.hidden = false;
+      const links = [...toc.querySelectorAll('a')];
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((en) => { if (en.isIntersecting) links.forEach((l) => l.classList.toggle('on', l.hash === '#' + en.target.id)); });
+      }, { rootMargin: '-80px 0px -70% 0px' });
+      heads.forEach((h) => io.observe(h));
+    }
+    if (location.hash) document.getElementById(location.hash.slice(1))?.scrollIntoView();
+  }
+  load();
+</script>
+</body>
+</html>
