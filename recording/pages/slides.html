@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>Foundry 데모 — 슬라이드</title>
+<style>
+  @font-face { font-family: 'Pretendard'; src: url('/src/web/static/fonts/PretendardVariable.woff2') format('woff2-variations'); font-weight: 45 920; }
+  :root { --brand: #0f6cbd; --brand2: #6d4ae0; --ink: #e8edf8; --mut: #93a0bd; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; overflow: hidden; font-family: 'Pretendard', 'Apple SD Gothic Neo', sans-serif; color: var(--ink); -webkit-font-smoothing: antialiased; }
+  body { background: #0a0f1d; }
+  .bg { position: fixed; inset: 0; background:
+    radial-gradient(900px 520px at 12% -8%, rgba(15,108,189,.55), transparent 62%),
+    radial-gradient(820px 520px at 105% 108%, rgba(109,74,224,.5), transparent 60%),
+    radial-gradient(500px 300px at 60% 40%, rgba(56,189,248,.08), transparent 70%), #0a0f1d; }
+  .grid { position: fixed; inset: 0; background-image: linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px); background-size: 48px 48px; mask-image: radial-gradient(ellipse at 50% 40%, #000 0, transparent 75%); }
+  section { position: fixed; inset: 0 0 78px 0; display: none; padding: 54px 80px 20px; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+  section.on { display: flex; }
+  .logo { width: 92px; height: 92px; border-radius: 26px; background: linear-gradient(135deg, #0f6cbd, #6d4ae0); display: grid; place-items: center; box-shadow: 0 18px 50px rgba(79,70,229,.5); margin: 0 auto 26px; }
+  h1 { font-size: 82px; letter-spacing: -.045em; line-height: 1.05; margin: 0 0 14px; font-weight: 800; background: linear-gradient(120deg, #fff 30%, #9ec9ff 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  h2 { font-size: 30px; font-weight: 500; color: #c3cde3; margin: 0 0 28px; letter-spacing: -.02em; }
+  .pills { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+  .pill { padding: 9px 18px; border-radius: 999px; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.16); font-weight: 600; font-size: 18px; }
+  .pill.a { background: rgba(15,108,189,.35); border-color: rgba(96,165,250,.5); }
+  .fade { opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s ease; }
+  [data-step~="1"] .s1, [data-step~="2"] .s2, [data-step~="3"] .s3, [data-step~="4"] .s4, [data-step~="5"] .s5, [data-step~="6"] .s6, [data-step~="7"] .s7 { opacity: 1; transform: none; }
+  h3.title { font-size: 46px; letter-spacing: -.035em; margin: 0 0 34px; font-weight: 800; }
+  .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; width: 100%; max-width: 1240px; }
+  .card { text-align: left; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.14); border-radius: 22px; padding: 28px 28px 26px; }
+  .card .ic { width: 54px; height: 54px; border-radius: 16px; display: grid; place-items: center; margin-bottom: 16px; }
+  .card h4 { margin: 0 0 6px; font-size: 27px; letter-spacing: -.03em; }
+  .card .pain { color: #ffb4a8; font-size: 18px; margin-bottom: 14px; }
+  .card .ans { color: #c9f2d8; font-size: 18px; border-top: 1px dashed rgba(255,255,255,.2); padding-top: 14px; line-height: 1.55; }
+  .card .ans b { color: #fff; }
+  .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; width: 100%; max-width: 1280px; }
+  .step { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.14); border-radius: 22px; padding: 28px 24px; text-align: left; min-height: 250px; }
+  .step .n { width: 46px; height: 46px; border-radius: 50%; background: linear-gradient(135deg, #0f6cbd, #6d4ae0); display: grid; place-items: center; font-weight: 800; font-size: 22px; margin-bottom: 16px; }
+  .step h4 { margin: 0 0 8px; font-size: 26px; letter-spacing: -.03em; } .step p { margin: 0; color: #b4bfd6; font-size: 18px; line-height: 1.6; }
+  /* 아키텍처 */
+  .arch { position: relative; width: 1290px; height: 560px; }
+  .box { position: absolute; border-radius: 18px; border: 1.5px solid rgba(255,255,255,.2); background: rgba(255,255,255,.06); padding: 14px 18px; text-align: left; }
+  .box .t { font-weight: 800; font-size: 19px; letter-spacing: -.02em; display: flex; gap: 9px; align-items: center; }
+  .box .d { color: #aab6cf; font-size: 15px; margin-top: 4px; line-height: 1.5; }
+  .box.foundry { border-color: rgba(96,165,250,.65); background: rgba(15,108,189,.12); box-shadow: 0 0 0 1px rgba(96,165,250,.2), 0 20px 60px rgba(15,108,189,.25); }
+  .tag { display: inline-block; font-size: 13.5px; font-weight: 700; padding: 3px 10px; border-radius: 99px; background: rgba(255,255,255,.1); margin: 4px 4px 0 0; }
+  .tag.t1 { background: rgba(59,130,246,.3); } .tag.t2 { background: rgba(124,58,237,.35); } .tag.t3 { background: rgba(16,185,129,.3); } .tag.t4 { background: rgba(8,145,178,.35); }
+  svg.links { position: absolute; inset: 0; pointer-events: none; }
+  .link { stroke: #60a5fa; stroke-width: 2.5; fill: none; stroke-dasharray: 8 7; animation: dash 1.2s linear infinite; opacity: 0; transition: opacity .6s; }
+  [data-step~="1"] .l1, [data-step~="2"] .l2, [data-step~="3"] .l3, [data-step~="6"] .l4 { opacity: 1; }
+  @keyframes dash { to { stroke-dashoffset: -30; } }
+  .pillars { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; width: 100%; max-width: 1180px; }
+  .pillar { display: flex; gap: 20px; text-align: left; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.14); border-radius: 22px; padding: 26px 28px; }
+  .pillar .ic { flex: none; width: 60px; height: 60px; border-radius: 18px; display: grid; place-items: center; }
+  .pillar h4 { margin: 0 0 6px; font-size: 27px; letter-spacing: -.03em; } .pillar p { margin: 0; color: #b4bfd6; font-size: 19px; line-height: 1.55; }
+  .code { font-family: Menlo, monospace; background: #0d1117; border: 1px solid #263044; border-radius: 14px; padding: 18px 28px; font-size: 28px; color: #7ee787; box-shadow: 0 14px 40px rgba(0,0,0,.4); }
+  .code span { color: #8b949e; }
+  .chap .num { font-size: 120px; font-weight: 900; letter-spacing: -.06em; background: linear-gradient(135deg, #38bdf8, #a78bfa); -webkit-background-clip: text; background-clip: text; color: transparent; line-height: 1; margin-bottom: 10px; }
+  .chap h1 { font-size: 66px; } .chap h2 { font-size: 28px; margin: 0; }
+
+  /* Foundry 플랫폼 지도 */
+  .wm { width: 100%; max-width: 1260px; display: flex; flex-direction: column; gap: 18px; }
+  .wm-top { display: flex; align-items: center; justify-content: center; gap: 14px; padding: 18px 26px; border-radius: 20px; border: 1.5px dashed rgba(255,255,255,.3); background: rgba(255,255,255,.04); font-size: 24px; font-weight: 700; letter-spacing: -.02em; }
+  .wm-top span { color: #9fb0cf; font-weight: 500; font-size: 19px; }
+  .wm-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .wm-p { text-align: left; border-radius: 20px; padding: 22px 24px; border: 1px solid color-mix(in srgb, var(--c) 55%, transparent); background: linear-gradient(160deg, color-mix(in srgb, var(--c) 22%, transparent), rgba(255,255,255,.04)); }
+  .wm-p .ic { width: 50px; height: 50px; border-radius: 15px; background: var(--c); display: grid; place-items: center; margin-bottom: 12px; }
+  .wm-p h4 { margin: 0 0 6px; font-size: 26px; letter-spacing: -.03em; } .wm-p p { margin: 0; color: #c0cbe0; font-size: 18px; line-height: 1.55; }
+  .wm-base { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; padding: 16px 20px; border-radius: 20px; background: linear-gradient(90deg, rgba(15,108,189,.35), rgba(109,74,224,.35)); border: 1px solid rgba(147,197,253,.4); }
+  .wm-base span { display: inline-flex; gap: 8px; align-items: center; font-size: 19px; font-weight: 700; padding: 6px 14px; border-radius: 99px; background: rgba(255,255,255,.1); }
+  /* 코드 슬라이드 */
+  .codewrap { display: grid; width: 100%; max-width: 1240px; }
+  .codewrap .win { grid-area: 1 / 1; }
+  .win.b { opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s ease; }
+  [data-step~="3"] .win.a { opacity: 0 !important; transform: translateY(-14px) !important; } [data-step~="3"] .win.b { opacity: 1; transform: none; }
+  .win { text-align: left; background: #0d1117; border: 1px solid #263044; border-radius: 16px; box-shadow: 0 18px 50px rgba(0,0,0,.45); overflow: hidden; }
+  .win .bar { display: flex; align-items: center; gap: 8px; padding: 12px 16px; background: #161b22; border-bottom: 1px solid #263044; font-size: 17px; color: #9fb0cf; font-weight: 600; }
+  .win .bar i { width: 12px; height: 12px; border-radius: 50%; background: #ff5f56; } .win .bar i:nth-child(2) { background: #ffbd2e; } .win .bar i:nth-child(3) { background: #27c93f; } .win .bar b { margin-left: 10px; color: #e6edf3; }
+  .win pre { margin: 0; padding: 16px 0 18px; font: 500 19.5px/1.55 Menlo, 'Nanum Gothic Coding', monospace; color: #e6edf3; white-space: pre; }
+  .win pre .ln { display: block; padding: 0 22px; border-left: 4px solid transparent; transition: background .5s, border-color .5s, opacity .5s; }
+  .win pre.dim .ln { opacity: .42; } .win pre.dim .ln.hl { opacity: 1; background: rgba(56,139,253,.16); border-left-color: #58a6ff; }
+  .hljs-keyword, .hljs-literal, .hljs-built_in { color: #ff7b72; } .hljs-string { color: #a5d6ff; } .hljs-comment { color: #8b949e; font-style: normal; }
+  .hljs-title, .hljs-title.function_, .hljs-title.class_ { color: #d2a8ff; } .hljs-number { color: #79c0ff; } .hljs-attr, .hljs-params { color: #e6edf3; } .hljs-meta { color: #79c0ff; }
+  .codenote { margin-top: 20px; display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
+  .codenote .pill { font-size: 20px; padding: 10px 20px; }
+  /* 엔터프라이즈 체크리스트 */
+  .ent { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; width: 100%; max-width: 1300px; }
+  .ent .e { text-align: left; border-radius: 20px; padding: 22px 24px 20px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.14); display: flex; flex-direction: column; gap: 6px; min-height: 238px; }
+  .ent .e .top { display: flex; align-items: center; gap: 14px; margin-bottom: 4px; }
+  .ent .e .ic { flex: none; width: 48px; height: 48px; border-radius: 14px; display: grid; place-items: center; }
+  .ent .e h4 { margin: 0; font-size: 26px; letter-spacing: -.03em; } .ent .e p { margin: 0; color: #b9c4da; font-size: 18px; line-height: 1.55; flex: 1; }
+  .chip2 { align-self: flex-start; font-size: 16.5px; font-weight: 700; padding: 6px 13px; border-radius: 99px; margin-top: 8px; }
+  .chip2.ok { background: rgba(16,185,129,.2); color: #86efac; border: 1px solid rgba(16,185,129,.5); }
+  .chip2.todo { background: rgba(245,158,11,.18); color: #fcd34d; border: 1px solid rgba(245,158,11,.5); }
+  .chip2.info { background: rgba(96,165,250,.18); color: #93c5fd; border: 1px solid rgba(96,165,250,.5); }
+  .grow { flex: 1; }
+</style>
+</head>
+<body>
+<div class="bg"></div><div class="grid"></div>
+
+<section id="title"><div class="logo" id="ic-logo"></div>
+  <h1 class="fade s1">Microsoft Foundry</h1><h2 class="fade s2">한국 기업이 바로 쓰는 AI 플랫폼 — 20분 데모</h2>
+  <div class="pills fade s3"><span class="pill a">Contoso AI</span><span class="pill">Korea Central 단일 리전</span><span class="pill">GPT-6.1</span><span class="pill">Agents · Guardrails · Evaluations</span><span class="pill">azd up 한 번</span></div></section>
+
+<section id="problem"><h3 class="title">AI는 파일럿에서 멈춥니다 — 전사 확산의 세 가지 벽</h3>
+  <div class="cards">
+    <div class="card fade s1"><div class="ic" style="background:#2563eb" data-ic="plug"></div><h4>연결</h4><div class="pain">우리 문서·시스템을 안전하게?</div><div class="ans"><b>에이전트 + 도구</b><br>문서 검색 · 코드 실행 · MCP · 함수</div></div>
+    <div class="card fade s2"><div class="ic" style="background:#7c3aed" data-ic="git-compare"></div><h4>선택</h4><div class="pain">모델은 매주 바뀌는데?</div><div class="ans"><b>모델 카탈로그 + Model Router</b><br>여러 회사 모델을 한 방식으로 호출</div></div>
+    <div class="card fade s3"><div class="ic" style="background:#059669" data-ic="shield-check"></div><h4>증명</h4><div class="pain">품질·보안을 운영 중에도?</div><div class="ans"><b>평가 · 가드레일 · 추적</b><br>숫자와 코드로 입증</div></div>
+  </div></section>
+
+<section id="agenda"><h3 class="title">오늘 보여 드릴 것</h3>
+  <div class="steps">
+    <div class="step fade s1"><div class="n">1</div><h4>한 번에 배포</h4><p>azd up 한 줄로 Foundry · 모델 · 가드레일 · 웹앱까지</p></div>
+    <div class="step fade s2"><div class="n">2</div><h4>직원 경험</h4><p>챗지피티 같은 앱 · 문서 검색 · 업무 자동화 · 데이터 분석</p></div>
+    <div class="step fade s3"><div class="n">3</div><h4>관리자 경험</h4><p>Foundry 포털 · 모델 · 에이전트 · 가드레일 · 추적 · 평가</p></div>
+    <div class="step fade s4"><div class="n">4</div><h4>도입 체크리스트</h4><p>보안 · 데이터 · 비용 — 한국 기업이 먼저 묻는 여섯 가지</p></div>
+  </div></section>
+
+<section id="arch"><h3 class="title" style="margin-bottom:22px">아키텍처 — 한 리전, 한 프로젝트, 키 없는 접속</h3>
+  <div class="arch">
+    <svg class="links" viewBox="0 0 1290 560">
+      <path class="link l1" d="M232 96 H300" /><path class="link l2" d="M572 96 H640" />
+      <path class="link l3" d="M797 372 V430" /><path class="link l3" d="M1132 372 V430" /><path class="link l4" d="M572 262 H640" /><path class="link l4" d="M232 262 H300" />
+    </svg>
+    <div class="box fade s1" style="left:0;top:30px;width:232px;height:132px"><div class="t" data-ic="user-round">직원</div><div class="d">브라우저에서 챗지피티 같은<br>웹 화면으로 접속</div></div>
+    <div class="box fade s1" style="left:300px;top:30px;width:272px;height:132px"><div class="t" data-ic="boxes">웹앱</div><div class="d">Azure Container Apps<br>FastAPI + 정적 프런트엔드<br>접속 코드 → Entra ID</div></div>
+    <div class="box fade s6" style="left:300px;top:215px;width:272px;height:132px;border-color:rgba(251,191,36,.6);background:rgba(251,191,36,.08)"><div class="t" data-ic="sliders-horizontal">관리자 · Foundry 포털</div><div class="d">ai.azure.com<br>모델 · 에이전트 · 가드레일<br>추적 · 평가 · 할당량</div></div>
+    <div class="box fade s6" style="left:0;top:215px;width:232px;height:132px;border-color:rgba(251,191,36,.6);background:rgba(251,191,36,.08)"><div class="t" data-ic="user-check">운영 담당자</div><div class="d">IT·보안·AI 운영팀<br>Entra ID 로그인 + 역할 권한</div></div>
+    <div class="box foundry fade s2" style="left:640px;top:0;width:650px;height:372px;padding:18px 20px">
+      <div class="t" style="font-size:22px" data-ic="sparkles">Microsoft Foundry · 프로젝트 contoso-ai <span class="tag" style="margin-left:auto">Korea Central</span></div>
+      <div class="d" style="margin-bottom:6px">하나의 리소스 · 하나의 엔드포인트 · 하나의 권한 체계</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:10px">
+        <div class="box fade s4" style="position:static;padding:12px 14px;min-height:128px"><div class="t" data-ic="bot">에이전트 ×4</div><div style="margin-top:4px"><span class="tag t1">file_search</span><span class="tag t2">Code Interpreter</span><span class="tag t3">함수 호출</span><span class="tag t4">MCP</span></div></div>
+        <div class="box fade s3" style="position:static;padding:12px 14px;min-height:128px"><div class="t" data-ic="cpu">모델 ×9</div><div style="margin-top:4px"><span class="tag">GPT-6.1 Sol/Terra</span><span class="tag">Model Router</span><span class="tag">임베딩</span><span class="tag">DeepSeek</span><span class="tag">Kimi</span><span class="tag">Llama</span><span class="tag">Mistral</span><span class="tag">Grok</span></div></div>
+        <div class="box fade s5" style="position:static;padding:12px 14px;min-height:96px"><div class="t" data-ic="shield-check">가드레일</div><div class="d">콘텐츠 필터 · Prompt Shields<br>PII 탐지 · 정책은 코드</div></div>
+        <div class="box fade s5" style="position:static;padding:12px 14px;min-height:96px"><div class="t" data-ic="flask-conical">평가 · 추적</div><div class="d">내장 평가기 · 에이전트 단계 추적<br>품질을 점수로</div></div>
+      </div>
+    </div>
+    <div class="box fade s7" style="left:640px;top:430px;width:315px;height:112px"><div class="t" data-ic="key-round">Entra ID · 관리 ID</div><div class="d">키 없음 · RBAC 최소 권한<br>MFA·SSO 연동</div></div>
+    <div class="box fade s7" style="left:975px;top:430px;width:315px;height:112px"><div class="t" data-ic="activity">Application Insights</div><div class="d">Log Analytics 연결<br>추적 · 지연 · 토큰</div></div>
+  </div></section>
+
+
+<section id="what"><h3 class="title" style="margin-bottom:26px">Microsoft Foundry — AI 앱과 에이전트를 위한 하나의 플랫폼</h3>
+  <div class="wm">
+    <div class="wm-top fade s1"><span style="display:contents" data-ic="boxes"></span>여러분의 앱 · 에이전트 · 업무 시스템 <span>웹 · 모바일 · Teams · 사내 시스템</span></div>
+    <div class="wm-grid">
+      <div class="wm-p fade s2" style="--c:#2563eb"><div class="ic" data-ic="cpu"></div><h4>모델</h4><p>GPT-6.1 · 파트너/오픈 모델<br>Model Router · 파인튜닝</p></div>
+      <div class="wm-p fade s2" style="--c:#7c3aed"><div class="ic" data-ic="bot"></div><h4>에이전트</h4><p>Agent Service · 대화 기억<br>버전 관리 · 사람 승인</p></div>
+      <div class="wm-p fade s2" style="--c:#0891b2"><div class="ic" data-ic="plug"></div><h4>도구 · 지식</h4><p>파일 검색 · 코드 실행 · MCP<br>웹 검색 · 사내 함수</p></div>
+      <div class="wm-p fade s3" style="--c:#dc2626"><div class="ic" data-ic="shield-check"></div><h4>가드레일</h4><p>콘텐츠 안전 · Prompt Shields<br>개인정보 · 간접 공격 방어</p></div>
+      <div class="wm-p fade s3" style="--c:#d97706"><div class="ic" data-ic="flask-conical"></div><h4>평가</h4><p>내장 평가기 · 에이전트 평가<br>배포 전후 품질 비교</p></div>
+      <div class="wm-p fade s3" style="--c:#059669"><div class="ic" data-ic="activity"></div><h4>추적 · 운영</h4><p>단계별 추적 · Application Insights<br>지연 · 토큰 · 쿼터</p></div>
+    </div>
+    <div class="wm-base fade s4"><span data-ic="key-round">Microsoft Entra ID</span><span data-ic="user-check">Azure RBAC</span><span data-ic="network">네트워크 격리</span><span data-ic="gauge">Azure Monitor</span><span data-ic="shield-check">Defender · Purview</span></div>
+  </div></section>
+
+<section id="code"><h3 class="title" style="margin-bottom:20px">에이전트는 코드로 만듭니다 — 정의 한 덩어리, 호출 한 덩어리</h3>
+  <div class="codewrap">
+    <div class="win a fade s1"><div class="bar"><i></i><i></i><i></i><b>agents_def.py</b>정의 — 모델 + 지침 + 도구</div><pre id="code-def"></pre></div>
+    <div class="win b"><div class="bar"><i></i><i></i><i></i><b>chat.py</b>호출 — 키 없이 · 스트리밍</div><pre id="code-call"></pre></div>
+  </div>
+  <div class="codenote fade s5"><span class="pill a">지침·도구를 바꾸면 새 버전</span><span class="pill">포털에서 이전 버전과 비교</span><span class="pill">화면은 이벤트를 그대로 그릴 뿐</span></div></section>
+
+<section id="enterprise"><h3 class="title" style="margin-bottom:26px">엔터프라이즈 도입 체크리스트 — 한국 기업이 가장 먼저 묻는 여섯 가지</h3>
+  <div class="ent">
+    <div class="e fade s1"><div class="top"><div class="ic" style="background:#2563eb" data-ic="key-round"></div><h4>접근 제어</h4></div><p>Microsoft Entra ID · Azure RBAC<br>사람과 앱 모두 최소 권한</p><span class="chip2 ok">✔ 이 데모: 키 없이 관리 ID</span></div>
+    <div class="e fade s1"><div class="top"><div class="ic" style="background:#7c3aed" data-ic="network"></div><h4>네트워크</h4></div><p>프라이빗 엔드포인트 · 가상 네트워크<br>공용 인터넷 노출 차단</p><span class="chip2 todo">▲ 운영 시: 격리 구성</span></div>
+    <div class="e fade s2"><div class="top"><div class="ic" style="background:#059669" data-ic="lock"></div><h4>데이터 보호</h4></div><p>고객 데이터는 기본 모델 학습에 사용되지 않음<br>저장 시 암호화 · 고객 관리 키</p><span class="chip2 ok">✔ 기본 제공</span></div>
+    <div class="e fade s2"><div class="top"><div class="ic" style="background:#0891b2" data-ic="map-pin"></div><h4>처리 위치</h4></div><p>리소스 지역 + 배포 유형 선택<br>Global · Data Zone · Regional</p><span class="chip2 info">ⓘ 이 데모: Global Standard</span></div>
+    <div class="e fade s3"><div class="top"><div class="ic" style="background:#dc2626" data-ic="shield-check"></div><h4>보안 · 거버넌스</h4></div><p>Defender for Cloud · Purview<br>Azure Policy · 감사 로그</p><span class="chip2 todo">▲ 운영 시: 켜기</span></div>
+    <div class="e fade s3"><div class="top"><div class="ic" style="background:#d97706" data-ic="coins"></div><h4>비용 통제</h4></div><p>토큰 종량제 · 쿼터 · 예산 알림<br>안정적 성능은 프로비저닝 처리량</p><span class="chip2 ok">✔ 이 데모: 배포별 쿼터</span></div>
+  </div></section>
+
+<section id="chapter" class="chap"><div class="num" id="c-num">1</div><h1 id="c-title">제목</h1><h2 id="c-sub">부제</h2></section>
+
+<section id="summary"><h3 class="title">오늘 본 것</h3>
+  <div class="pillars">
+    <div class="pillar fade s1"><div class="ic" style="background:#2563eb" data-ic="rocket"></div><div><h4>한 번에 배포</h4><p>명령어 하나로 모델·에이전트·가드레일·관측까지 코드로 배포</p></div></div>
+    <div class="pillar fade s2"><div class="ic" style="background:#059669" data-ic="bot"></div><div><h4>직원은 챗지피티 같은 앱으로</h4><p>문서에 답하고, 업무를 처리하고, 데이터를 분석 (사람 승인)</p></div></div>
+    <div class="pillar fade s3"><div class="ic" style="background:#7c3aed" data-ic="sliders-horizontal"></div><div><h4>관리자는 Foundry 포털에서</h4><p>모델 · 에이전트 · 가드레일 · 추적 · 평가를 한곳에서 운영</p></div></div>
+    <div class="pillar fade s4"><div class="ic" style="background:#d4322a" data-ic="shield-check"></div><div><h4>코드와 숫자로 증명</h4><p>가드레일은 코드로, 품질은 평가 점수로, 운영은 추적으로</p></div></div>
+  </div></section>
+
+<section id="next"><h3 class="title">다음 단계</h3>
+  <div class="steps" style="grid-template-columns:repeat(3,1fr);max-width:1180px">
+    <div class="step fade s1" style="min-height:200px"><div class="n">1</div><h4>업무 하나 고르기</h4><p>가장 반복적이고 규정·문서에 기대는 업무</p></div>
+    <div class="step fade s2" style="min-height:200px"><div class="n">2</div><h4>문서 연결 + 평가 20문항</h4><p>지식을 붙이고, 정답이 있는 질문으로 점수 확인</p></div>
+    <div class="step fade s3" style="min-height:200px"><div class="n">3</div><h4>직접 배포해 보기</h4><p>이 저장소로 오늘 본 환경을 그대로 재현</p></div>
+  </div>
+  <div class="code fade s4" style="margin-top:30px">$ azd up <span># 약 10분 — 모델·에이전트·가드레일·웹앱</span></div></section>
+
+<script type="module">
+  import { ICONS } from '/src/web/static/vendor/icons.js';
+  const svg = (name, size) => `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${ICONS[name] || ''}</svg>`;
+
+  import hljs from '/src/web/static/vendor/highlight.mjs';
+  const DEF = [
+    'from azure.ai.projects.models import PromptAgentDefinition, FileSearchTool, MCPTool',
+    '',
+    'agent = project.agents.create_version(        # 새 버전이 만들어집니다',
+    '    agent_name="contoso-guide",',
+    '    definition=PromptAgentDefinition(',
+    '        model="gpt-6.1-terra",                # 배포 이름 한 줄',
+    '        instructions=KNOWLEDGE,               # 지침',
+    '        tools=[                               # 도구 — 연결만으로 추가',
+    '            FileSearchTool(vector_store_ids=[vs.id]),',
+    '            MCPTool(server_label="mslearn",',
+    '                    server_url="https://learn.microsoft.com/api/mcp"),',
+    '        ],',
+    '    ),',
+    ')',
+  ];
+  const DEF_HL = [5, 6, 7, 8, 9, 10, 11];
+  const CALL = [
+    'project = AIProjectClient(',
+    '    endpoint=FOUNDRY_PROJECT_ENDPOINT,',
+    '    credential=DefaultAzureCredential(),     # 키 없음 · Entra ID',
+    ')',
+    'openai = project.get_openai_client()',
+    '',
+    'stream = openai.responses.create(',
+    '    conversation=conv.id,                    # 대화 기억',
+    '    input="입사 4년 차 연차는 며칠이야?",',
+    '    extra_body={"agent_reference": {',
+    '        "name": "contoso-guide",          # 에이전트 이름만 알려 주면 끝',
+    '        "type": "agent_reference"}},',
+    '    stream=True,                             # 도구 호출·출처·토큰이 이벤트로 도착',
+    ')',
+  ];
+  const CALL_HL = [2, 10, 12];
+  function renderCode(id, lines, hl) {
+    const html = hljs.highlight(lines.join('\n'), { language: 'python' }).value.split('\n');
+    document.getElementById(id).innerHTML = html.map((l, i) => `<span class="ln${hl.includes(i) ? ' hl' : ''}">${l || ' '}</span>`).join('');
+  }
+  renderCode('code-def', DEF, DEF_HL);
+  renderCode('code-call', CALL, CALL_HL);
+  document.getElementById('ic-logo').innerHTML = svg('sparkles', 46);
+  document.querySelectorAll('[data-ic]').forEach((el) => { const n = el.dataset.ic; const big = el.classList.contains('ic'); el.insertAdjacentHTML('afterbegin', svg(n, big ? 28 : 22)); });
+  window.__slide = {
+    show(name, params = {}) {
+      document.querySelectorAll('section').forEach((s) => s.classList.toggle('on', s.id === name));
+      document.body.dataset.step = '';
+      if (name === 'chapter') { document.getElementById('c-num').textContent = params.n; document.getElementById('c-title').textContent = params.title; document.getElementById('c-sub').textContent = params.sub || ''; document.body.dataset.step = '1 2 3'; }
+    },
+    step(n) {
+      document.body.dataset.step = Array.from({ length: n }, (_, i) => i + 1).join(' ');
+      document.getElementById('code-def')?.classList.toggle('dim', n === 2);
+      document.getElementById('code-call')?.classList.toggle('dim', n === 4);
+    },
+  };
+  window.__ready = true;
+</script>
+</body>
+</html>
