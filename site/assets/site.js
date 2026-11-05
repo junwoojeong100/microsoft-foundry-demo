@@ -20,6 +20,7 @@
         video.currentTime = t;
       }
       if (play) video.play().catch(() => {});
+      markChapter(t); // 영상이 해당 위치를 불러오기 전에도 챕터 표시와 '지금' 문구를 바로 바꾼다
       if (reveal) {
         const r = video.getBoundingClientRect();
         if (r.top < 64 || r.bottom > innerHeight) video.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center' });
