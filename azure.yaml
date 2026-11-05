@@ -1,0 +1,43 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
+name: microsoft-foundry-demo
+metadata:
+  template: microsoft-foundry-demo@1.0.0
+
+infra:
+  provider: bicep
+  path: infra
+  module: main
+
+services:
+  web:
+    project: ./src/web
+    language: py
+    host: containerapp
+    docker:
+      path: ./Dockerfile
+      context: .
+      remoteBuild: true   # 로컬 Docker 없이 Azure Container Registry 가 빌드합니다
+
+hooks:
+  preprovision:
+    posix:
+      shell: sh
+      run: ./scripts/hooks/preprovision.sh
+      interactive: false
+      continueOnError: false
+    windows:
+      shell: pwsh
+      run: ./scripts/hooks/preprovision.ps1
+      interactive: false
+      continueOnError: false
+  postdeploy:
+    posix:
+      shell: sh
+      run: ./scripts/hooks/postdeploy.sh
+      interactive: false
+      continueOnError: true
+    windows:
+      shell: pwsh
+      run: ./scripts/hooks/postdeploy.ps1
+      interactive: false
+      continueOnError: true

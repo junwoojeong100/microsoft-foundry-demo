@@ -1,0 +1,4 @@
+# 샘플 데이터·영상 제작 스크립트용 (웹앱 배포에는 필요 없음)
+-r src/web/requirements.txt
+playwright==1.64.1
+pillow==13.0.0

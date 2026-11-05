@@ -1,0 +1,26 @@
+# 환경·비밀
+.azure/
+.env
+.env.*
+*.pem
+
+# Python / Node
+.venv/
+__pycache__/
+*.pyc
+node_modules/
+
+# macOS
+.DS_Store
+
+# 영상 제작 중간 산출물(용량이 큼) — 최종 영상만 video/ 에 둡니다
+recording/raw/
+recording/frames/
+recording/tmp/
+
+# 포털 로그인 세션(인증 쿠키 포함) — 절대 커밋하지 않습니다
+portal_state*.json
+*_state.json
+
+# GitHub Pages 빌드 결과 (Actions 가 배포 때 다시 만듭니다)
+_site/
