@@ -2,6 +2,8 @@
 <!-- summary: 영상과 같은 흐름으로 라이브 시연하는 법 — 장면별 한 줄 설명, 시작 질문과 기대 결과, 고객이 자주 묻는 질문. -->
 
 영상(`video/microsoft-foundry-demo-ko.mp4`)의 흐름을 그대로 **라이브로 시연**하거나, 영상을 틀고 **설명을 덧붙일 때** 쓰는 가이드입니다.
+
+> **같은 흐름의 자료** — 발표 슬라이드: [한국어](https://view.officeapps.live.com/op/view.aspx?src=https%3A%2F%2Fjunwoojeong100.github.io%2Fmicrosoft-foundry-demo%2Fslides%2FMicrosoft_Foundry_Demo_Deck_KO.pptx) · [English](https://view.officeapps.live.com/op/view.aspx?src=https%3A%2F%2Fjunwoojeong100.github.io%2Fmicrosoft-foundry-demo%2Fslides%2FMicrosoft_Foundry_Demo_Deck_EN.pptx) (웹에서 바로 열리고, 슬라이드 속 영상이 재생되며, 발표자 노트에 대본이 있습니다). 전체 영상: [한국어](https://junwoojeong100.github.io/microsoft-foundry-demo/) · [English](https://junwoojeong100.github.io/microsoft-foundry-demo/microsoft-foundry-demo-en.mp4).
 모델 응답은 실행마다 조금씩 다르므로 아래 "기대하는 결과"는 문장이 아니라 **핵심 사실**만 적었습니다.
 
 ## 한 문장 메시지

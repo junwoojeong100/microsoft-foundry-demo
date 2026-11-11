@@ -1,5 +1,5 @@
 # main 에 push 하면 사이트(영상 + 문서)를 다시 만들어 GitHub Pages 에 배포합니다.
-#   · 사이트 소스: site/ · 영상: video/ · 문서: docs/  (만드는 방법: scripts/build_site.py)
+#   · 사이트 소스: site/ · 영상: video/ · 슬라이드(PPTX): slides/ · 문서: docs/  (만드는 방법: scripts/build_site.py)
 #   · 처음 한 번만 저장소 Settings → Pages → Source 를 "GitHub Actions" 로 두면 됩니다(이 저장소는 이미 설정돼 있습니다).
 name: Deploy site to GitHub Pages
 

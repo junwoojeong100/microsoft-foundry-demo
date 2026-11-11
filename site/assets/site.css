@@ -160,6 +160,8 @@ h1 { margin: 0 0 20px; font-size: clamp(2.1rem, 4.8vw, 3.6rem); line-height: 1.1
 .doc-card p { flex: 1; margin: 0; color: var(--mut); font-size: 14.5px; }
 .doc-card span { color: var(--brand); font-weight: 700; font-size: 14px; }
 
+.deck-note { margin: 18px 4px 0; color: var(--faint); font-size: 13.5px; line-height: 1.65; }
+
 .footer { margin-top: 90px; padding: 34px 0 44px; color: var(--faint); font-size: 13.5px; border-top: 1px solid var(--line); }
 .footer p { margin: 4px 0; }
 

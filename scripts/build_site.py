@@ -9,12 +9,14 @@
 
 입력                                                      → 출력(_site/)
   site/index.html · doc.html · assets/                    → {{자리표시자}} 를 채운 페이지
-  video/<이름>.mp4 · .srt · .chapters.txt · .thumbnail.png → 영상, 챕터(눌러서 이동), 대본, 길이·용량 표시
+  video/<이름>-ko.mp4 · .srt · .chapters.txt · .thumbnail.png → 영상, 챕터(눌러서 이동), 대본, 길이·용량 표시
+  video/<이름>-en.mp4 · .srt                              → 영문 영상 (사이트에서 바로 재생되는 파일 링크)
+  slides/Microsoft_Foundry_Demo_Deck_{KO,EN}.pptx         → slides/  (README·사이트의 Office 웹 뷰어 링크가 이 파일을 가리킴 — scripts/publish_deck.py 로 복사)
   docs/*.md                                               → docs/*.md  (doc.html 이 브라우저에서 변환해 보여 줌)
   src/web/static/{vendor,fonts}                           → vendor/ · fonts/ · 아이콘
 
 영상을 다시 만들어 video/ 를 바꾸고 push 하면 챕터·길이·대본이 저절로 바뀝니다.
-페이지 자리표시자: {{t:키}} {{mmss:키}} (챕터 시각) · {{icon:이름}} · {{duration}} {{size_mb}} {{repo_url}} {{base_url}} …
+페이지 자리표시자: {{t:키}} {{mmss:키}} (챕터 시각) · {{icon:이름}} · {{duration}} {{size_mb}} {{repo_url}} {{base_url}} {{viewer_ko}} {{viewer_en}} …
 """
 from __future__ import annotations
 
@@ -29,6 +31,8 @@ import shutil
 import struct
 import subprocess
 import sys
+import urllib.parse
+import zipfile
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 SRC = ROOT / "site"
@@ -36,6 +40,10 @@ VIDEO_DIR = ROOT / "video"
 DOCS_DIR = ROOT / "docs"
 STATIC = ROOT / "src/web/static"
 BASENAME = "microsoft-foundry-demo-ko"
+BASENAME_EN = "microsoft-foundry-demo-en"
+SLIDES_DIR = ROOT / "slides"
+DECK_NAMES = {"ko": "Microsoft_Foundry_Demo_Deck_KO.pptx", "en": "Microsoft_Foundry_Demo_Deck_EN.pptx"}
+OFFICE_VIEWER = "https://view.officeapps.live.com/op/view.aspx?src="  # 공개 주소의 PPTX 를 PowerPoint 웹 뷰어로 보여 줍니다(다운로드 불필요)
 DEFAULT_REPO = "junwoojeong100/microsoft-foundry-demo"
 KST = dt.timezone(dt.timedelta(hours=9))
 
@@ -171,6 +179,23 @@ def docs_info() -> list[dict]:
     return items
 
 
+def viewer_url(base: str, rel: str) -> str:
+    """Office 웹 뷰어 링크 — src 에는 덱의 공개 주소(퍼센트 인코딩)를 넣습니다."""
+    return OFFICE_VIEWER + urllib.parse.quote(base + rel, safe="")
+
+
+def deck_counts(path: pathlib.Path) -> tuple[int, int]:
+    """(슬라이드 수, 슬라이드에 내장된 영상 수)"""
+    with zipfile.ZipFile(path) as z:
+        names = z.namelist()
+    return sum(1 for n in names if re.fullmatch(r"ppt/slides/slide\d+\.xml", n)), sum(1 for n in names if re.fullmatch(r"ppt/media/.+\.mp4", n))
+
+
+def minutes_text(seconds: float, english: bool = False) -> str:
+    m, sec = divmod(int(round(seconds)), 60)
+    return f"{m} min {sec} s" if english else f"{m}분 {sec}초"
+
+
 # ───────────────────────────────────────── HTML 조각
 def chapters_html(chapters: list[dict]) -> str:
     rows = [f'<li><button type="button" data-t="{c["t"]}"><time>{mmss(c["t"])}</time><span>{html.escape(c["title"])}</span></button></li>' for c in chapters]
@@ -285,9 +310,12 @@ def main() -> None:
         die(f"출력 위치가 위험합니다: {out}")
 
     mp4, srt, chap, thumb, poster = (VIDEO_DIR / f"{BASENAME}{ext}" for ext in (".mp4", ".srt", ".chapters.txt", ".thumbnail.png", ".poster.jpg"))
-    for f in (mp4, srt, chap, thumb, poster, SRC / "index.html", SRC / "doc.html"):
+    mp4_en, srt_en = (VIDEO_DIR / f"{BASENAME_EN}{ext}" for ext in (".mp4", ".srt"))
+    decks = {lang: SLIDES_DIR / name for lang, name in DECK_NAMES.items()}
+    for f in (mp4, srt, chap, thumb, poster, mp4_en, srt_en, *decks.values(), SRC / "index.html", SRC / "doc.html"):
         if not f.exists():
-            die(f"필요한 파일이 없습니다: {f.relative_to(ROOT)}")
+            hint = "  (덱은 python scripts/publish_deck.py <덱.pptx> --lang ko|en 으로 slides/ 에 복사하세요)" if f.parent == SLIDES_DIR else ""
+            die(f"필요한 파일이 없습니다: {f.relative_to(ROOT)}{hint}")
 
     slug = repo_slug(args.repo)
     owner, name = slug.split("/", 1)
@@ -306,13 +334,19 @@ def main() -> None:
     icons = load_icons()
     now = dt.datetime.now(KST)
     d_min, d_sec = divmod(int(round(duration)), 60)
+    deck_stats = {lang: deck_counts(path) for lang, path in decks.items()}
     ctx = {
         "owner": owner, "repo": name, "repo_url": f"https://github.com/{slug}", "base_url": base,
         "duration": f"{d_min}분 {d_sec}초", "duration_mmss": f"{d_min}:{d_sec:02d}", "size_mb": f"{mp4.stat().st_size / 1e6:.1f}MB",
         "chapter_count": str(len(chapters)), "chapters_html": chapters_html(chapters), "transcript_html": transcript_html(cues, chapters),
         "docs_cards": docs_cards(docs), "docs_json": json.dumps({d["slug"]: d["title"] for d in docs}, ensure_ascii=False),
         "commit": short_commit(), "build_date": now.strftime("%Y-%m-%d %H:%M KST"), "video_file": mp4.name, "srt_file": srt.name, "vtt_file": f"{BASENAME}.vtt",
+        "video_en_file": mp4_en.name, "srt_en_file": srt_en.name, "duration_en": minutes_text(mp4_duration(mp4_en), english=True), "size_en_mb": f"{mp4_en.stat().st_size / 1e6:.1f}MB",
     }
+    for lang, path in decks.items():
+        rel = f"slides/{path.name}"
+        ctx.update({f"pptx_{lang}": rel, f"pptx_{lang}_mb": f"{path.stat().st_size / 1e6:.0f}MB", f"viewer_{lang}": viewer_url(base, rel),
+                    f"slides_{lang}_count": str(deck_stats[lang][0]), f"clips_{lang}_count": str(deck_stats[lang][1])})
 
     if out.exists():
         shutil.rmtree(out)
@@ -325,6 +359,11 @@ def main() -> None:
         shutil.copy2(STATIC / "vendor" / lib, out / "vendor" / lib)
     shutil.copy2(mp4, out / mp4.name)
     shutil.copy2(srt, out / srt.name)
+    shutil.copy2(mp4_en, out / mp4_en.name)
+    shutil.copy2(srt_en, out / srt_en.name)
+    (out / "slides").mkdir()
+    for path in decks.values():
+        shutil.copy2(path, out / "slides" / path.name)
     shutil.copy2(thumb, out / "thumbnail.png")  # 공유 미리보기(og:image)용
     shutil.copy2(poster, out / "poster.jpg")     # 재생 전 플레이어에 보이는 16:9 화면
     write_vtt(cues, out / ctx["vtt_file"])
@@ -343,12 +382,15 @@ def main() -> None:
     total = sum(p.stat().st_size for p in out.rglob("*") if p.is_file())
     print(f"✔ {out}  ({total / 1e6:.1f}MB)")
     print(f"  영상 {ctx['duration']} · {ctx['size_mb']} · 챕터 {len(chapters)}개 · 대본 {len(cues)}줄 · 문서 {len(docs)}개")
+    print(f"  영문 영상 {ctx['duration_en']} · {ctx['size_en_mb']} · 슬라이드 한국어 {ctx['slides_ko_count']}장({ctx['pptx_ko_mb']}) · 영어 {ctx['slides_en_count']}장({ctx['pptx_en_mb']})")
+    print(f"  슬라이드 보기 {ctx['viewer_ko']}")
     print(f"  주소 {base}   저장소 https://github.com/{slug}   커밋 {ctx['commit']}")
     unmapped = [c["title"] for c in chapters if not any(c is v for v in chapter_by_key.values())]
     if unmapped:
         print(f"  ℹ 카드 연결이 없는 챕터: {', '.join(unmapped)}")
-    if mp4.stat().st_size > 100 * 1024 * 1024:
-        print("  ⚠ 영상이 100MB 를 넘습니다 — GitHub 저장소 파일 한도(100MB)를 넘어 push 할 수 없습니다. compose.py --crf 값을 올리세요")
+    for big in (mp4, mp4_en, *decks.values()):
+        if big.stat().st_size > 100 * 1024 * 1024:
+            print(f"  ⚠ {big.name} 이(가) 100MB 를 넘습니다 — GitHub 저장소 파일 한도(100MB)를 넘어 push 할 수 없습니다(영상은 compose.py --crf 값을 올리고, 덱은 슬라이드 속 클립 화질을 낮추세요)")
 
 
 if __name__ == "__main__":

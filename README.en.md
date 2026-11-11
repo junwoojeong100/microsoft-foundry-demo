@@ -7,9 +7,22 @@ A demo kit that shows what **Microsoft Foundry** is. It deploys a working enviro
 - **One `azd up`** deploys models, agents, guardrails, evaluation and observability to real Azure (a single region, Korea Central).
 - **Employees** work in a ChatGPT-style web app, *Contoso AI*: document search, receipt reimbursement, data analysis, up-to-date technical docs and general chat.
 - **Administrators** operate models, agents, guardrails, tracing and evaluation in the **Foundry portal itself** — the app has no admin screens of its own.
-- A **recorded English demo video** (narrated and captioned) made from this code on a real deployment is included: [`video/microsoft-foundry-demo-en.mp4`](video/microsoft-foundry-demo-en.mp4) (16 min 37 s · 1080p · 18 chapters · 67.8 MB) · chapters [`.chapters.txt`](video/microsoft-foundry-demo-en.chapters.txt) · captions [`.srt`](video/microsoft-foundry-demo-en.srt). Every on-screen string — the app, the Foundry portal, slides, captions — is English. The Korean video is [`video/microsoft-foundry-demo-ko.mp4`](video/microsoft-foundry-demo-ko.mp4).
+- A **recorded English demo video** (16 min 37 s, narrated and captioned) and matching **slides** (21 slides, PPTX) made from this code on a real deployment are included. Every on-screen string — the app, the Foundry portal, slides, captions — is English. The Korean video and slides are included too.
 
-> The narration is AI-generated with Azure AI Speech.
+## Watch online — no download
+
+Click to play the video or open the slides right in your browser (the demo videos inside the slides play too).
+
+[![English demo video (16 min 37 s) — click to play](video/microsoft-foundry-demo-en.thumbnail.png)](https://junwoojeong100.github.io/microsoft-foundry-demo/microsoft-foundry-demo-en.mp4)
+
+| What | English | 한국어 (Korean) |
+|---|---|---|
+| **Full video** (1080p, narration + captions) | [▶ Play in the browser](https://junwoojeong100.github.io/microsoft-foundry-demo/microsoft-foundry-demo-en.mp4) — 16 min 37 s · 18 chapters | [▶ Play on the site](https://junwoojeong100.github.io/microsoft-foundry-demo/) — 18 min 54 s · 18 chapters · script |
+| **Slides** (21 slides, 14 demo videos embedded) | [📑 Open in the browser](https://view.officeapps.live.com/op/view.aspx?src=https%3A%2F%2Fjunwoojeong100.github.io%2Fmicrosoft-foundry-demo%2Fslides%2FMicrosoft_Foundry_Demo_Deck_EN.pptx) | [📑 Open in the browser](https://view.officeapps.live.com/op/view.aspx?src=https%3A%2F%2Fjunwoojeong100.github.io%2Fmicrosoft-foundry-demo%2Fslides%2FMicrosoft_Foundry_Demo_Deck_KO.pptx) |
+| **Jump to a chapter** of the video | [Deploy](https://junwoojeong100.github.io/microsoft-foundry-demo/microsoft-foundry-demo-en.mp4#t=135) · [Knowledge search](https://junwoojeong100.github.io/microsoft-foundry-demo/microsoft-foundry-demo-en.mp4#t=230) · [Task automation](https://junwoojeong100.github.io/microsoft-foundry-demo/microsoft-foundry-demo-en.mp4#t=299) · [Data analysis](https://junwoojeong100.github.io/microsoft-foundry-demo/microsoft-foundry-demo-en.mp4#t=351) · [Latest docs (MCP)](https://junwoojeong100.github.io/microsoft-foundry-demo/microsoft-foundry-demo-en.mp4#t=407) · [Chat · model choice](https://junwoojeong100.github.io/microsoft-foundry-demo/microsoft-foundry-demo-en.mp4#t=440) · [Safety](https://junwoojeong100.github.io/microsoft-foundry-demo/microsoft-foundry-demo-en.mp4#t=521) · [Agents as code](https://junwoojeong100.github.io/microsoft-foundry-demo/microsoft-foundry-demo-en.mp4#t=581) · [Admin: Models](https://junwoojeong100.github.io/microsoft-foundry-demo/microsoft-foundry-demo-en.mp4#t=631) · [Agents](https://junwoojeong100.github.io/microsoft-foundry-demo/microsoft-foundry-demo-en.mp4#t=703) · [Guardrails](https://junwoojeong100.github.io/microsoft-foundry-demo/microsoft-foundry-demo-en.mp4#t=749) · [Tracing](https://junwoojeong100.github.io/microsoft-foundry-demo/microsoft-foundry-demo-en.mp4#t=774) · [Evaluation](https://junwoojeong100.github.io/microsoft-foundry-demo/microsoft-foundry-demo-en.mp4#t=804) · [Operations](https://junwoojeong100.github.io/microsoft-foundry-demo/microsoft-foundry-demo-en.mp4#t=838) · [Adoption checklist](https://junwoojeong100.github.io/microsoft-foundry-demo/microsoft-foundry-demo-en.mp4#t=896) · [Wrap-up](https://junwoojeong100.github.io/microsoft-foundry-demo/microsoft-foundry-demo-en.mp4#t=956) | [한국어 챕터](README.md#브라우저에서-바로-보기--다운로드-없이) |
+| **Download** | [PPTX](slides/Microsoft_Foundry_Demo_Deck_EN.pptx) · [MP4](video/microsoft-foundry-demo-en.mp4) · [SRT](video/microsoft-foundry-demo-en.srt) · [chapters](video/microsoft-foundry-demo-en.chapters.txt) | [PPTX](slides/Microsoft_Foundry_Demo_Deck_KO.pptx) · [MP4](video/microsoft-foundry-demo-ko.mp4) · [SRT](video/microsoft-foundry-demo-ko.srt) · [chapters](video/microsoft-foundry-demo-ko.chapters.txt) |
+
+The videos are served by GitHub Pages, so they open in your browser's built-in player. The slides open in Microsoft's PowerPoint for the web: press ▶ on a slide's video to play it, **Notes** (bottom right) shows the spoken script, and **Start Slide Show** gives a full-screen view. The viewer uses its own fonts, so a few line breaks can differ slightly from desktop PowerPoint. For the exact layout, download the PPTX. The narration is AI-generated with Azure AI Speech.
 
 ## Switching the edition: `DEMO_LANG`
 
@@ -144,6 +157,8 @@ python recording/record.py all-app                          # employee app scene
 python recording/record.py all-portal                       # Foundry portal scenes (English portal UI)
 python recording/compose.py                                 # video/microsoft-foundry-demo-en.mp4 + chapters + captions + thumbnail
 ```
+
+The slide decks are built from the finished video and are not generated in this repository. To publish a new version, copy it with `python scripts/publish_deck.py <deck.pptx> --lang en` (or `ko`): it writes the public copy to [`slides/`](slides/) with personal metadata removed. Pushing to `main` deploys it to the site, and the *Open in the browser* links above show it in PowerPoint for the web.
 
 ## How the demo differs from production
 

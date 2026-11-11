@@ -84,6 +84,20 @@ python recording/mask_cast.py recording/raw/azd_up.cast recording/assets/azd_up.
 `pty_capture.py` 는 가짜 영상이 아니라 실제 명령의 출력과 소요 시간을 그대로 기록합니다. 장면 코드(`S03_deploy`)의 `markers` 와 `seconds` 로
 단계 표식과 단계별 재생 시간(압축 비율)을 정합니다.
 
+## 슬라이드 덱을 웹에 올리기
+
+발표 덱(PPTX)은 완성된 영상의 챕터 클립을 끼워 넣어 따로 만들며(저장소에는 덱 생성 스크립트가 없습니다), 완성본은 `slides/` 에 두면 사이트가 함께 배포합니다. README 의 슬라이드 링크는 이 PPTX 를 **Office 웹 뷰어**로 여는 주소(`https://view.officeapps.live.com/op/view.aspx?src=<PPTX 공개 주소>`)입니다.
+
+```bash
+python scripts/publish_deck.py <한국어 덱.pptx> --lang ko   # → slides/Microsoft_Foundry_Demo_Deck_KO.pptx
+python scripts/publish_deck.py <영어 덱.pptx> --lang en     # → slides/Microsoft_Foundry_Demo_Deck_EN.pptx
+git add slides && git commit -m "Update decks" && git push   # main 에 push 하면 Pages 가 다시 배포합니다
+```
+
+- `publish_deck.py` 는 공개용 사본을 만들 때 마지막 수정자의 실명과 Microsoft 민감도 레이블만 지웁니다(슬라이드·노트·영상은 그대로). 원본 덱은 건드리지 않습니다.
+- 같은 주소의 파일을 바꾸면 Office 뷰어가 이전 파일을 한동안 기억할 수 있습니다. 바로 확인하려면 뷰어 링크의 `src=` 값 끝에 `%3Fv%3D2`(= PPTX 주소 뒤 `?v=2`)를 붙여 여세요. GitHub Pages 는 쿼리 문자열을 무시하므로 같은 파일이 열립니다.
+- 덱 용량은 GitHub 파일 한도(100MB) 안이어야 하고, 뷰어가 60초 안에 내려받을 수 있어야 합니다. 지금은 각각 약 60MB 입니다.
+
 ## 알아 둘 점
 
 - **한 번에 한 가지 일만 시키세요.** 헤드리스 브라우저를 여러 개 동시에 돌리면 CPU 가 포화돼 타이핑·화면 전환이 느려지고 영상 타이밍이 어긋납니다. 장면은 하나씩(`--parallel 1`, 기본값) 또는 슬라이드처럼 가벼운 것만 2개까지 동시에 녹화하세요.

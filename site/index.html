@@ -4,14 +4,14 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Microsoft Foundry 데모 — Contoso AI</title>
-  <meta name="description" content="azd up 한 번으로 모델·에이전트·가드레일·평가를 실제 Azure에 배포하고, 직원은 ChatGPT 같은 앱으로, 관리자는 Foundry 포털에서 운영하는 과정을 담은 한국어 데모 영상과 소스 코드.">
+  <meta name="description" content="azd up 한 번으로 모델·에이전트·가드레일·평가를 실제 Azure에 배포하고, 직원은 ChatGPT 같은 앱으로, 관리자는 Foundry 포털에서 운영하는 과정을 담은 한국어 데모 영상과 슬라이드, 영어판, 소스 코드.">
   <meta name="theme-color" content="#0a0f1d">
   <link rel="canonical" href="{{base_url}}">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="ko_KR">
   <meta property="og:title" content="Microsoft Foundry 데모 — Contoso AI">
-  <meta property="og:description" content="배포부터 운영까지 {{duration}} — 한국어 내레이션·자막이 있는 데모 영상과 소스 코드">
+  <meta property="og:description" content="배포부터 운영까지 {{duration}} — 한국어 내레이션·자막이 있는 데모 영상과 슬라이드, 소스 코드(영어판 포함)">
   <meta property="og:url" content="{{base_url}}">
   <meta property="og:image" content="{{base_url}}thumbnail.png">
   <meta name="twitter:card" content="summary_large_image">
@@ -27,6 +27,7 @@
     <a class="brand" href="./" aria-label="처음으로"><span class="logo" aria-hidden="true">{{icon:sparkles}}</span><span>Foundry 데모</span></a>
     <nav aria-label="주 메뉴">
       <a href="#video">영상</a>
+      <a href="#slides">슬라이드</a>
       <a href="#features">데모 내용</a>
       <a href="#arch">구조</a>
       <a href="#start">시작하기</a>
@@ -43,6 +44,7 @@
     <p class="lead"><code>azd up</code> 한 번으로 모델·에이전트·가드레일·평가·관측을 실제 Azure에 배포하고, 직원은 ChatGPT 같은 앱으로 일하고 관리자는 Foundry 포털에서 운영하는 모습을 그대로 녹화했습니다.</p>
     <div class="cta">
       <a class="btn primary" href="#video" data-t="0">{{icon:play}}<span>영상 보기 · {{duration}}</span></a>
+      <a class="btn" href="#slides">{{icon:layers}}<span>슬라이드 보기</span></a>
       <a class="btn" href="#start">{{icon:terminal}}<span>직접 배포해 보기</span></a>
       <a class="btn" href="{{repo_url}}" target="_blank" rel="noopener">{{icon:github}}<span>소스 코드</span></a>
     </div>
@@ -86,6 +88,20 @@
 {{transcript_html}}
       </div>
     </details>
+  </section>
+
+  <section id="slides" class="container section">
+    <header class="sec-head">
+      <p class="eyebrow">슬라이드 · English</p>
+      <h2>발표 슬라이드와 영어판도 웹에서 바로</h2>
+      <p>다운로드 없이 브라우저에서 열립니다. 슬라이드에는 데모 영상 {{clips_ko_count}}편이 들어 있어 ▶ 를 누르면 재생되고, 오른쪽 아래 <b>NOTES</b> 에서 발표 스크립트를 볼 수 있습니다.</p>
+    </header>
+    <div class="doc-cards">
+      <a class="doc-card" href="{{viewer_ko}}" target="_blank" rel="noopener"><h3>한국어 슬라이드 · {{slides_ko_count}}장</h3><p>영상과 같은 흐름입니다. 핵심 메시지와 영상 대본이 발표자 노트에 있습니다.</p><span>웹에서 열기 ↗</span></a>
+      <a class="doc-card" href="{{viewer_en}}" target="_blank" rel="noopener"><h3>English slides · {{slides_en_count}} slides</h3><p>The same flow in English, built from the English video, with the script in the speaker notes.</p><span>Open in the browser ↗</span></a>
+      <a class="doc-card" href="{{video_en_file}}" target="_blank" rel="noopener"><h3>English video · {{duration_en}}</h3><p>English narration and captions, recorded on the English edition of this demo.</p><span>Play in the browser ↗</span></a>
+    </div>
+    <p class="deck-note">PPTX 내려받기: <a href="{{pptx_ko}}" download>한국어 ({{pptx_ko_mb}})</a> · <a href="{{pptx_en}}" download>English ({{pptx_en_mb}})</a> · 영어판 자막: <a href="{{srt_en_file}}" download>SRT</a>. 슬라이드는 Microsoft 의 PowerPoint 웹 뷰어로 열리며 자체 글꼴을 쓰므로 줄바꿈이 데스크톱 PowerPoint 와 조금 다를 수 있습니다.</p>
   </section>
 
   <section id="features" class="container section">
