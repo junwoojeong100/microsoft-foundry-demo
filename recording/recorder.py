@@ -22,8 +22,10 @@ from typing import Any, Awaitable
 
 from playwright.async_api import Browser, BrowserContext, Page
 
+from lang import LANG, SUFFIX, pick
+
 ROOT = pathlib.Path(__file__).resolve().parent
-RAW = ROOT / "raw"
+RAW = ROOT / f"raw{SUFFIX}"  # 영어판(REC_LANG=en)은 raw_en/ — 한국어 녹화 원본과 섞이지 않는다
 VIEWPORT = {"width": 1440, "height": 810}
 PORTAL_VIEWPORT = {"width": 1440, "height": 732}  # 아래 78px 는 자막 전용 페이지 몫
 CAPTION_VIEWPORT = {"width": 1440, "height": 78}
@@ -43,8 +45,8 @@ async def launch(playwright: Any) -> Browser:
 
 async def new_context(browser: Browser, *, viewport: dict[str, int] | None = None, caph: int = 78, mask: bool = False, **kw: Any) -> BrowserContext:
     """caph: 페이지 안에 얹을 자막 바 높이(0 이면 자막 바 없음). mask: 포털용 개인정보 가리개 주입."""
-    ctx = await browser.new_context(viewport=viewport or VIEWPORT, device_scale_factor=DSF, locale="ko-KR", timezone_id="Asia/Seoul", color_scheme="light", **kw)
-    await ctx.add_init_script(script=f"window.__REC_CAPH = {int(caph)};")
+    ctx = await browser.new_context(viewport=viewport or VIEWPORT, device_scale_factor=DSF, locale=pick("ko-KR", "en-US"), timezone_id="Asia/Seoul", color_scheme="light", **kw)
+    await ctx.add_init_script(script=f"window.__REC_CAPH = {int(caph)}; window.__REC_LANG = '{LANG}';")
     await ctx.add_init_script(path=str(ROOT / "overlay.js"))
     if mask:
         from masking import personal_terms  # 내 계정에서 알아낸 구독 이름·계정 이름(저장소에는 개인 값을 두지 않는다)
@@ -101,12 +103,41 @@ class Recorder:
         await asyncio.sleep(0.2)
 
 
-def split_caption(text: str, limit: int = 62) -> list[str]:
-    """내레이션을 자막 한 장면 길이로 쪼갭니다 (문장 → 쉼표/공백)."""
+def _split_even(sent: str, limit: int) -> list[str] | None:
+    """영어: 긴 문장을 비슷한 길이의 조각으로 나눕니다(쉼표·세미콜론 뒤를 우선). 조각이 limit 를 넘으면 None."""
+    words = sent.split()
+    k = -(-len(sent) // limit)
+    if k < 2:
+        return None
+    ends, pos = [], 0
+    for w in words:
+        pos += len(w) + (1 if pos else 0)
+        ends.append(pos)
+    cuts, prev = [], 0
+    for j in range(1, k):
+        ideal = j * len(sent) / k
+        best = min(range(prev, len(words) - 1), key=lambda b: abs(ends[b] - ideal) - (8 if words[b].endswith((",", ";", ":")) else 0), default=None)
+        if best is None:
+            return None
+        cuts.append(best)
+        prev = best + 1
+    parts, a = [], 0
+    for c in [*cuts, len(words) - 1]:
+        parts.append(" ".join(words[a:c + 1]))
+        a = c + 1
+    return parts if all(len(x) <= limit for x in parts) else None
+
+
+def split_caption(text: str, limit: int | None = None) -> list[str]:
+    """내레이션을 자막 한 장면 길이로 쪼갭니다 (문장 → 쉼표/공백). 기본 길이: 한국어 62자, 영어 90자(영어는 비슷한 길이로 균등 분할)."""
+    limit = limit or pick(62, 90)
     parts: list[str] = []
     for sent in re.split(r"(?<=[.!?。…])\s+", text.strip()):
         if len(sent) <= limit:
             parts.append(sent)
+            continue
+        if LANG == "en" and (even := _split_even(sent, limit)):
+            parts += even
             continue
         cur = ""
         for chunk in re.split(r"(?<=[,，])\s*|\s+", sent):

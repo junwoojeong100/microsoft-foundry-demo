@@ -9,6 +9,29 @@
 장면(scenes.py)   ─▶ record.py ─▶ raw/<장면>/scene.mp4 ─┴▶ compose.py ─▶ video/microsoft-foundry-demo-ko.mp4
 ```
 
+## 영문판 (`REC_LANG=en`)
+
+같은 파이프라인으로 영문판(영어 화면·내레이션·자막)을 만들 수 있습니다. 한국어판 결과물과 섞이지 않도록 산출물 폴더가 따로 나뉩니다.
+
+| | 한국어(기본) | 영어(`REC_LANG=en`) |
+|---|---|---|
+| 대본 | `script_ko.py` | `script_en.py` |
+| 내레이션 | `audio/` · `ko-KR-SunHiNeural` | `audio_en/` · `en-US-Andrew:DragonHDLatestNeural` (`tts.py --lang en`) |
+| 슬라이드·터미널 화면 | `pages/slides.html` · `terminal.html` | `pages/slides_en.html` · `terminal_en.html` |
+| 녹화 중간 산출물 | `raw/` | `raw_en/` |
+| 앱 | `DEMO_LANG` 미설정(한국어 앱) | **`DEMO_LANG=en` 으로 따로 배포한 앱**(영문 UI·사규 PDF·평가 질문) |
+| 포털 | 한국어 UI | 영어 UI (`save_portal_state.py --lang en` 으로 세션 저장) |
+| 결과 | `video/microsoft-foundry-demo-ko.*` | `video/microsoft-foundry-demo-en.*` |
+
+```bash
+export REC_LANG=en AZURE_ENV_NAME=contoso-demo-en     # 영문판 azd 환경(DEMO_LANG=en)
+python recording/tts.py --lang en --build --verify     # --verify: 합성한 음성을 다시 받아 적어 대본과 비교
+python recording/record.py all-slides S03_deploy all-app all-portal
+python recording/compose.py
+```
+
+영문판 `azd up` 기록은 `recording/assets/azd_up_en.cast` 입니다. 화면의 모든 글자가 영어여야 하므로 앱·포털 장면 모두 영어 UI 로 녹화합니다(포털은 번역하지 않고 실제 영어 화면을 씁니다).
+
 ## 준비물
 
 | 항목 | 용도 |

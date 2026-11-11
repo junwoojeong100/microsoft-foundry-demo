@@ -6,6 +6,7 @@
     python recording/record.py S03_deploy                       # azd up 실제 기록 재생
     python recording/record.py P01_models P02_agents            # 포털 장면 (로그인 세션 필요 — recording/portal.py 참고)
     python recording/record.py all-slides | all-app | all-portal
+    REC_LANG=en python recording/record.py all-slides ...     # 영어판: audio_en/ 의 음성·script_en.py·slides_en.html 을 쓰고 raw_en/ 에 녹화
 
 각 장면은 별도 브라우저 컨텍스트에서 실제로 실행되고, 끝나면 recording/raw/<장면>/scene.mp4 가 만들어집니다.
 """
@@ -22,6 +23,8 @@ import time
 
 sys.path.insert(0, str(pathlib.Path(__file__).parent))
 from playwright.async_api import async_playwright  # noqa: E402
+
+from lang import SUFFIX  # noqa: E402
 
 from portal import azd_values, open_portal, portal_base  # noqa: E402
 from recorder import assemble_scene, launch, new_context  # noqa: E402
@@ -74,7 +77,7 @@ async def run_scene(browser, name: str, args: argparse.Namespace, manifest: dict
     except Exception as exc:  # noqa: BLE001
         print(f"✘ {name}: {type(exc).__name__}: {str(exc)[:500]}", flush=True)
         try:
-            await page.screenshot(path=str(ROOT / "raw" / f"FAIL_{name}.png"))
+            await page.screenshot(path=str(ROOT / f"raw{SUFFIX}" / f"FAIL_{name}.png"))
         except Exception:  # noqa: BLE001
             pass
     finally:
@@ -101,7 +104,7 @@ async def main() -> None:
     if unknown:
         sys.exit(f"알 수 없는 장면: {unknown}\n가능: {sorted(SCENES)}")
     ensure_http()
-    manifest = json.loads((ROOT / "audio" / "manifest.json").read_text())
+    manifest = json.loads((ROOT / f"audio{SUFFIX}" / "manifest.json").read_text())
     async with async_playwright() as p:
         browser = await launch(p)
         sem = asyncio.Semaphore(args.parallel)

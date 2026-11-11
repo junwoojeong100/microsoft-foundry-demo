@@ -9,6 +9,7 @@ param appInsightsConnectionString string
 param webIdentityPrincipalId string
 param deployerPrincipalId string
 param deployerPrincipalType string = 'User'
+param demoLang string = 'ko'
 
 @description('배포할 모델 목록: { name, format, model, version, sku, capacity }')
 param models array
@@ -43,7 +44,7 @@ resource project 'Microsoft.CognitiveServices/accounts/projects@2025-06-01' = {
   identity: { type: 'SystemAssigned' }
   properties: {
     displayName: 'Contoso AI'
-    description: 'Microsoft Foundry 데모 — 에이전트, 지식 검색, 가드레일, 평가, 관측'
+    description: demoLang == 'en' ? 'Microsoft Foundry demo — agents, knowledge search, guardrails, evaluation, observability' : 'Microsoft Foundry 데모 — 에이전트, 지식 검색, 가드레일, 평가, 관측'
   }
 }
 

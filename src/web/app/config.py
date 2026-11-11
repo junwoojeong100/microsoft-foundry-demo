@@ -18,6 +18,7 @@ class Settings:
     account_name: str
     project_name: str
     region: str
+    lang: str  # "ko" | "en" — 에디션 언어 (DEMO_LANG)
     model_flagship: str
     model_fast: str
     model_router: str
@@ -49,11 +50,13 @@ def load_settings() -> Settings:
     account = _env("FOUNDRY_ACCOUNT_NAME")
     if not account and endpoint:
         account = endpoint.split("//", 1)[-1].split(".", 1)[0]
+    lang = "en" if _env("DEMO_LANG", "ko").lower() == "en" else "ko"  # en 이외의 값은 모두 ko
     return Settings(
         project_endpoint=endpoint,
         account_name=account,
         project_name=_env("FOUNDRY_PROJECT_NAME", "contoso-ai"),
         region=_env("AZURE_REGION", "koreacentral"),
+        lang=lang,
         model_flagship=_env("MODEL_FLAGSHIP", "gpt-6.1-sol"),
         model_fast=_env("MODEL_FAST", "gpt-6.1-terra"),
         model_router=_env("MODEL_ROUTER", "model-router"),
@@ -61,7 +64,7 @@ def load_settings() -> Settings:
         auth_mode=_env("AUTH_MODE", "none"),
         access_code=_env("DEMO_ACCESS_CODE"),
         auto_bootstrap=_env("AUTO_BOOTSTRAP", "true").lower() in ("1", "true", "yes"),
-        seed_dir=Path(_env("SEED_DIR") or BASE_DIR / "seed"),
+        seed_dir=Path(_env("SEED_DIR") or BASE_DIR / ("seed_en" if lang == "en" else "seed")),
         static_dir=Path(_env("STATIC_DIR") or BASE_DIR / "static"),
         appinsights_connection_string=_env("APPLICATIONINSIGHTS_CONNECTION_STRING"),
     )

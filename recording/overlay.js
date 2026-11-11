@@ -28,7 +28,7 @@
     const cap = Object.assign(document.createElement('div'), { id: '__cap' }); cap.innerHTML = '<span></span>';
     if (CAP_H <= 0) cap.style.display = 'none';
     const chap = Object.assign(document.createElement('div'), { id: '__chap' });
-    const ff = Object.assign(document.createElement('div'), { id: '__ff' }); ff.innerHTML = '⏩ <span>빨리 감기</span>';
+    const ff = Object.assign(document.createElement('div'), { id: '__ff' }); ff.innerHTML = '⏩ <span>' + (window.__REC_LANG === 'en' ? 'Fast-forward' : '빨리 감기') + '</span>';
     const cur = Object.assign(document.createElement('div'), { id: '__cur' });
     cur.innerHTML = '<svg width="28" height="28" viewBox="0 0 24 24"><path d="M5 3l14 7-6 2-2 6z" fill="#fff" stroke="#111" stroke-width="1.5" stroke-linejoin="round"/></svg>';
     document.documentElement.append(cap, chap, ff, cur);

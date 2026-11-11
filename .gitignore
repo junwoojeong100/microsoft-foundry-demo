@@ -15,6 +15,7 @@ node_modules/
 
 # 영상 제작 중간 산출물(용량이 큼) — 최종 영상만 video/ 에 둡니다
 recording/raw/
+recording/raw_en/
 recording/frames/
 recording/tmp/
 

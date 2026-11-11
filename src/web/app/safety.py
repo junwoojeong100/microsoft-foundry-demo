@@ -13,26 +13,49 @@ import asyncio
 import time
 from typing import Any
 
+from .config import settings
 from .foundry import foundry
+from .i18n import pick
 
-PII_LABELS = {
+# 한국어판 매핑은 그대로 두고, 영어판에만 미국 항목(SSN·운전면허·여권·계좌)을 더한다
+_PII_LABELS_KO = {
     "Person": "이름", "PhoneNumber": "전화번호", "Email": "이메일", "Address": "주소",
     "KRResidentRegistrationNumber": "주민등록번호", "CreditCardNumber": "카드번호",
     "InternationalBankingAccountNumber": "계좌번호", "KRPassportNumber": "여권번호",
     "KRDriversLicenseNumber": "운전면허번호", "IPAddress": "IP주소",
 }
-FILTER_LABELS = {
-    "hate": "혐오", "sexual": "성적 콘텐츠", "violence": "폭력", "self_harm": "자해", "jailbreak": "탈옥 시도 (Prompt Shields)",
-    "indirect_attack": "간접 프롬프트 주입", "protected_material_text": "저작권 보호 텍스트", "protected_material_code": "코드 라이선스",
+_PII_LABELS_EN = {
+    "Person": "Name", "PhoneNumber": "Phone number", "Email": "Email", "Address": "Address",
+    "KRResidentRegistrationNumber": "Resident registration number", "USSocialSecurityNumber": "SSN",
+    "CreditCardNumber": "Card number", "InternationalBankingAccountNumber": "Bank account number",
+    "USBankAccountNumber": "Bank account number", "KRPassportNumber": "Passport number",
+    "USUKPassportNumber": "Passport number", "KRDriversLicenseNumber": "Driver's license number",
+    "USDriversLicenseNumber": "Driver's license number", "IPAddress": "IP address",
 }
-CATEGORY_LABELS = {"Hate": "혐오", "Sexual": "성적 콘텐츠", "Violence": "폭력", "SelfHarm": "자해"}
+PII_LABELS = pick(_PII_LABELS_KO, _PII_LABELS_EN)
+FILTER_LABELS = pick(
+    {
+        "hate": "혐오", "sexual": "성적 콘텐츠", "violence": "폭력", "self_harm": "자해", "jailbreak": "탈옥 시도 (Prompt Shields)",
+        "indirect_attack": "간접 프롬프트 주입", "protected_material_text": "저작권 보호 텍스트", "protected_material_code": "코드 라이선스",
+    },
+    {
+        "hate": "Hate", "sexual": "Sexual content", "violence": "Violence", "self_harm": "Self-harm", "jailbreak": "Jailbreak attempt (Prompt Shields)",
+        "indirect_attack": "Indirect prompt injection", "protected_material_text": "Protected text material", "protected_material_code": "Code licensing",
+    },
+)
+CATEGORY_LABELS = pick(
+    {"Hate": "혐오", "Sexual": "성적 콘텐츠", "Violence": "폭력", "SelfHarm": "자해"},
+    {"Hate": "Hate", "Sexual": "Sexual content", "Violence": "Violence", "SelfHarm": "Self-harm"},
+)
+BLOCK_STAGE = pick("입력(프롬프트) 검사", "Input (prompt) check")
+BLOCK_MESSAGE = pick("Foundry 가드레일 정책이 요청을 차단했습니다.", "The Foundry guardrail policy blocked the request.")
 
 
 async def redact_pii(text: str) -> dict[str, Any]:
     body = {
         "kind": "PiiEntityRecognition",
         "parameters": {"modelVersion": "latest", "stringIndexType": "UnicodeCodePoint"},
-        "analysisInput": {"documents": [{"id": "1", "language": "ko", "text": text}]},
+        "analysisInput": {"documents": [{"id": "1", "language": settings.lang, "text": text}]},
     }
     t0 = time.time()
     data = await foundry.post_cognitive("/language/:analyze-text?api-version=2024-11-01", body)
@@ -75,7 +98,7 @@ def parse_filter_error(body: Any) -> dict[str, Any]:
     """OpenAI SDK 의 400(content_filter) 본문에서 어떤 필터가 걸렸는지 뽑는다."""
     inner = (body or {}).get("innererror", {}) if isinstance(body, dict) else {}
     result = inner.get("content_filter_result", {}) or {}
-    return {"stage": "입력(프롬프트) 검사", "filters": _filters_from_result(result), "message": "Foundry 가드레일 정책이 요청을 차단했습니다."}
+    return {"stage": BLOCK_STAGE, "filters": _filters_from_result(result), "message": BLOCK_MESSAGE}
 
 
 def _filters_from_result(result: dict[str, Any]) -> list[dict[str, Any]]:
@@ -96,4 +119,4 @@ async def explain_block(text: str) -> dict[str, Any]:
         for c in cats["categories"]:
             if c["severity"] >= 4:
                 filters.append({"name": c["name"].lower(), "label": c["label"], "severity": c["severity"], "filtered": True})
-    return {"stage": "입력(프롬프트) 검사", "filters": filters, "message": "Foundry 가드레일 정책이 요청을 차단했습니다."}
+    return {"stage": BLOCK_STAGE, "filters": filters, "message": BLOCK_MESSAGE}

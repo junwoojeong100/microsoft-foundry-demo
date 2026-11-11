@@ -7,6 +7,8 @@
 - **관리자**는 앱을 따로 만들지 않고 **Foundry 포털 화면 그대로** 모델·에이전트·가드레일·추적·평가를 운영합니다.
 - 이 코드로 직접 배포해 녹화한 **약 19분 한국어 데모 영상**(내레이션·자막 포함)이 들어 있습니다.
 
+> **English edition** — 화면·샘플 문서·내레이션·자막이 모두 영어인 영문판(`DEMO_LANG=en`)도 같은 코드로 만들 수 있습니다. [README.en.md](README.en.md) 를 보세요.
+
 [![데모 영상 — 클릭하면 사이트에서 재생됩니다](video/microsoft-foundry-demo-ko.thumbnail.png)](https://junwoojeong100.github.io/microsoft-foundry-demo/)
 
 > **▶ 웹사이트에서 보기: <https://junwoojeong100.github.io/microsoft-foundry-demo/>** — 18분 54초 · 1080p · 한국어 내레이션과 자막 · 챕터 18개(눌러서 이동) · 대본 · 기능별 바로가기
@@ -134,6 +136,7 @@ infra/                Bicep — Foundry·모델·가드레일·Container Apps·�
 src/web/app/          FastAPI 백엔드: 에이전트 정의, 스트리밍 채팅, 안전장치, 첫 기동 준비
 src/web/static/       ChatGPT 스타일 프런트엔드 (빌드 도구 없는 Preact + htm)
 src/web/seed/         가상 사규 PDF 8개 · 판매/VOC CSV · 영수증 · 평가 질문 22개
+src/web/seed_en/      위의 영문판 (DEMO_LANG=en 일 때 사용)
 scripts/              로컬 실행, 샘플 데이터 생성, 평가 실행, 화면 점검, 배포 훅
 recording/            데모 영상 제작 파이프라인 (대본·음성·녹화·조립)
 docs/                 데모 진행 가이드, 영상 다시 만들기
@@ -169,6 +172,8 @@ site/                 GitHub Pages 사이트 소스 (랜딩 페이지 · 문서 
 ## 영상 다시 만들기
 
 대본·장면·조립이 모두 코드입니다. 대본(`recording/script_ko.py`)이나 장면(`recording/scenes.py`)을 고쳐 다시 만들 수 있습니다 — 방법은 [docs/recording.md](docs/recording.md) 를 보세요.
+
+영문판 영상은 `REC_LANG=en`(대본 `recording/script_en.py`)으로 같은 파이프라인을 돌려 만듭니다. 한국어판 결과물(`recording/raw/`, `audio/`, `video/…-ko.*`)은 건드리지 않고 `raw_en/`, `audio_en/`, `video/…-en.*` 에 따로 만들어집니다.
 
 ## 웹사이트 (GitHub Pages)
 

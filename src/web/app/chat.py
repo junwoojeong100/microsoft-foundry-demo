@@ -27,14 +27,19 @@ from . import safety, tools_local
 from .agents_def import APPROVAL_REQUIRED, spec_by_key
 from .config import settings
 from .foundry import foundry
+from .i18n import pick
 
 log = logging.getLogger("chat")
 
 MAX_ROUNDS = 6
-GENERAL_INSTRUCTIONS = (
+GENERAL_INSTRUCTIONS = pick(
     "당신은 Contoso(주) 임직원을 돕는 AI 어시스턴트입니다. 한국어로 명확하고 간결하게 답하세요. "
     "글쓰기·요약·번역·분석·아이디어 같은 일반 업무 요청은 사내 자료 없이도 바로 작성해 주세요(예: 고객에게 보낼 사과 문자 초안). "
-    "사내 규정이나 제도 자체를 묻는 질문일 때만 'Contoso Guide' 에이전트를 안내하세요. 모르는 사실은 추측하지 마세요."
+    "사내 규정이나 제도 자체를 묻는 질문일 때만 'Contoso Guide' 에이전트를 안내하세요. 모르는 사실은 추측하지 마세요.",
+    "You are an AI assistant that helps employees of Contoso Ltd. Answer clearly and concisely in English. "
+    "Handle general work requests such as writing, summarizing, translating, analysis and brainstorming directly, without needing internal documents "
+    "(for example, drafting an apology text message to send to a customer). "
+    "Point to the 'Contoso Guide' agent only when the question is about company policies or procedures themselves. Do not guess facts you do not know.",
 )
 
 
@@ -70,7 +75,7 @@ def describe_item(item: Any, done: bool) -> tuple[str, str, dict[str, Any]] | No
                 {"filename": r.filename, "score": round(float(r.score or 0), 3), "snippet": _trunc((r.text or "").strip().replace("\n", " "), 160)}
                 for r in results[:6]
             ]
-        return "search", "지식 검색 (file_search)", detail
+        return "search", pick("지식 검색 (file_search)", "Knowledge search (file_search)"), detail
     if t == "code_interpreter_call":
         detail = {"code": getattr(item, "code", None) or ""}
         outs = []
@@ -82,7 +87,7 @@ def describe_item(item: Any, done: bool) -> tuple[str, str, dict[str, Any]] | No
                 outs.append({"type": "image"})
         if outs:
             detail["outputs"] = outs
-        return "code", "코드 실행 (Code Interpreter)", detail
+        return "code", pick("코드 실행 (Code Interpreter)", "Code execution (Code Interpreter)"), detail
     if t == "mcp_call":
         label = getattr(item, "server_label", "mcp")
         name = getattr(item, "name", "")
@@ -91,18 +96,19 @@ def describe_item(item: Any, done: bool) -> tuple[str, str, dict[str, Any]] | No
             detail["output"] = _trunc(getattr(item, "output", "") or "", 500)
             if getattr(item, "error", None):
                 detail["error"] = _trunc(item.error, 300)
-        return "mcp", f"MCP 도구 호출 · {label}.{name}", detail
+        return "mcp", pick(f"MCP 도구 호출 · {label}.{name}", f"MCP tool call · {label}.{name}"), detail
     if t == "mcp_list_tools":
         tools = [getattr(x, "name", "") for x in (getattr(item, "tools", None) or [])]
-        return "mcp", f"MCP 도구 목록 확인 · {getattr(item, 'server_label', '')}", {"tools": tools[:12]}
+        server = getattr(item, "server_label", "")
+        return "mcp", pick(f"MCP 도구 목록 확인 · {server}", f"MCP tools listed · {server}"), {"tools": tools[:12]}
     if t == "function_call":
-        return "function", f"함수 호출 · {item.name}", {"arguments": _trunc(item.arguments or "", 600)}
+        return "function", pick(f"함수 호출 · {item.name}", f"Function call · {item.name}"), {"arguments": _trunc(item.arguments or "", 600)}
     if t == "web_search_call":
         action = getattr(item, "action", None)
         q = getattr(action, "query", None) or (getattr(action, "queries", None) or [None])[0] if action else None
-        return "web", "웹 검색", {"query": q or ""}
+        return "web", pick("웹 검색", "Web search"), {"query": q or ""}
     if t == "reasoning":
-        return "reasoning", "추론", {}
+        return "reasoning", pick("추론", "Reasoning"), {}
     return None
 
 
@@ -213,10 +219,13 @@ async def _stream_once(
         elif t == "response.incomplete":
             reason = getattr(ev.response.incomplete_details, "reason", None)
             if reason == "content_filter":
-                turn.blocked = {"reason": "content_filter", "detail": {"stage": "응답 처리 중", "message": "가드레일이 요청을 차단했습니다."}}
-                turn.messages.clear()  # 모델이 만든 영어 거절 문구 대신 한국어 차단 카드를 보여 준다
+                turn.blocked = {"reason": "content_filter", "detail": {
+                    "stage": pick("응답 처리 중", "Processing the response"),
+                    "message": pick("가드레일이 요청을 차단했습니다.", "Guardrails blocked the request."),
+                }}
+                turn.messages.clear()  # 모델이 만든 영어 거절 문구 대신 (에디션 언어의) 차단 카드를 보여 준다
             else:
-                turn.error = f"응답이 완료되지 않았습니다({reason})"
+                turn.error = pick(f"응답이 완료되지 않았습니다({reason})", f"The response did not complete ({reason})")
         elif t in ("response.failed", "error"):
             err = getattr(getattr(ev, "response", None), "error", None) or ev
             turn.error = f"{getattr(err, 'code', '') or ''} {getattr(err, 'message', '') or str(err)[:300]}".strip()
@@ -230,7 +239,7 @@ async def _run_turn(
     spec = spec_by_key(agent_key)
     agent_name = spec.name if spec else None
     include = []
-    if spec and any(c in spec.capabilities for c in ("지식 검색",)):
+    if spec and spec.uses_file_search:
         include.append("file_search_call.results")
     tools = [{"type": "web_search"}] if (not spec and web_search) else None
 
@@ -357,10 +366,13 @@ async def stream_approval(req: dict[str, Any]) -> AsyncIterator[dict[str, Any]]:
         for c in await pending_function_calls(conversation_id):
             args = json.loads(c["arguments"] or "{}")
             if c["name"] in APPROVAL_REQUIRED and not decisions.get(c["call_id"], False):
-                result = {"status": "REJECTED_BY_USER", "message": "사용자가 실행을 승인하지 않았습니다. 등록되지 않았습니다."}
+                result = {"status": "REJECTED_BY_USER", "message": pick(
+                    "사용자가 실행을 승인하지 않았습니다. 등록되지 않았습니다.",
+                    "The user did not approve the run. Nothing was registered.",
+                )}
             else:
                 result = tools_local.execute(c["name"], args)
-            yield {"type": "step", "id": c["call_id"], "kind": "function", "title": f"함수 실행 · {c['name']}", "status": "done",
+            yield {"type": "step", "id": c["call_id"], "kind": "function", "title": pick(f"함수 실행 · {c['name']}", f"Function run · {c['name']}"), "status": "done",
                    "detail": {"arguments": _trunc(args, 400), "output": _trunc(result, 400)}, "ms": 0}
             outputs.append({"type": "function_call_output", "call_id": c["call_id"], "output": json.dumps(result, ensure_ascii=False)})
         async for ev in _run_turn(agent_key=agent_key, conversation_id=conversation_id, input_items=outputs, model=None,

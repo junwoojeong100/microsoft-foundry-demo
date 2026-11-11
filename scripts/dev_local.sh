@@ -3,6 +3,7 @@
 #
 #   ./scripts/dev_local.sh            # azd 환경 값(.azure/<env>/.env)을 읽어 실행
 #   PORT=8765 AUTH_MODE=none ./scripts/dev_local.sh
+#   DEMO_LANG=en ./scripts/dev_local.sh                       # 영어판(azd 환경에 DEMO_LANG 가 있으면 자동)
 #   FOUNDRY_PROJECT_ENDPOINT=https://… ./scripts/dev_local.sh   # azd 없이 직접 지정
 #
 # 사전 조건: az login (Entra ID 로 Foundry 에 접속하므로 키가 필요 없습니다)
@@ -13,7 +14,7 @@ cd "$ROOT"
 if [ -z "${FOUNDRY_PROJECT_ENDPOINT:-}" ] && command -v azd >/dev/null 2>&1; then
   while IFS='=' read -r key value; do
     case "$key" in
-      FOUNDRY_PROJECT_ENDPOINT|FOUNDRY_ACCOUNT_NAME|FOUNDRY_PROJECT_NAME|AZURE_RESOURCE_GROUP|AZURE_SUBSCRIPTION_ID|AZURE_LOCATION|APPLICATIONINSIGHTS_CONNECTION_STRING)
+      FOUNDRY_PROJECT_ENDPOINT|FOUNDRY_ACCOUNT_NAME|FOUNDRY_PROJECT_NAME|AZURE_RESOURCE_GROUP|AZURE_SUBSCRIPTION_ID|AZURE_LOCATION|APPLICATIONINSIGHTS_CONNECTION_STRING|DEMO_LANG)
         export "$key=${value//\"/}" ;;
     esac
   done < <(azd env get-values 2>/dev/null || true)

@@ -6,6 +6,7 @@ import { marked } from '../vendor/marked.mjs';
 import DOMPurify from '../vendor/purify.mjs';
 import hljs from '../vendor/highlight.mjs';
 import { ICONS } from '../vendor/icons.js';
+import { LANG, tt } from './i18n.js';
 
 export { h, render, Fragment, useState, useEffect, useRef, useMemo, useCallback, useLayoutEffect };
 export const html = htm.bind(h);
@@ -31,7 +32,7 @@ marked.use({
     code({ text, lang }) {
       const language = lang && hljs.getLanguage(lang) ? lang : null;
       const body = language ? hljs.highlight(text, { language }).value : esc(text);
-      return `<div class="codeblock"><div class="codehead"><span>${esc(lang || 'text')}</span><button class="copybtn" data-copy>복사</button></div><pre><code class="hljs">${body}</code></pre></div>`;
+      return `<div class="codeblock"><div class="codehead"><span>${esc(lang || 'text')}</span><button class="copybtn" data-copy>${tt('복사', 'Copy')}</button></div><pre><code class="hljs">${body}</code></pre></div>`;
     },
   },
 });
@@ -56,14 +57,14 @@ document.addEventListener('click', (e) => {
   if (!b) return;
   const code = b.closest('.codeblock')?.querySelector('code')?.innerText || '';
   navigator.clipboard?.writeText(code);
-  b.textContent = '복사됨';
-  setTimeout(() => (b.textContent = '복사'), 1400);
+  b.textContent = tt('복사됨', 'Copied');
+  setTimeout(() => (b.textContent = tt('복사', 'Copy')), 1400);
 });
 
 // ───────────────────────── API
 export async function api(path, { method = 'GET', body } = {}) {
   const r = await fetch(path, { method, credentials: 'same-origin', headers: body ? { 'content-type': 'application/json' } : undefined, body: body ? JSON.stringify(body) : undefined });
-  if (r.status === 401) { window.dispatchEvent(new Event('contoso-unauth')); throw new Error('로그인이 필요합니다'); }
+  if (r.status === 401) { window.dispatchEvent(new Event('contoso-unauth')); throw new Error(tt('로그인이 필요합니다', 'Sign-in required')); }
   if (!r.ok) {
     let d = r.statusText;
     try { d = (await r.json()).detail || d; } catch { /* 본문이 JSON 이 아님 */ }
@@ -74,8 +75,8 @@ export async function api(path, { method = 'GET', body } = {}) {
 
 export async function* sse(path, body, signal) {
   const r = await fetch(path, { method: 'POST', credentials: 'same-origin', headers: { 'content-type': 'application/json' }, body: JSON.stringify(body), signal });
-  if (r.status === 401) { window.dispatchEvent(new Event('contoso-unauth')); throw new Error('로그인이 필요합니다'); }
-  if (!r.ok) throw new Error(`요청 실패 (${r.status})`);
+  if (r.status === 401) { window.dispatchEvent(new Event('contoso-unauth')); throw new Error(tt('로그인이 필요합니다', 'Sign-in required')); }
+  if (!r.ok) throw new Error(tt(`요청 실패 (${r.status})`, `Request failed (${r.status})`));
   const reader = r.body.getReader();
   const dec = new TextDecoder();
   let buf = '';
@@ -93,10 +94,14 @@ export async function* sse(path, body, signal) {
 }
 
 // ───────────────────────── 유틸
+const LOCALE = tt('ko-KR', 'en-US');
+const REGION_NAMES = { koreacentral: 'Korea Central', koreasouth: 'Korea South', japaneast: 'Japan East', eastus: 'East US', eastus2: 'East US 2', westus3: 'West US 3', swedencentral: 'Sweden Central', westeurope: 'West Europe', northeurope: 'North Europe', southeastasia: 'Southeast Asia' };
 export const fmt = {
-  n: (v) => (v == null ? '–' : Number(v).toLocaleString('ko-KR')),
-  ms: (v) => (v == null ? '–' : v >= 1000 ? (v / 1000).toFixed(1) + '초' : Math.round(v) + 'ms'),
-  krw: (v) => Number(v).toLocaleString('ko-KR') + '원',
+  n: (v) => (v == null ? '–' : Number(v).toLocaleString(LOCALE)),
+  ms: (v) => (v == null ? '–' : v >= 1000 ? (v / 1000).toFixed(1) + tt('초', ' s') : Math.round(v) + 'ms'),
+  krw: (v) => tt(Number(v).toLocaleString('ko-KR') + '원', 'KRW ' + Number(v).toLocaleString('en-US')),
+  // 한국어 화면은 리전 ID 를 그대로, 영어 화면은 읽기 좋은 이름으로 보여 준다
+  region: (r) => (LANG === 'en' ? REGION_NAMES[r] || r : r),
 };
 export const uid = () => Math.random().toString(36).slice(2, 10);
 export function toast(msg) {

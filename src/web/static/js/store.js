@@ -1,7 +1,9 @@
 // 전역 상태 (아주 작은 스토어) + 대화 컨트롤러(스트리밍 이벤트 → 메시지)
 import { useState, useEffect, sse, api, uid } from './lib.js';
+import { tt } from './i18n.js';
 
-const KEY = 'contoso.chats.v1';
+// 언어별로 저장소를 나눠, 같은 브라우저에서 두 화면을 번갈아 써도 대화 기록이 섞이지 않게 한다 (한국어 키는 그대로)
+const KEY = tt('contoso.chats.v1', 'contoso.chats.v1.en');
 
 function loadChats() {
   try { return JSON.parse(localStorage.getItem(KEY) || '[]'); } catch { return []; }
@@ -48,11 +50,15 @@ window.addEventListener('hashchange', () => { S.route = parseRoute(); touch(); }
 
 // ───────────────────────── 대화
 export const GENERAL = {
-  key: 'general', title: '일반 채팅', subtitle: '모델을 골라 대화 · 웹 검색', icon: 'message-square', color: '#475569', capabilities: ['모델 선택', '웹 검색'],
+  key: 'general', title: tt('일반 채팅', 'General chat'), subtitle: tt('모델을 골라 대화 · 웹 검색', 'Pick a model · web search'), icon: 'message-square', color: '#475569',
+  capabilities: [tt('모델 선택', 'Model selection'), tt('웹 검색', 'Web search')],
   starters: [
-    '로봇청소기 리튬이온 배터리와 관련해, 유럽연합 배터리 규정에서 제조사가 알아야 할 핵심 의무를 세 가지로 요약해줘. (웹 검색)',
-    '배터리 불만이 늘어난 로봇청소기 고객에게 보낼 사과 문자를 세 문장으로 써줘.',
-    'CFO에게 보낼 3분기 마감 일정 지연 보고 메일 초안을 정중한 톤으로 써줘.',
+    tt('로봇청소기 리튬이온 배터리와 관련해, 유럽연합 배터리 규정에서 제조사가 알아야 할 핵심 의무를 세 가지로 요약해줘. (웹 검색)',
+      'Summarize the key obligations a manufacturer must know under the EU Battery Regulation for the lithium-ion batteries in robot vacuums, in three points. (web search)'),
+    tt('배터리 불만이 늘어난 로봇청소기 고객에게 보낼 사과 문자를 세 문장으로 써줘.',
+      'Write a three-sentence apology text message for robot vacuum customers who have been complaining about the battery.'),
+    tt('CFO에게 보낼 3분기 마감 일정 지연 보고 메일 초안을 정중한 톤으로 써줘.',
+      'Draft a polite email to the CFO reporting a delay to the Q3 closing schedule.'),
   ],
   accepts: ['image'],
 };
@@ -61,7 +67,7 @@ export const agentOf = (key) => (key === 'general' ? GENERAL : S.config?.agents.
 export function newChat(agent) {
   const empty = S.chats.find((c) => c.agent === agent && c.messages.length === 0);
   if (empty) { S.currentId = empty.id; touch(); return empty; }
-  const chat = { id: uid(), title: '새 채팅', agent, model: S.config?.default_model, conv_id: null, messages: [], ts: Date.now() };
+  const chat = { id: uid(), title: tt('새 채팅', 'New chat'), agent, model: S.config?.default_model, conv_id: null, messages: [], ts: Date.now() };
   S.chats.unshift(chat);
   S.currentId = chat.id;
   touch();
@@ -116,7 +122,7 @@ async function run(chat, bot, user, path, body) {
     for await (const ev of sse(path, body, ctl.signal)) { applyEvent(chat, bot, user, ev); touch(); }
   } catch (e) {
     if (e.name !== 'AbortError') bot.error = e.message;
-    else bot.text += '\n\n_(응답을 중단했습니다)_';
+    else bot.text += tt('\n\n_(응답을 중단했습니다)_', '\n\n_(Response stopped)_');
   } finally {
     bot.streaming = false;
     delete S.aborters[chat.id];
@@ -130,7 +136,7 @@ export function stop(chat) { S.aborters[chat.id]?.abort(); }
 export async function send(chat, { text, images = [], files = [], redactPii = false, webSearch = false }) {
   const user = { id: uid(), role: 'user', text, images, files };
   const bot = { id: uid(), role: 'bot', agent: chat.agent, model: chat.agent === 'general' ? chat.model : agentOf(chat.agent).model, text: '', steps: [], citations: [], files: [], streaming: true };
-  if (chat.messages.length === 0) chat.title = text.replace(/\s+/g, ' ').slice(0, 28) || '새 채팅';
+  if (chat.messages.length === 0) chat.title = text.replace(/\s+/g, ' ').slice(0, 28) || tt('새 채팅', 'New chat');
   chat.messages.push(user, bot);
   chat.ts = Date.now();
   touch();

@@ -1,5 +1,6 @@
 // 앱 셸: 로그인, 사이드바, 라우팅
-import { html, render, Icon, useState, useEffect, api } from './lib.js';
+import { html, render, Icon, useState, useEffect, api, fmt } from './lib.js';
+import { tt } from './i18n.js';
 import { S, useStore, touch, go, newChat, deleteChat, agentOf, GENERAL, refreshStatus } from './store.js';
 import { ChatView } from './chat.js';
 
@@ -12,18 +13,18 @@ function Login({ onOk }) {
   };
   return html`<div class="login"><form class="card" onSubmit=${submit}>
     <div class="logo"><${Icon} name="sparkles" size=28 /></div>
-    <h1>Contoso AI</h1><p>Microsoft Foundry 데모 · 접속 코드를 입력하세요</p>
+    <h1>Contoso AI</h1><p>${tt('Microsoft Foundry 데모 · 접속 코드를 입력하세요', 'Microsoft Foundry demo · Enter your access code')}</p>
     <input type="password" autofocus placeholder="••••••" value=${code} onInput=${(e) => { setCode(e.target.value); setErr(''); }} />
     ${err ? html`<div class="err">${err}</div>` : null}
-    <button class="btn primary" type="submit"><${Icon} name="key-round" size=16 />입장</button>
-    <div class="foot-note" style="margin-top:16px">운영 환경에서는 Microsoft Entra ID 로그인(SSO·MFA)으로 바꿉니다</div></form></div>`;
+    <button class="btn primary" type="submit"><${Icon} name="key-round" size=16 />${tt('입장', 'Enter')}</button>
+    <div class="foot-note" style="margin-top:16px">${tt('운영 환경에서는 Microsoft Entra ID 로그인(SSO·MFA)으로 바꿉니다', 'In production this is replaced by Microsoft Entra ID sign-in (SSO·MFA)')}</div></form></div>`;
 }
 
 // 채팅 기록을 오늘 / 어제 / 이전으로 묶는다 (ChatGPT 와 같은 방식)
 function groupChats(chats) {
   const day0 = (d) => new Date(d.getFullYear(), d.getMonth(), d.getDate()).getTime();
   const today = day0(new Date());
-  const groups = [['오늘', []], ['어제', []], ['이전', []]];
+  const groups = [[tt('오늘', 'Today'), []], [tt('어제', 'Yesterday'), []], [tt('이전', 'Earlier'), []]];
   for (const c of chats.filter((x) => x.messages.length)) {
     const t = day0(new Date(c.ts || 0));
     groups[t >= today ? 0 : t >= today - 86400000 ? 1 : 2][1].push(c);
@@ -38,9 +39,9 @@ function Sidebar() {
   const agents = S.config?.agents || [];
   return html`<aside class="side">
     <div class="brand"><div class="logo"><${Icon} name="sparkles" size=20 /></div><div><b>Contoso AI</b><small>Powered by Microsoft Foundry</small></div></div>
-    <button class="newchat" onClick=${() => { const a = r.view === 'chat' ? r.agent : 'knowledge'; newChat(a); go('chat/' + a); }}><${Icon} name="plus" size=18 />새 채팅</button>
+    <button class="newchat" onClick=${() => { const a = r.view === 'chat' ? r.agent : 'knowledge'; newChat(a); go('chat/' + a); }}><${Icon} name="plus" size=18 />${tt('새 채팅', 'New chat')}</button>
     <div class="side-scroll">
-      <div class="side-title">에이전트</div>
+      <div class="side-title">${tt('에이전트', 'Agents')}</div>
       ${agents.map((a) => html`<button class=${'nav ' + (r.view === 'chat' && r.agent === a.key ? 'on' : '')} onClick=${() => { newChat(a.key); go('chat/' + a.key); }}>
         <span class="dot" style=${'background:' + a.color}><${Icon} name=${a.icon} size=16 /></span><span class="t"><span>${a.title}</span><small>${a.subtitle}</small></span></button>`)}
       <button class=${'nav ' + (r.view === 'chat' && r.agent === 'general' ? 'on' : '')} onClick=${() => { newChat('general'); go('chat/general'); }}>
@@ -50,10 +51,10 @@ function Sidebar() {
           <i style=${'background:' + agentOf(c.agent).color}></i><span>${c.title}</span><button class="x" onClick=${(e) => { e.stopPropagation(); deleteChat(c.id); }}><${Icon} name="x" size=14 /></button></button>`)}`)}
     </div>
     <div class="side-foot">
-      <div class="user"><div class="avatar">${(user.name || '김')[0]}</div><div style="flex:1"><b>${user.name}</b><small>${user.team}</small></div>
-        ${S.auth.required ? html`<button class="icobtn" title="로그아웃" onClick=${async () => { await api('/api/logout', { method: 'POST' }); location.reload(); }}><${Icon} name="log-out" size=17 /></button>` : null}</div>
-      ${S.config?.links?.agents ? html`<a class="adminlink" href=${S.config.links.agents} target="_blank" rel="noopener"><${Icon} name="sliders-horizontal" size=15 />관리자 콘솔 · Foundry 포털<${Icon} name="arrow-up-right" size=14 /></a>` : null}
-      <div class="chips"><span class="chip brand"><${Icon} name="map-pin" size=12 />${S.config?.region}</span><span class="chip ok"><${Icon} name="key-round" size=12 />키 없음 · Entra ID</span></div>
+      <div class="user"><div class="avatar">${(user.name || tt('김', 'M'))[0]}</div><div style="flex:1"><b>${user.name}</b><small>${user.team}</small></div>
+        ${S.auth.required ? html`<button class="icobtn" title=${tt('로그아웃', 'Sign out')} onClick=${async () => { await api('/api/logout', { method: 'POST' }); location.reload(); }}><${Icon} name="log-out" size=17 /></button>` : null}</div>
+      ${S.config?.links?.agents ? html`<a class="adminlink" href=${S.config.links.agents} target="_blank" rel="noopener"><${Icon} name="sliders-horizontal" size=15 />${tt('관리자 콘솔 · Foundry 포털', 'Admin console · Foundry portal')}<${Icon} name="arrow-up-right" size=14 /></a>` : null}
+      <div class="chips"><span class="chip brand"><${Icon} name="map-pin" size=12 />${fmt.region(S.config?.region)}</span><span class="chip ok"><${Icon} name="key-round" size=12 />${tt('키 없음 · Entra ID', 'No keys · Entra ID')}</span></div>
     </div></aside>`;
 }
 

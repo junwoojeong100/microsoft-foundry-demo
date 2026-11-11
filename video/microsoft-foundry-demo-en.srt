@@ -1,0 +1,935 @@
+1
+00:00:00,803 --> 00:00:01,316
+Hello.
+
+2
+00:00:01,316 --> 00:00:07,018
+In the next few minutes, I'll introduce Microsoft Foundry with a demo we built ourselves.
+
+3
+00:00:07,018 --> 00:00:10,478
+Contoso AI, which you'll see today, is the internal AI
+
+4
+00:00:10,478 --> 00:00:13,745
+service of a fictional manufacturer called Contoso.
+
+5
+00:00:13,745 --> 00:00:18,807
+Employees use it like ChatGPT, and administrators run it in the Foundry portal.
+
+6
+00:00:18,807 --> 00:00:22,523
+Everything on screen is the result of a real run on Azure.
+
+7
+00:00:23,707 --> 00:00:26,190
+Many companies succeed with an AI pilot.
+
+8
+00:00:26,190 --> 00:00:30,599
+But the moment they try to scale it across the company, they hit walls.
+
+9
+00:00:30,599 --> 00:00:34,758
+First, you have to connect your own documents and systems securely.
+
+10
+00:00:34,758 --> 00:00:39,725
+Second, you have to keep choosing which model to use, among a flood of new ones.
+
+11
+00:00:39,725 --> 00:00:44,009
+Third, you have to prove quality and security even after you go live.
+
+12
+00:00:44,009 --> 00:00:46,555
+Foundry solves all three on one platform.
+
+13
+00:00:47,522 --> 00:00:52,854
+Microsoft Foundry is one platform where enterprises build and run AI apps and agents.
+
+14
+00:00:52,854 --> 00:00:55,739
+At the top are your apps and business systems.
+
+15
+00:00:55,739 --> 00:00:59,127
+Below them sit models and agents, tools and knowledge.
+
+16
+00:00:59,127 --> 00:01:03,769
+Guardrails, evaluation and tracing live in the same project, and all of it
+
+17
+00:01:03,769 --> 00:01:08,285
+rests on Entra ID, Azure's permission system, networking and monitoring.
+
+18
+00:01:08,285 --> 00:01:12,676
+In other words, instead of collecting parts and bolting them together,
+
+19
+00:01:12,676 --> 00:01:15,938
+you start from a platform that is already connected.
+
+20
+00:01:17,229 --> 00:01:18,633
+Today has four parts.
+
+21
+00:01:18,633 --> 00:01:21,975
+First, we deploy everything with a single command.
+
+22
+00:01:21,975 --> 00:01:25,451
+Next, the app that employees use: agents that answer
+
+23
+00:01:25,451 --> 00:01:28,593
+from documents, handle tasks, and analyze data.
+
+24
+00:01:28,593 --> 00:01:30,933
+Then it's the administrator's turn.
+
+25
+00:01:30,933 --> 00:01:34,208
+We'll see models, agents, guardrails, tracing and
+
+26
+00:01:34,208 --> 00:01:37,952
+evaluation in the real Foundry portal, exactly as it is.
+
+27
+00:01:37,952 --> 00:01:41,829
+Finally, we wrap up with an enterprise adoption checklist.
+
+28
+00:01:43,783 --> 00:01:45,442
+The architecture is simple.
+
+29
+00:01:45,442 --> 00:01:49,068
+Employees use the Contoso AI app running on Container Apps,
+
+30
+00:01:49,068 --> 00:01:53,247
+and the app reaches the Foundry project with Entra ID, with no keys.
+
+31
+00:01:53,247 --> 00:01:57,550
+Inside the project are nine models, including GPT-6.1; agents that use
+
+32
+00:01:57,550 --> 00:02:02,036
+tools such as document search and code execution; guardrails that protect
+
+33
+00:02:02,036 --> 00:02:06,093
+inputs and outputs; and evaluation and tracing to measure quality.
+
+34
+00:02:06,093 --> 00:02:10,210
+Administrators run the same project directly in the Foundry portal.
+
+35
+00:02:10,210 --> 00:02:13,591
+And everything lives in a single region, Korea Central.
+
+36
+00:02:18,015 --> 00:02:20,425
+Deployment is a single command: azd up.
+
+37
+00:02:20,425 --> 00:02:25,863
+What you're about to see is a recording of a real run, with the waiting time compressed.
+
+38
+00:02:26,243 --> 00:02:27,946
+First, the pre-flight checks.
+
+39
+00:02:27,946 --> 00:02:30,705
+It verifies the required resource providers and
+
+40
+00:02:30,705 --> 00:02:33,347
+generates the demo access code automatically.
+
+41
+00:02:38,953 --> 00:02:42,430
+Next, a Bicep template creates the infrastructure:
+
+42
+00:02:42,430 --> 00:02:45,908
+the Foundry resource and project, and nine models.
+
+43
+00:02:45,908 --> 00:02:49,733
+That's GPT-6.1 Sol and Terra, Model Router, embeddings,
+
+44
+00:02:49,733 --> 00:02:52,863
+plus DeepSeek, Kimi, Llama, Mistral and Grok.
+
+45
+00:02:52,863 --> 00:02:57,105
+The guardrail policy, the Application Insights connection and
+
+46
+00:02:57,105 --> 00:03:01,417
+the least-privilege role assignments are in the same template.
+
+47
+00:03:09,907 --> 00:03:11,308
+Then the container image.
+
+48
+00:03:11,308 --> 00:03:14,728
+Even without Docker on your machine, Azure Container Registry
+
+49
+00:03:14,728 --> 00:03:18,259
+builds it for you, and the image is deployed to Container Apps.
+
+50
+00:03:22,493 --> 00:03:26,356
+Finally, when the app starts for the first time, it uploads eight
+
+51
+00:03:26,356 --> 00:03:30,220
+policy PDFs to a vector store and creates four agents in Foundry.
+
+52
+00:03:30,220 --> 00:03:32,597
+That wait is handled automatically, too.
+
+53
+00:03:35,418 --> 00:03:36,658
+And that's everything.
+
+54
+00:03:36,658 --> 00:03:39,363
+The web address and the access code are printed.
+
+55
+00:03:39,363 --> 00:03:43,026
+In production, you would replace this code with Entra ID sign-in.
+
+56
+00:03:53,749 --> 00:03:55,846
+Now, the app that employees see.
+
+57
+00:03:55,846 --> 00:03:59,450
+Enter the access code and a ChatGPT-style screen opens.
+
+58
+00:03:59,450 --> 00:04:02,399
+On the left are agents for each kind of work,
+
+59
+00:04:02,399 --> 00:04:05,413
+and your conversation history builds up below.
+
+60
+00:04:06,268 --> 00:04:08,045
+Let's ask Contoso Guide first.
+
+61
+00:04:08,045 --> 00:04:11,184
+I've been here four years, so how many days of annual
+
+62
+00:04:11,184 --> 00:04:14,620
+leave do I get this year, and how do I request a half day?
+
+63
+00:04:14,972 --> 00:04:16,470
+You can watch the agent work.
+
+64
+00:04:16,470 --> 00:04:20,395
+It turns the question into search queries and finds relevant passages in the
+
+65
+00:04:20,395 --> 00:04:24,476
+policy documents, and you can even see the document names and relevance scores.
+
+66
+00:04:25,227 --> 00:04:29,861
+The answer is sixteen days, based on the HR-001 employment rules.
+
+67
+00:04:29,861 --> 00:04:32,855
+Click a source and the original PDF opens.
+
+68
+00:04:32,855 --> 00:04:37,275
+That one line is what reduces hallucinations and builds trust.
+
+69
+00:04:37,628 --> 00:04:39,126
+Let's try a harder one.
+
+70
+00:04:39,126 --> 00:04:43,556
+A team dinner for twelve people, 480,000 won, with alcohol included.
+
+71
+00:04:43,556 --> 00:04:46,292
+Can it be reimbursed, and who approves it?
+
+72
+00:04:46,644 --> 00:04:51,594
+It applies the meal limit and the alcohol rule together, and even shows the calculation.
+
+73
+00:04:51,594 --> 00:04:54,238
+Whether this answer matches the policy exactly,
+
+74
+00:04:54,238 --> 00:04:57,444
+we'll verify later with the evaluation in the admin view.
+
+75
+00:04:59,006 --> 00:05:02,516
+This time, instead of an answer, let's hand over a task.
+
+76
+00:05:02,516 --> 00:05:05,462
+We upload a team-dinner receipt to Contoso Pay.
+
+77
+00:05:08,122 --> 00:05:11,217
+From the photo of the receipt, it reads the merchant,
+
+78
+00:05:11,217 --> 00:05:15,130
+the items and the amounts, and even tells whether alcohol is on it.
+
+79
+00:05:15,130 --> 00:05:20,386
+It looks up the meal limit in the policy and calculates the claimable amount step by step.
+
+80
+00:05:26,080 --> 00:05:30,626
+Then it looks up the employee by ID and calls a function to submit the expense.
+
+81
+00:05:30,626 --> 00:05:31,661
+This part matters.
+
+82
+00:05:31,661 --> 00:05:35,344
+We configured submission to run only after a person approves it.
+
+83
+00:05:36,105 --> 00:05:39,058
+The claimed amount and the personal share are laid out,
+
+84
+00:05:39,058 --> 00:05:41,958
+and when you click approve, a ticket number is issued.
+
+85
+00:05:41,958 --> 00:05:45,609
+You hand the work to AI, but the responsibility stays with a person.
+
+86
+00:05:51,205 --> 00:05:52,607
+Next is data analysis.
+
+87
+00:05:52,607 --> 00:05:56,114
+We ask Contoso Analyst, which is connected to the sales
+
+88
+00:05:56,114 --> 00:05:59,365
+and customer feedback files, to look for anomalies.
+
+89
+00:06:01,874 --> 00:06:05,483
+The agent writes Python code itself and runs it in a sandbox.
+
+90
+00:06:05,483 --> 00:06:07,909
+The calculation is not the model's guess.
+
+91
+00:06:07,909 --> 00:06:10,394
+It is the result of actually running code.
+
+92
+00:06:19,157 --> 00:06:23,658
+If we expand a finished step, the code the agent wrote appears as it is.
+
+93
+00:06:23,658 --> 00:06:26,909
+You can verify exactly which calculations were done.
+
+94
+00:06:28,454 --> 00:06:29,501
+Here is the result.
+
+95
+00:06:29,501 --> 00:06:33,413
+It found that robot vacuum revenue in the Busan-Gyeongnam region turned
+
+96
+00:06:33,413 --> 00:06:37,050
+down from July and returns went up, and it linked that to customer
+
+97
+00:06:37,050 --> 00:06:41,072
+feedback from the same period, most of which complains about the battery.
+
+98
+00:06:41,072 --> 00:06:43,166
+The chart can be downloaded as a file.
+
+99
+00:06:47,552 --> 00:06:51,088
+Questions about the latest technology go to Contoso Architect,
+
+100
+00:06:51,088 --> 00:06:54,110
+which is connected to the Microsoft Learn MCP server.
+
+101
+00:06:54,110 --> 00:06:58,957
+The basis is not the model's memory, but official documentation it has just searched.
+
+102
+00:06:58,957 --> 00:07:02,264
+Tools are added by connecting them, without changing code.
+
+103
+00:07:08,019 --> 00:07:10,763
+In the tool call list, the sequence stays visible.
+
+104
+00:07:10,763 --> 00:07:14,659
+It searches Microsoft Learn for documents, then looks for code samples.
+
+105
+00:07:14,659 --> 00:07:19,323
+The commands in the answer are based on the official documentation it just retrieved.
+
+106
+00:07:20,675 --> 00:07:23,163
+There is also a general chat with no agent.
+
+107
+00:07:23,163 --> 00:07:26,866
+It is the closest to ChatGPT, and you pick the model at the top.
+
+108
+00:07:26,866 --> 00:07:30,164
+Let's turn on web search and ask about the European Union
+
+109
+00:07:30,164 --> 00:07:33,635
+battery regulation obligations a manufacturer needs to know.
+
+110
+00:07:39,420 --> 00:07:42,538
+It searched the latest web and answered with source links.
+
+111
+00:07:42,538 --> 00:07:47,268
+You can also see which model produced the answer, how long it took, and the token count.
+
+112
+00:07:47,620 --> 00:07:50,646
+Now let's change only the model, on the same screen.
+
+113
+00:07:50,646 --> 00:07:52,683
+Not OpenAI this time, but DeepSeek.
+
+114
+00:07:52,683 --> 00:07:55,301
+We'll ask it to write an apology text message
+
+115
+00:07:55,301 --> 00:07:58,036
+for customers who complained about the battery.
+
+116
+00:08:01,690 --> 00:08:04,936
+The screen stays the same and only the model changed,
+
+117
+00:08:04,936 --> 00:08:08,794
+because the call goes to the same endpoint of the same project.
+
+118
+00:08:09,149 --> 00:08:11,083
+Finally, let's pick Model Router.
+
+119
+00:08:11,083 --> 00:08:14,717
+It looks at how hard the question is, chooses a suitable model
+
+120
+00:08:14,717 --> 00:08:18,057
+by itself, and shows below which model actually answered.
+
+121
+00:08:18,057 --> 00:08:21,749
+The platform even takes the burden of choosing a model off you.
+
+122
+00:08:43,704 --> 00:08:44,590
+Now, security.
+
+123
+00:08:44,590 --> 00:08:49,524
+It happens all the time that an employee pastes customer information as it is.
+
+124
+00:08:49,524 --> 00:08:52,560
+Let's turn on personal data masking and send it.
+
+125
+00:08:58,428 --> 00:09:02,476
+It found the name, the ID number and the phone number and masked them,
+
+126
+00:09:02,476 --> 00:09:05,483
+and only the masked sentence is passed to the model.
+
+127
+00:09:05,483 --> 00:09:09,588
+The original text is not left in the chat history or the title, either.
+
+128
+00:09:09,949 --> 00:09:11,498
+Next is a jailbreak attempt.
+
+129
+00:09:11,498 --> 00:09:16,309
+Let's send the classic attack that tells the model to ignore its previous instructions.
+
+130
+00:09:31,493 --> 00:09:34,756
+The Foundry guardrail blocked it before the model was even
+
+131
+00:09:34,756 --> 00:09:37,793
+called, and it tells the employee which policy it hit.
+
+132
+00:09:37,793 --> 00:09:40,493
+Administrators manage this policy in the portal.
+
+133
+00:09:42,316 --> 00:09:43,158
+A quick pause.
+
+134
+00:09:43,158 --> 00:09:47,187
+Let's look at how the agents we've seen so far were built, in code.
+
+135
+00:09:47,187 --> 00:09:50,554
+This is the whole definition: the model deployment name,
+
+136
+00:09:50,554 --> 00:09:52,839
+the instructions, and a list of tools.
+
+137
+00:09:52,839 --> 00:09:56,387
+Add the document search tool and you get a knowledge agent.
+
+138
+00:09:56,387 --> 00:09:59,273
+Add the code interpreter and you get an analyst.
+
+139
+00:09:59,273 --> 00:10:02,339
+Add an MCP server address and you get an architect.
+
+140
+00:10:02,339 --> 00:10:06,368
+Change the instructions or tools and recreate it, and a new version
+
+141
+00:10:06,368 --> 00:10:10,276
+appears that you can compare with the previous one in the portal.
+
+142
+00:10:11,031 --> 00:10:12,670
+Calling it is even simpler.
+
+143
+00:10:12,670 --> 00:10:15,279
+You connect with Entra ID instead of a key,
+
+144
+00:10:15,279 --> 00:10:18,252
+and just tell the Responses API the agent's name.
+
+145
+00:10:18,252 --> 00:10:21,710
+When you stream, the tool calls, sources and token counts
+
+146
+00:10:21,710 --> 00:10:25,533
+arrive as events, and our web screen simply draws those events.
+
+147
+00:10:25,533 --> 00:10:30,447
+Now let's move on to the administrator's screen, where these agents are operated.
+
+148
+00:10:34,441 --> 00:10:36,824
+Administrators start in the Foundry portal.
+
+149
+00:10:36,824 --> 00:10:38,875
+The project we just deployed is open.
+
+150
+00:10:38,875 --> 00:10:43,698
+You can see the project endpoint, and it shows that API key authentication is not used.
+
+151
+00:10:43,698 --> 00:10:47,689
+Both apps and people come in only through Entra ID and role permissions.
+
+152
+00:10:51,726 --> 00:10:55,901
+The catalog gathers models from many companies: OpenAI,
+
+153
+00:10:55,901 --> 00:10:59,622
+Anthropic, Microsoft, Meta, Mistral and DeepSeek.
+
+154
+00:10:59,622 --> 00:11:03,342
+Find the model you want and deploy it right away.
+
+155
+00:11:10,544 --> 00:11:12,726
+This is the deployments screen.
+
+156
+00:11:12,726 --> 00:11:17,373
+All nine models the app was using are here: GPT-6.1 Sol and Terra,
+
+157
+00:11:17,373 --> 00:11:21,034
+Model Router, embeddings, and DeepSeek, Kimi, Llama,
+
+158
+00:11:21,034 --> 00:11:25,400
+Mistral and Grok, managed in the same project in the same way.
+
+159
+00:11:31,505 --> 00:11:34,006
+Open one deployment and you see its endpoint,
+
+160
+00:11:34,006 --> 00:11:36,951
+its deployment type, and the tokens-per-minute limit.
+
+161
+00:11:36,951 --> 00:11:39,564
+It shows that keys can't be used, and adding or
+
+162
+00:11:39,564 --> 00:11:42,065
+swapping a model also happens on this screen.
+
+163
+00:11:43,339 --> 00:11:44,650
+This is the agents screen.
+
+164
+00:11:44,650 --> 00:11:46,970
+The four agents created from code are running,
+
+165
+00:11:46,970 --> 00:11:49,795
+and the knowledge agent has already reached version two.
+
+166
+00:11:53,654 --> 00:11:58,328
+Open one and you see the model, the instructions and the connected tools as they are.
+
+167
+00:11:58,328 --> 00:12:00,858
+The knowledge agent has file search connected.
+
+168
+00:12:00,858 --> 00:12:03,607
+From here you can edit the instructions, chat with
+
+169
+00:12:03,607 --> 00:12:06,302
+it right away, and even save it as a new version.
+
+170
+00:12:06,655 --> 00:12:09,908
+The same definition is also available as YAML, so you can put it
+
+171
+00:12:09,908 --> 00:12:13,111
+in Git and run it through code review and deployment pipelines.
+
+172
+00:12:17,081 --> 00:12:21,491
+In the details, you check the response endpoint and the publishing channels.
+
+173
+00:12:21,491 --> 00:12:25,031
+You can publish to Teams, Microsoft 365 Copilot or a web app,
+
+174
+00:12:25,031 --> 00:12:28,745
+which takes the agent into the tools your employees already use.
+
+175
+00:12:31,647 --> 00:12:33,726
+This is the guardrails screen.
+
+176
+00:12:33,726 --> 00:12:37,329
+The Contoso guardrail we deployed as code is applied
+
+177
+00:12:37,329 --> 00:12:40,863
+to the two GPT-6.1 deployments and to Model Router.
+
+178
+00:12:41,216 --> 00:12:45,214
+Jailbreak, indirect prompt injection and four content safety categories
+
+179
+00:12:45,214 --> 00:12:48,592
+are all on, and you can expand any item to see its criteria.
+
+180
+00:12:48,592 --> 00:12:53,264
+The request that was blocked in the app earlier was blocked by exactly this policy.
+
+181
+00:12:56,388 --> 00:12:57,109
+Now, tracing.
+
+182
+00:12:57,109 --> 00:13:00,495
+Every question an employee asked in the app is recorded here.
+
+183
+00:13:00,495 --> 00:13:03,436
+You can see how long it took and the input and output
+
+184
+00:13:03,436 --> 00:13:06,156
+tokens, and some have evaluation scores attached.
+
+185
+00:13:10,175 --> 00:13:13,673
+Open one and you see how long each step took, from the app's
+
+186
+00:13:13,673 --> 00:13:17,521
+request to the agent call, the document search and the model call.
+
+187
+00:13:17,521 --> 00:13:22,127
+When an answer is slow or odd, you can find the step that caused it right away.
+
+188
+00:13:29,999 --> 00:13:34,329
+Finally, the most important question: how do we know it really got better?
+
+189
+00:13:34,329 --> 00:13:38,074
+This evaluation scored the version before we connected knowledge
+
+190
+00:13:38,074 --> 00:13:41,351
+and the version after, on the same twenty-two questions.
+
+191
+00:13:41,717 --> 00:13:45,676
+Version two, with knowledge connected, passed most of the items,
+
+192
+00:13:45,676 --> 00:13:48,583
+while version one, without it, falls far short.
+
+193
+00:13:48,583 --> 00:13:53,346
+You prove improvement with numbers, not with a feeling, and before deployment
+
+194
+00:13:53,346 --> 00:13:57,677
+you can run the same evaluation to stop a version whose quality drops.
+
+195
+00:14:01,447 --> 00:14:05,739
+For administrators responsible for operations, there is the Operate screen.
+
+196
+00:14:05,739 --> 00:14:09,402
+You see every project and agent in the subscription at a glance,
+
+197
+00:14:09,402 --> 00:14:13,351
+with the number of running agents, the success rate, cost and alerts.
+
+198
+00:14:24,403 --> 00:14:27,244
+In Management, the Quota screen shows each deployment's
+
+199
+00:14:27,244 --> 00:14:30,757
+tokens-per-minute limit and usage, and lets you request an increase.
+
+200
+00:14:30,757 --> 00:14:34,219
+It's the screen that keeps responses from suddenly getting blocked.
+
+201
+00:14:39,747 --> 00:14:43,011
+In the project details you manage roles per user, and under
+
+202
+00:14:43,011 --> 00:14:46,220
+connected resources you confirm that Application Insights,
+
+203
+00:14:46,220 --> 00:14:49,762
+which collects the traces, is already connected to this project.
+
+204
+00:14:49,762 --> 00:14:52,417
+Employees use the app, administrators operate in
+
+205
+00:14:52,417 --> 00:14:54,963
+the portal, and both look at the same project.
+
+206
+00:14:56,700 --> 00:15:00,889
+Here are the questions that come up first in enterprise adoption.
+
+207
+00:15:00,889 --> 00:15:02,307
+First, access control.
+
+208
+00:15:02,307 --> 00:15:07,593
+Entra ID and Azure role-based access control separate what people and apps can do,
+
+209
+00:15:07,593 --> 00:15:11,847
+and even this demo connects with a managed identity, with no keys.
+
+210
+00:15:11,847 --> 00:15:13,071
+Second, networking.
+
+211
+00:15:13,071 --> 00:15:17,648
+Private endpoints and virtual networks can close off internet exposure.
+
+212
+00:15:17,648 --> 00:15:18,421
+Third, data.
+
+213
+00:15:18,421 --> 00:15:21,450
+Customer prompts and data are not used to train
+
+214
+00:15:21,450 --> 00:15:24,415
+the base models, and stored data is encrypted.
+
+215
+00:15:24,415 --> 00:15:26,478
+Fourth, where data is processed.
+
+216
+00:15:26,478 --> 00:15:31,699
+You choose the resource region and the deployment type to meet your requirements.
+
+217
+00:15:31,699 --> 00:15:33,697
+Fifth, security and governance.
+
+218
+00:15:33,697 --> 00:15:38,660
+Defender, Purview and Azure Policy carry threat detection and policy forward.
+
+219
+00:15:38,660 --> 00:15:39,433
+Sixth, cost.
+
+220
+00:15:39,433 --> 00:15:42,592
+You cap each deployment with a quota, and reserve
+
+221
+00:15:42,592 --> 00:15:46,201
+provisioned throughput when you need stable performance.
+
+222
+00:15:46,201 --> 00:15:50,971
+We configured this demo with a public endpoint for demonstration purposes.
+
+223
+00:15:50,971 --> 00:15:54,516
+In production, turning these items on is the next step.
+
+224
+00:15:56,367 --> 00:15:57,052
+To sum up.
+
+225
+00:15:57,052 --> 00:16:02,323
+First, a single command deploys models, agents, guardrails and observability.
+
+226
+00:16:02,323 --> 00:16:08,211
+Second, employees get answers from documents and get work done in a ChatGPT-style app.
+
+227
+00:16:08,211 --> 00:16:12,114
+Third, administrators operate models, agents, guardrails,
+
+228
+00:16:12,114 --> 00:16:15,948
+tracing and evaluation in one place, the Foundry portal.
+
+229
+00:16:15,948 --> 00:16:20,535
+Fourth, security and quality are proven with code and with numbers.
+
+230
+00:16:21,408 --> 00:16:22,973
+The next step is simple.
+
+231
+00:16:22,973 --> 00:16:26,364
+Pick one highly repetitive task, connect the related
+
+232
+00:16:26,364 --> 00:16:29,560
+documents, and write twenty evaluation questions.
+
+233
+00:16:29,560 --> 00:16:33,668
+Deploy everything you saw today yourself, with this repository.
+
+234
+00:16:33,668 --> 00:16:34,320
+Thank you.

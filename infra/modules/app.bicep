@@ -19,6 +19,7 @@ param region string
 param subscriptionId string
 param resourceGroupName string
 param tenantId string
+param demoLang string = 'ko'
 
 var roleAcrPull = '7f951dda-4ed3-4680-a7ca-43fe172d538d'
 
@@ -118,6 +119,7 @@ resource web 'Microsoft.App/containerApps@2025-01-01' = {
             { name: 'DEMO_ACCESS_CODE', secretRef: 'demo-access-code' }
             { name: 'APPLICATIONINSIGHTS_CONNECTION_STRING', secretRef: 'appinsights-connection-string' }
             { name: 'AUTO_BOOTSTRAP', value: 'true' }
+            { name: 'DEMO_LANG', value: demoLang }
           ]
         }
       ]

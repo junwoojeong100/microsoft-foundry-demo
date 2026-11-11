@@ -36,6 +36,11 @@ param deployMultiVendorModels bool = true
 @allowed(['GlobalStandard', 'DataZoneStandard'])
 param chatModelSku string = 'GlobalStandard'
 
+@description('데모 화면 언어: ko(기본) 또는 en. 앱 UI·에이전트 지침·샘플 문서와 프로젝트 설명의 언어를 정합니다(azd env set DEMO_LANG en).')
+param demoLang string = 'ko'
+
+var lang = demoLang == 'en' ? 'en' : 'ko'  // 빈 값·알 수 없는 값은 한국어
+
 var tags = {
   'azd-env-name': environmentName
   workload: 'microsoft-foundry-demo'
@@ -99,6 +104,7 @@ module foundry 'modules/foundry.bicep' = {
     webIdentityPrincipalId: identity.outputs.principalId
     deployerPrincipalId: principalId
     deployerPrincipalType: principalType
+    demoLang: lang
   }
 }
 
@@ -123,6 +129,7 @@ module app 'modules/app.bicep' = {
     subscriptionId: subscription().subscriptionId
     resourceGroupName: rg.name
     tenantId: tenant().tenantId
+    demoLang: lang
   }
 }
 

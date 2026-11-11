@@ -1,0 +1,771 @@
+﻿date,region,product,channel,rating,text
+2026-01-01,Daegu-Gyeongbuk,Air Purifier,Online,3,The Wi-Fi connection drops often.
+2026-01-01,Daejeon-Chungcheong,Air Purifier,Online,5,"The filter replacement alerts are accurate, so upkeep is easy."
+2026-01-02,Seoul,Robot Vacuum,Offline,5,I'm happy with the mopping performance.
+2026-01-02,Gyeonggi-Incheon,Robot Vacuum,Online,5,It steers around obstacles well and covers the whole area thoroughly.
+2026-01-03,Gwangju-Jeolla,Air Purifier,Offline,3,The Wi-Fi connection drops often.
+2026-01-03,Gwangju-Jeolla,Air Fryer,Online,3,The basket is a little stiff.
+2026-01-04,Gyeonggi-Incheon,Robot Vacuum,B2B,5,It steers around obstacles well and covers the whole area thoroughly.
+2026-01-04,Gyeonggi-Incheon,Air Purifier,Online,4,I like being able to check the air quality in the app.
+2026-01-04,Gyeonggi-Incheon,Air Purifier,Online,3,It's louder than I expected when it's running.
+2026-01-05,Gwangju-Jeolla,Robot Vacuum,B2B,5,I'm happy with the mopping performance.
+2026-01-05,Gyeonggi-Incheon,Air Fryer,Offline,5,Fried food comes out crispy and it's easy to clean.
+2026-01-05,Gwangju-Jeolla,Smart Lighting,Online,5,It works smoothly with my voice assistant.
+2026-01-05,Gyeonggi-Incheon,Robot Vacuum,B2B,5,I'm happy with the mopping performance.
+2026-01-05,Gwangju-Jeolla,Smart Lighting,Online,2,It sometimes loses its connection to the app.
+2026-01-06,Gwangju-Jeolla,Air Fryer,Online,5,"The app has plenty of recipes, so cooking has become more fun."
+2026-01-06,Gyeonggi-Incheon,Air Purifier,Offline,2,The Wi-Fi connection drops often.
+2026-01-07,Busan-Gyeongnam,Robot Vacuum,Online,5,Setting cleaning zones in the app is easy.
+2026-01-07,Busan-Gyeongnam,Air Fryer,Online,3,The basket is a little stiff.
+2026-01-07,Busan-Gyeongnam,Air Fryer,B2B,3,The basket is a little stiff.
+2026-01-07,Seoul,Smart Lighting,Online,3,The brightness steps are too coarse.
+2026-01-08,Busan-Gyeongnam,Robot Vacuum,Offline,5,It steers around obstacles well and covers the whole area thoroughly.
+2026-01-09,Seoul,Air Purifier,Offline,5,"The filter replacement alerts are accurate, so upkeep is easy."
+2026-01-09,Seoul,Smart Lighting,Offline,5,"Easy to install, and the colors look great."
+2026-01-10,Gyeonggi-Incheon,Robot Vacuum,Offline,3,It sometimes fails to return to the charging dock.
+2026-01-10,Daejeon-Chungcheong,Air Fryer,Online,5,"The app has plenty of recipes, so cooking has become more fun."
+2026-01-11,Daegu-Gyeongbuk,Air Fryer,Online,3,It took a long time to get through to the Customer Service Center.
+2026-01-11,Daejeon-Chungcheong,Air Fryer,Online,5,Fried food comes out crispy and it's easy to clean.
+2026-01-12,Daegu-Gyeongbuk,Robot Vacuum,B2B,2,It sometimes fails to return to the charging dock.
+2026-01-13,Busan-Gyeongnam,Air Fryer,Online,4,"The app has plenty of recipes, so cooking has become more fun."
+2026-01-13,Daegu-Gyeongbuk,Air Fryer,Offline,4,"At 6.5 L, it's big enough for a family of four."
+2026-01-15,Busan-Gyeongnam,Robot Vacuum,Offline,5,I'm happy with the mopping performance.
+2026-01-15,Daegu-Gyeongbuk,Smart Lighting,Offline,2,It sometimes loses its connection to the app.
+2026-01-16,Gyeonggi-Incheon,Air Fryer,Online,5,"At 6.5 L, it's big enough for a family of four."
+2026-01-17,Daegu-Gyeongbuk,Air Fryer,Offline,3,The basket is a little stiff.
+2026-01-17,Gyeonggi-Incheon,Robot Vacuum,Offline,3,It has trouble getting over thresholds.
+2026-01-17,Gwangju-Jeolla,Air Fryer,Online,3,The basket is a little stiff.
+2026-01-18,Seoul,Air Fryer,Offline,4,"The app has plenty of recipes, so cooking has become more fun."
+2026-01-18,Gyeonggi-Incheon,Air Fryer,Online,5,"At 6.5 L, it's big enough for a family of four."
+2026-01-18,Daejeon-Chungcheong,Robot Vacuum,Online,5,Setting cleaning zones in the app is easy.
+2026-01-19,Daegu-Gyeongbuk,Smart Lighting,Online,3,It sometimes loses its connection to the app.
+2026-01-19,Gyeonggi-Incheon,Robot Vacuum,Online,5,It steers around obstacles well and covers the whole area thoroughly.
+2026-01-20,Seoul,Smart Lighting,Offline,5,"Easy to install, and the colors look great."
+2026-01-21,Gyeonggi-Incheon,Smart Lighting,Offline,5,"Easy to install, and the colors look great."
+2026-01-21,Gyeonggi-Incheon,Smart Lighting,Online,4,"Easy to install, and the colors look great."
+2026-01-21,Gwangju-Jeolla,Air Fryer,Online,4,"The app has plenty of recipes, so cooking has become more fun."
+2026-01-21,Daejeon-Chungcheong,Smart Lighting,Offline,5,"Easy to install, and the colors look great."
+2026-01-22,Busan-Gyeongnam,Air Purifier,Online,5,"The filter replacement alerts are accurate, so upkeep is easy."
+2026-01-22,Seoul,Smart Lighting,Online,4,It works smoothly with my voice assistant.
+2026-01-22,Gyeonggi-Incheon,Air Purifier,B2B,5,I like being able to check the air quality in the app.
+2026-01-22,Seoul,Air Fryer,B2B,2,The coating seems to be peeling off.
+2026-01-22,Daegu-Gyeongbuk,Air Purifier,B2B,4,"The filter replacement alerts are accurate, so upkeep is easy."
+2026-01-22,Seoul,Air Fryer,Online,5,"The app has plenty of recipes, so cooking has become more fun."
+2026-01-23,Daejeon-Chungcheong,Air Fryer,Online,5,"The app has plenty of recipes, so cooking has become more fun."
+2026-01-23,Gyeonggi-Incheon,Air Purifier,Offline,3,It's louder than I expected when it's running.
+2026-01-24,Seoul,Robot Vacuum,B2B,5,Setting cleaning zones in the app is easy.
+2026-01-24,Gyeonggi-Incheon,Smart Lighting,Online,3,Delivery arrived three days later than scheduled.
+2026-01-24,Seoul,Robot Vacuum,Offline,4,I'm happy with the mopping performance.
+2026-01-24,Seoul,Air Purifier,Online,5,I like being able to check the air quality in the app.
+2026-01-25,Gyeonggi-Incheon,Air Fryer,B2B,5,"At 6.5 L, it's big enough for a family of four."
+2026-01-25,Seoul,Air Fryer,B2B,4,"At 6.5 L, it's big enough for a family of four."
+2026-01-25,Seoul,Robot Vacuum,B2B,4,I'm happy with the mopping performance.
+2026-01-25,Busan-Gyeongnam,Air Purifier,Online,5,"The filter replacement alerts are accurate, so upkeep is easy."
+2026-01-26,Daejeon-Chungcheong,Air Purifier,Online,3,The Wi-Fi connection drops often.
+2026-01-27,Daegu-Gyeongbuk,Robot Vacuum,Offline,4,I'm happy with the mopping performance.
+2026-01-27,Busan-Gyeongnam,Air Purifier,Online,4,"The filter replacement alerts are accurate, so upkeep is easy."
+2026-01-27,Gwangju-Jeolla,Air Purifier,Online,3,It was hard to schedule an after-sales service visit.
+2026-01-28,Gyeonggi-Incheon,Robot Vacuum,Online,3,It's a bit on the loud side.
+2026-01-28,Busan-Gyeongnam,Robot Vacuum,Offline,4,Setting cleaning zones in the app is easy.
+2026-01-28,Seoul,Air Fryer,Offline,5,"At 6.5 L, it's big enough for a family of four."
+2026-01-30,Gwangju-Jeolla,Air Purifier,Online,5,I like being able to check the air quality in the app.
+2026-01-30,Busan-Gyeongnam,Air Fryer,Online,5,Fried food comes out crispy and it's easy to clean.
+2026-01-30,Busan-Gyeongnam,Robot Vacuum,B2B,5,It steers around obstacles well and covers the whole area thoroughly.
+2026-01-31,Busan-Gyeongnam,Air Purifier,Online,4,"The filter replacement alerts are accurate, so upkeep is easy."
+2026-02-01,Daegu-Gyeongbuk,Robot Vacuum,Online,2,It took a long time to get through to the Customer Service Center.
+2026-02-02,Gyeonggi-Incheon,Air Fryer,Offline,2,It gives off a smell when preheating.
+2026-02-02,Daegu-Gyeongbuk,Air Fryer,B2B,5,"At 6.5 L, it's big enough for a family of four."
+2026-02-02,Busan-Gyeongnam,Air Fryer,B2B,4,"At 6.5 L, it's big enough for a family of four."
+2026-02-02,Gyeonggi-Incheon,Air Fryer,Offline,5,"The app has plenty of recipes, so cooking has become more fun."
+2026-02-02,Gyeonggi-Incheon,Robot Vacuum,Offline,2,The package arrived damaged.
+2026-02-02,Gwangju-Jeolla,Air Purifier,B2B,4,The air feels noticeably cleaner. Sleep mode is almost silent.
+2026-02-02,Busan-Gyeongnam,Air Purifier,B2B,3,The Wi-Fi connection drops often.
+2026-02-02,Gyeonggi-Incheon,Robot Vacuum,Online,2,It's a bit on the loud side.
+2026-02-02,Gyeonggi-Incheon,Air Fryer,Offline,3,It gives off a smell when preheating.
+2026-02-03,Busan-Gyeongnam,Air Fryer,B2B,5,"The app has plenty of recipes, so cooking has become more fun."
+2026-02-03,Busan-Gyeongnam,Air Purifier,B2B,4,"The filter replacement alerts are accurate, so upkeep is easy."
+2026-02-03,Gyeonggi-Incheon,Air Fryer,Online,4,"At 6.5 L, it's big enough for a family of four."
+2026-02-04,Daegu-Gyeongbuk,Air Purifier,Online,3,It's louder than I expected when it's running.
+2026-02-04,Gyeonggi-Incheon,Air Purifier,Online,5,"The filter replacement alerts are accurate, so upkeep is easy."
+2026-02-04,Gyeonggi-Incheon,Air Purifier,Offline,5,I like being able to check the air quality in the app.
+2026-02-05,Gyeonggi-Incheon,Air Fryer,Online,5,"At 6.5 L, it's big enough for a family of four."
+2026-02-06,Seoul,Air Fryer,Online,3,It gives off a smell when preheating.
+2026-02-06,Busan-Gyeongnam,Air Fryer,Online,3,The package arrived damaged.
+2026-02-06,Daegu-Gyeongbuk,Air Purifier,Online,3,It took a long time to get through to the Customer Service Center.
+2026-02-08,Daegu-Gyeongbuk,Air Fryer,Online,4,"At 6.5 L, it's big enough for a family of four."
+2026-02-08,Daegu-Gyeongbuk,Air Fryer,B2B,5,Fried food comes out crispy and it's easy to clean.
+2026-02-10,Gyeonggi-Incheon,Air Fryer,Online,3,It gives off a smell when preheating.
+2026-02-10,Daejeon-Chungcheong,Air Purifier,Online,5,The air feels noticeably cleaner. Sleep mode is almost silent.
+2026-02-10,Gyeonggi-Incheon,Air Fryer,Online,5,Fried food comes out crispy and it's easy to clean.
+2026-02-11,Seoul,Air Fryer,Online,5,"The app has plenty of recipes, so cooking has become more fun."
+2026-02-12,Gyeonggi-Incheon,Robot Vacuum,Online,5,I'm happy with the mopping performance.
+2026-02-12,Seoul,Robot Vacuum,Offline,5,It steers around obstacles well and covers the whole area thoroughly.
+2026-02-12,Seoul,Robot Vacuum,Online,4,Setting cleaning zones in the app is easy.
+2026-02-12,Gyeonggi-Incheon,Smart Lighting,Offline,3,The brightness steps are too coarse.
+2026-02-12,Daegu-Gyeongbuk,Robot Vacuum,Online,5,Setting cleaning zones in the app is easy.
+2026-02-13,Daejeon-Chungcheong,Robot Vacuum,Online,5,I'm happy with the mopping performance.
+2026-02-13,Seoul,Robot Vacuum,Online,2,It sometimes fails to return to the charging dock.
+2026-02-13,Gwangju-Jeolla,Air Purifier,Online,3,The replacement filters are a bit pricey.
+2026-02-13,Seoul,Robot Vacuum,B2B,4,I'm happy with the mopping performance.
+2026-02-14,Gyeonggi-Incheon,Air Fryer,Offline,5,"At 6.5 L, it's big enough for a family of four."
+2026-02-15,Gyeonggi-Incheon,Robot Vacuum,Online,4,It steers around obstacles well and covers the whole area thoroughly.
+2026-02-15,Busan-Gyeongnam,Air Purifier,Online,3,The Wi-Fi connection drops often.
+2026-02-15,Daegu-Gyeongbuk,Air Purifier,Online,5,I like being able to check the air quality in the app.
+2026-02-16,Busan-Gyeongnam,Smart Lighting,Offline,4,It works smoothly with my voice assistant.
+2026-02-17,Gwangju-Jeolla,Robot Vacuum,Online,5,I'm happy with the mopping performance.
+2026-02-18,Daegu-Gyeongbuk,Air Purifier,Offline,5,The air feels noticeably cleaner. Sleep mode is almost silent.
+2026-02-18,Gyeonggi-Incheon,Robot Vacuum,Online,5,Setting cleaning zones in the app is easy.
+2026-02-18,Busan-Gyeongnam,Robot Vacuum,Offline,3,It's a bit on the loud side.
+2026-02-20,Gyeonggi-Incheon,Robot Vacuum,Online,4,I'm happy with the mopping performance.
+2026-02-20,Seoul,Robot Vacuum,B2B,4,I'm happy with the mopping performance.
+2026-02-20,Seoul,Robot Vacuum,Online,5,Setting cleaning zones in the app is easy.
+2026-02-20,Daejeon-Chungcheong,Air Purifier,Online,3,The package arrived damaged.
+2026-02-20,Gwangju-Jeolla,Smart Lighting,Online,3,The brightness steps are too coarse.
+2026-02-21,Daegu-Gyeongbuk,Air Fryer,Online,5,"The app has plenty of recipes, so cooking has become more fun."
+2026-02-22,Busan-Gyeongnam,Air Fryer,Online,3,It took a long time to get through to the Customer Service Center.
+2026-02-23,Gyeonggi-Incheon,Robot Vacuum,Online,5,It steers around obstacles well and covers the whole area thoroughly.
+2026-02-23,Gwangju-Jeolla,Air Fryer,Offline,4,"At 6.5 L, it's big enough for a family of four."
+2026-02-23,Gyeonggi-Incheon,Air Purifier,Online,3,The Wi-Fi connection drops often.
+2026-02-24,Daegu-Gyeongbuk,Robot Vacuum,B2B,3,It sometimes fails to return to the charging dock.
+2026-02-24,Gyeonggi-Incheon,Robot Vacuum,Offline,5,Setting cleaning zones in the app is easy.
+2026-02-26,Seoul,Robot Vacuum,Offline,5,Setting cleaning zones in the app is easy.
+2026-02-26,Gyeonggi-Incheon,Air Purifier,Offline,5,The air feels noticeably cleaner. Sleep mode is almost silent.
+2026-02-26,Daegu-Gyeongbuk,Air Purifier,Online,4,The air feels noticeably cleaner. Sleep mode is almost silent.
+2026-02-28,Busan-Gyeongnam,Air Purifier,Online,5,I like being able to check the air quality in the app.
+2026-03-01,Busan-Gyeongnam,Air Fryer,Offline,4,Fried food comes out crispy and it's easy to clean.
+2026-03-01,Daejeon-Chungcheong,Air Purifier,Online,5,"The filter replacement alerts are accurate, so upkeep is easy."
+2026-03-01,Seoul,Smart Lighting,Offline,5,It works smoothly with my voice assistant.
+2026-03-03,Gyeonggi-Incheon,Robot Vacuum,B2B,2,It was hard to schedule an after-sales service visit.
+2026-03-03,Gyeonggi-Incheon,Air Fryer,Online,2,It gives off a smell when preheating.
+2026-03-04,Daejeon-Chungcheong,Robot Vacuum,Offline,4,It steers around obstacles well and covers the whole area thoroughly.
+2026-03-04,Seoul,Air Fryer,Online,4,"At 6.5 L, it's big enough for a family of four."
+2026-03-04,Gyeonggi-Incheon,Robot Vacuum,Offline,2,The package arrived damaged.
+2026-03-04,Daejeon-Chungcheong,Robot Vacuum,Offline,5,Setting cleaning zones in the app is easy.
+2026-03-06,Gwangju-Jeolla,Smart Lighting,Offline,4,It works smoothly with my voice assistant.
+2026-03-06,Seoul,Air Fryer,Online,5,Fried food comes out crispy and it's easy to clean.
+2026-03-06,Busan-Gyeongnam,Robot Vacuum,Offline,5,Setting cleaning zones in the app is easy.
+2026-03-07,Seoul,Robot Vacuum,B2B,3,Delivery arrived three days later than scheduled.
+2026-03-10,Seoul,Robot Vacuum,Offline,5,It steers around obstacles well and covers the whole area thoroughly.
+2026-03-10,Seoul,Robot Vacuum,Online,3,It has trouble getting over thresholds.
+2026-03-10,Gyeonggi-Incheon,Air Fryer,Online,2,It gives off a smell when preheating.
+2026-03-11,Daegu-Gyeongbuk,Air Fryer,Online,5,"The app has plenty of recipes, so cooking has become more fun."
+2026-03-12,Daegu-Gyeongbuk,Air Fryer,Offline,4,"The app has plenty of recipes, so cooking has become more fun."
+2026-03-12,Gwangju-Jeolla,Robot Vacuum,Offline,3,It's a bit on the loud side.
+2026-03-12,Daegu-Gyeongbuk,Air Fryer,Offline,3,The basket is a little stiff.
+2026-03-12,Seoul,Robot Vacuum,Online,5,I'm happy with the mopping performance.
+2026-03-13,Gyeonggi-Incheon,Robot Vacuum,Online,5,Setting cleaning zones in the app is easy.
+2026-03-13,Seoul,Robot Vacuum,Online,5,Setting cleaning zones in the app is easy.
+2026-03-15,Gwangju-Jeolla,Smart Lighting,Offline,4,"Easy to install, and the colors look great."
+2026-03-15,Gwangju-Jeolla,Air Purifier,Online,3,It was hard to schedule an after-sales service visit.
+2026-03-16,Gyeonggi-Incheon,Air Purifier,Online,4,"The filter replacement alerts are accurate, so upkeep is easy."
+2026-03-16,Gyeonggi-Incheon,Robot Vacuum,Online,5,I'm happy with the mopping performance.
+2026-03-16,Gyeonggi-Incheon,Air Fryer,Offline,3,Delivery arrived three days later than scheduled.
+2026-03-17,Daejeon-Chungcheong,Air Purifier,Online,5,The air feels noticeably cleaner. Sleep mode is almost silent.
+2026-03-17,Gyeonggi-Incheon,Air Purifier,Online,3,The Wi-Fi connection drops often.
+2026-03-18,Seoul,Robot Vacuum,Online,5,It steers around obstacles well and covers the whole area thoroughly.
+2026-03-18,Busan-Gyeongnam,Robot Vacuum,Online,4,I'm happy with the mopping performance.
+2026-03-18,Daejeon-Chungcheong,Smart Lighting,Online,5,"Easy to install, and the colors look great."
+2026-03-19,Gyeonggi-Incheon,Robot Vacuum,Offline,3,It's a bit on the loud side.
+2026-03-19,Gwangju-Jeolla,Air Purifier,Offline,4,The air feels noticeably cleaner. Sleep mode is almost silent.
+2026-03-19,Busan-Gyeongnam,Air Fryer,Offline,5,"At 6.5 L, it's big enough for a family of four."
+2026-03-20,Busan-Gyeongnam,Robot Vacuum,Online,4,I'm happy with the mopping performance.
+2026-03-20,Daegu-Gyeongbuk,Robot Vacuum,Online,2,It's a bit on the loud side.
+2026-03-20,Gyeonggi-Incheon,Air Fryer,Online,4,"The app has plenty of recipes, so cooking has become more fun."
+2026-03-20,Gwangju-Jeolla,Air Fryer,Online,3,It gives off a smell when preheating.
+2026-03-20,Seoul,Air Fryer,Offline,4,Fried food comes out crispy and it's easy to clean.
+2026-03-21,Gwangju-Jeolla,Air Fryer,Online,5,Fried food comes out crispy and it's easy to clean.
+2026-03-21,Gwangju-Jeolla,Air Purifier,Offline,5,"The filter replacement alerts are accurate, so upkeep is easy."
+2026-03-21,Daejeon-Chungcheong,Air Fryer,Offline,2,The basket is a little stiff.
+2026-03-22,Daejeon-Chungcheong,Robot Vacuum,Online,5,It steers around obstacles well and covers the whole area thoroughly.
+2026-03-24,Daegu-Gyeongbuk,Robot Vacuum,B2B,5,Setting cleaning zones in the app is easy.
+2026-03-24,Gyeonggi-Incheon,Air Purifier,Online,3,The replacement filters are a bit pricey.
+2026-03-25,Seoul,Air Fryer,Offline,2,The coating seems to be peeling off.
+2026-03-25,Gyeonggi-Incheon,Robot Vacuum,Online,4,Setting cleaning zones in the app is easy.
+2026-03-26,Seoul,Smart Lighting,Online,5,"Easy to install, and the colors look great."
+2026-03-26,Seoul,Robot Vacuum,Online,5,It steers around obstacles well and covers the whole area thoroughly.
+2026-03-27,Daejeon-Chungcheong,Air Purifier,Online,5,The air feels noticeably cleaner. Sleep mode is almost silent.
+2026-03-27,Gwangju-Jeolla,Air Fryer,Online,4,"The app has plenty of recipes, so cooking has become more fun."
+2026-03-28,Daegu-Gyeongbuk,Air Fryer,Offline,3,The coating seems to be peeling off.
+2026-03-29,Daegu-Gyeongbuk,Air Purifier,Online,2,It's louder than I expected when it's running.
+2026-03-29,Daegu-Gyeongbuk,Robot Vacuum,Online,2,It's a bit on the loud side.
+2026-03-30,Gyeonggi-Incheon,Smart Lighting,Online,2,It sometimes loses its connection to the app.
+2026-03-30,Gwangju-Jeolla,Air Purifier,Offline,5,"The filter replacement alerts are accurate, so upkeep is easy."
+2026-03-30,Busan-Gyeongnam,Robot Vacuum,Offline,4,Setting cleaning zones in the app is easy.
+2026-03-30,Gyeonggi-Incheon,Smart Lighting,Online,5,"Easy to install, and the colors look great."
+2026-03-30,Gyeonggi-Incheon,Air Purifier,B2B,5,"The filter replacement alerts are accurate, so upkeep is easy."
+2026-03-31,Gwangju-Jeolla,Robot Vacuum,Offline,4,I'm happy with the mopping performance.
+2026-03-31,Busan-Gyeongnam,Smart Lighting,Online,3,The brightness steps are too coarse.
+2026-03-31,Busan-Gyeongnam,Air Fryer,Online,4,Fried food comes out crispy and it's easy to clean.
+2026-03-31,Seoul,Smart Lighting,Online,5,It works smoothly with my voice assistant.
+2026-04-01,Daegu-Gyeongbuk,Air Fryer,Offline,5,"At 6.5 L, it's big enough for a family of four."
+2026-04-01,Gwangju-Jeolla,Air Purifier,Offline,5,I like being able to check the air quality in the app.
+2026-04-02,Gwangju-Jeolla,Air Purifier,B2B,3,It was hard to schedule an after-sales service visit.
+2026-04-02,Busan-Gyeongnam,Air Fryer,Online,5,"At 6.5 L, it's big enough for a family of four."
+2026-04-03,Gyeonggi-Incheon,Air Purifier,Online,5,I like being able to check the air quality in the app.
+2026-04-03,Daejeon-Chungcheong,Robot Vacuum,Offline,2,It sometimes fails to return to the charging dock.
+2026-04-04,Gwangju-Jeolla,Robot Vacuum,B2B,5,It steers around obstacles well and covers the whole area thoroughly.
+2026-04-04,Gyeonggi-Incheon,Robot Vacuum,Online,5,Setting cleaning zones in the app is easy.
+2026-04-05,Gyeonggi-Incheon,Air Fryer,Offline,2,It was hard to schedule an after-sales service visit.
+2026-04-05,Daejeon-Chungcheong,Air Fryer,Online,5,"At 6.5 L, it's big enough for a family of four."
+2026-04-05,Gyeonggi-Incheon,Robot Vacuum,Online,5,I'm happy with the mopping performance.
+2026-04-06,Gyeonggi-Incheon,Robot Vacuum,Online,3,It has trouble getting over thresholds.
+2026-04-06,Busan-Gyeongnam,Air Fryer,Online,4,"At 6.5 L, it's big enough for a family of four."
+2026-04-07,Busan-Gyeongnam,Air Purifier,Online,5,I like being able to check the air quality in the app.
+2026-04-07,Gyeonggi-Incheon,Air Purifier,B2B,5,I like being able to check the air quality in the app.
+2026-04-08,Daegu-Gyeongbuk,Robot Vacuum,B2B,5,It steers around obstacles well and covers the whole area thoroughly.
+2026-04-09,Daegu-Gyeongbuk,Smart Lighting,Offline,2,It took a long time to get through to the Customer Service Center.
+2026-04-10,Gyeonggi-Incheon,Smart Lighting,Online,5,It works smoothly with my voice assistant.
+2026-04-10,Busan-Gyeongnam,Air Fryer,Offline,5,"The app has plenty of recipes, so cooking has become more fun."
+2026-04-10,Daegu-Gyeongbuk,Air Purifier,B2B,5,"The filter replacement alerts are accurate, so upkeep is easy."
+2026-04-11,Seoul,Robot Vacuum,Online,4,I'm happy with the mopping performance.
+2026-04-11,Gwangju-Jeolla,Air Purifier,Offline,5,The air feels noticeably cleaner. Sleep mode is almost silent.
+2026-04-12,Gyeonggi-Incheon,Smart Lighting,Online,5,It works smoothly with my voice assistant.
+2026-04-12,Busan-Gyeongnam,Smart Lighting,Online,5,"Easy to install, and the colors look great."
+2026-04-12,Busan-Gyeongnam,Air Fryer,Offline,4,"At 6.5 L, it's big enough for a family of four."
+2026-04-12,Seoul,Air Purifier,Offline,4,I like being able to check the air quality in the app.
+2026-04-13,Busan-Gyeongnam,Smart Lighting,Offline,5,"Easy to install, and the colors look great."
+2026-04-14,Busan-Gyeongnam,Smart Lighting,Offline,4,It works smoothly with my voice assistant.
+2026-04-15,Gyeonggi-Incheon,Robot Vacuum,Offline,5,It steers around obstacles well and covers the whole area thoroughly.
+2026-04-15,Busan-Gyeongnam,Robot Vacuum,Online,5,I'm happy with the mopping performance.
+2026-04-15,Gyeonggi-Incheon,Air Fryer,Online,5,"At 6.5 L, it's big enough for a family of four."
+2026-04-16,Seoul,Robot Vacuum,Offline,5,I'm happy with the mopping performance.
+2026-04-16,Gyeonggi-Incheon,Smart Lighting,Online,5,"Easy to install, and the colors look great."
+2026-04-16,Gyeonggi-Incheon,Air Fryer,B2B,4,"The app has plenty of recipes, so cooking has become more fun."
+2026-04-16,Daejeon-Chungcheong,Robot Vacuum,Offline,4,Setting cleaning zones in the app is easy.
+2026-04-16,Gwangju-Jeolla,Air Purifier,Offline,2,The Wi-Fi connection drops often.
+2026-04-17,Busan-Gyeongnam,Air Fryer,Offline,4,Fried food comes out crispy and it's easy to clean.
+2026-04-17,Seoul,Air Fryer,Online,3,The basket is a little stiff.
+2026-04-18,Gyeonggi-Incheon,Air Purifier,Online,5,The air feels noticeably cleaner. Sleep mode is almost silent.
+2026-04-18,Daegu-Gyeongbuk,Air Purifier,Online,4,"The filter replacement alerts are accurate, so upkeep is easy."
+2026-04-18,Gyeonggi-Incheon,Air Fryer,Online,3,It was hard to schedule an after-sales service visit.
+2026-04-19,Daejeon-Chungcheong,Air Purifier,Offline,4,I like being able to check the air quality in the app.
+2026-04-19,Gyeonggi-Incheon,Air Purifier,Offline,5,"The filter replacement alerts are accurate, so upkeep is easy."
+2026-04-20,Seoul,Air Purifier,Online,2,The package arrived damaged.
+2026-04-20,Busan-Gyeongnam,Air Fryer,Online,4,Fried food comes out crispy and it's easy to clean.
+2026-04-21,Daejeon-Chungcheong,Air Fryer,Offline,3,The coating seems to be peeling off.
+2026-04-21,Seoul,Smart Lighting,Online,4,It works smoothly with my voice assistant.
+2026-04-22,Daegu-Gyeongbuk,Robot Vacuum,Online,4,Setting cleaning zones in the app is easy.
+2026-04-22,Daegu-Gyeongbuk,Air Purifier,Online,4,"The filter replacement alerts are accurate, so upkeep is easy."
+2026-04-22,Daejeon-Chungcheong,Robot Vacuum,Online,5,I'm happy with the mopping performance.
+2026-04-23,Gyeonggi-Incheon,Robot Vacuum,Offline,4,Setting cleaning zones in the app is easy.
+2026-04-23,Busan-Gyeongnam,Air Fryer,Online,3,The coating seems to be peeling off.
+2026-04-24,Gyeonggi-Incheon,Air Fryer,Online,4,"At 6.5 L, it's big enough for a family of four."
+2026-04-24,Gyeonggi-Incheon,Air Fryer,B2B,2,The basket is a little stiff.
+2026-04-24,Daegu-Gyeongbuk,Robot Vacuum,Online,3,It has trouble getting over thresholds.
+2026-04-25,Gyeonggi-Incheon,Smart Lighting,Online,5,It works smoothly with my voice assistant.
+2026-04-26,Gyeonggi-Incheon,Robot Vacuum,Offline,5,I'm happy with the mopping performance.
+2026-04-26,Busan-Gyeongnam,Robot Vacuum,Online,5,It steers around obstacles well and covers the whole area thoroughly.
+2026-04-27,Busan-Gyeongnam,Air Purifier,Offline,5,The air feels noticeably cleaner. Sleep mode is almost silent.
+2026-04-27,Daegu-Gyeongbuk,Robot Vacuum,B2B,5,I'm happy with the mopping performance.
+2026-04-28,Gwangju-Jeolla,Robot Vacuum,B2B,2,It sometimes fails to return to the charging dock.
+2026-04-29,Daegu-Gyeongbuk,Air Purifier,B2B,5,The air feels noticeably cleaner. Sleep mode is almost silent.
+2026-04-30,Daegu-Gyeongbuk,Air Purifier,Online,3,The package arrived damaged.
+2026-04-30,Gyeonggi-Incheon,Air Fryer,Offline,3,It gives off a smell when preheating.
+2026-04-30,Seoul,Air Purifier,Offline,3,It's louder than I expected when it's running.
+2026-04-30,Gyeonggi-Incheon,Air Fryer,B2B,4,"The app has plenty of recipes, so cooking has become more fun."
+2026-04-30,Daegu-Gyeongbuk,Air Fryer,Online,2,It gives off a smell when preheating.
+2026-04-30,Daegu-Gyeongbuk,Air Purifier,Online,5,"The filter replacement alerts are accurate, so upkeep is easy."
+2026-05-01,Gwangju-Jeolla,Robot Vacuum,Offline,3,It sometimes fails to return to the charging dock.
+2026-05-02,Daegu-Gyeongbuk,Air Fryer,B2B,5,"At 6.5 L, it's big enough for a family of four."
+2026-05-03,Daegu-Gyeongbuk,Air Fryer,Offline,5,"At 6.5 L, it's big enough for a family of four."
+2026-05-03,Busan-Gyeongnam,Air Fryer,Offline,5,"At 6.5 L, it's big enough for a family of four."
+2026-05-03,Daegu-Gyeongbuk,Air Purifier,B2B,4,I like being able to check the air quality in the app.
+2026-05-03,Seoul,Robot Vacuum,Online,5,Setting cleaning zones in the app is easy.
+2026-05-04,Gyeonggi-Incheon,Smart Lighting,Online,5,"Easy to install, and the colors look great."
+2026-05-04,Seoul,Air Purifier,Offline,2,The package arrived damaged.
+2026-05-04,Daegu-Gyeongbuk,Smart Lighting,Online,4,It works smoothly with my voice assistant.
+2026-05-04,Seoul,Air Fryer,Online,5,Fried food comes out crispy and it's easy to clean.
+2026-05-05,Busan-Gyeongnam,Air Purifier,Online,3,It's louder than I expected when it's running.
+2026-05-05,Seoul,Air Purifier,B2B,4,I like being able to check the air quality in the app.
+2026-05-05,Daejeon-Chungcheong,Air Fryer,B2B,4,"The app has plenty of recipes, so cooking has become more fun."
+2026-05-05,Seoul,Air Purifier,Online,4,The air feels noticeably cleaner. Sleep mode is almost silent.
+2026-05-05,Daegu-Gyeongbuk,Air Fryer,Online,5,"The app has plenty of recipes, so cooking has become more fun."
+2026-05-07,Gyeonggi-Incheon,Robot Vacuum,Offline,5,Setting cleaning zones in the app is easy.
+2026-05-07,Daejeon-Chungcheong,Air Purifier,Offline,3,The replacement filters are a bit pricey.
+2026-05-07,Gyeonggi-Incheon,Air Fryer,Online,5,"At 6.5 L, it's big enough for a family of four."
+2026-05-08,Gyeonggi-Incheon,Air Purifier,Online,5,I like being able to check the air quality in the app.
+2026-05-09,Gwangju-Jeolla,Air Fryer,Online,2,The coating seems to be peeling off.
+2026-05-09,Daegu-Gyeongbuk,Robot Vacuum,Online,4,I'm happy with the mopping performance.
+2026-05-10,Daegu-Gyeongbuk,Air Fryer,Online,5,Fried food comes out crispy and it's easy to clean.
+2026-05-10,Seoul,Robot Vacuum,Online,3,It sometimes fails to return to the charging dock.
+2026-05-11,Gyeonggi-Incheon,Air Fryer,Online,3,The basket is a little stiff.
+2026-05-11,Daegu-Gyeongbuk,Air Fryer,Offline,5,Fried food comes out crispy and it's easy to clean.
+2026-05-11,Busan-Gyeongnam,Robot Vacuum,Offline,5,Setting cleaning zones in the app is easy.
+2026-05-12,Gyeonggi-Incheon,Smart Lighting,Online,4,"Easy to install, and the colors look great."
+2026-05-12,Daejeon-Chungcheong,Air Fryer,Online,5,Fried food comes out crispy and it's easy to clean.
+2026-05-12,Seoul,Robot Vacuum,Online,5,I'm happy with the mopping performance.
+2026-05-13,Daegu-Gyeongbuk,Smart Lighting,B2B,4,It works smoothly with my voice assistant.
+2026-05-13,Busan-Gyeongnam,Robot Vacuum,Offline,2,It was hard to schedule an after-sales service visit.
+2026-05-13,Seoul,Air Purifier,Online,5,I like being able to check the air quality in the app.
+2026-05-14,Gyeonggi-Incheon,Robot Vacuum,B2B,4,I'm happy with the mopping performance.
+2026-05-14,Seoul,Air Fryer,B2B,3,The basket is a little stiff.
+2026-05-15,Seoul,Air Fryer,Online,5,Fried food comes out crispy and it's easy to clean.
+2026-05-15,Daegu-Gyeongbuk,Air Fryer,Online,5,"At 6.5 L, it's big enough for a family of four."
+2026-05-16,Seoul,Air Purifier,Offline,3,It's louder than I expected when it's running.
+2026-05-16,Gyeonggi-Incheon,Air Purifier,Online,5,The air feels noticeably cleaner. Sleep mode is almost silent.
+2026-05-17,Gyeonggi-Incheon,Robot Vacuum,Online,5,Setting cleaning zones in the app is easy.
+2026-05-18,Busan-Gyeongnam,Smart Lighting,Offline,5,"Easy to install, and the colors look great."
+2026-05-19,Gyeonggi-Incheon,Smart Lighting,Offline,2,It sometimes loses its connection to the app.
+2026-05-19,Seoul,Air Fryer,Online,3,It gives off a smell when preheating.
+2026-05-19,Busan-Gyeongnam,Air Fryer,Offline,2,The coating seems to be peeling off.
+2026-05-20,Gyeonggi-Incheon,Air Purifier,Online,5,I like being able to check the air quality in the app.
+2026-05-20,Daegu-Gyeongbuk,Robot Vacuum,Online,3,It has trouble getting over thresholds.
+2026-05-20,Gyeonggi-Incheon,Robot Vacuum,Offline,2,It has trouble getting over thresholds.
+2026-05-20,Daejeon-Chungcheong,Robot Vacuum,Online,2,It's a bit on the loud side.
+2026-05-20,Busan-Gyeongnam,Robot Vacuum,Offline,5,Setting cleaning zones in the app is easy.
+2026-05-21,Daejeon-Chungcheong,Air Fryer,Online,5,"The app has plenty of recipes, so cooking has become more fun."
+2026-05-21,Busan-Gyeongnam,Smart Lighting,Offline,5,"Easy to install, and the colors look great."
+2026-05-21,Seoul,Robot Vacuum,Offline,3,It sometimes fails to return to the charging dock.
+2026-05-21,Busan-Gyeongnam,Robot Vacuum,Online,4,I'm happy with the mopping performance.
+2026-05-21,Daejeon-Chungcheong,Air Purifier,Online,5,I like being able to check the air quality in the app.
+2026-05-22,Daejeon-Chungcheong,Robot Vacuum,Online,4,I'm happy with the mopping performance.
+2026-05-22,Gyeonggi-Incheon,Robot Vacuum,Online,2,It took a long time to get through to the Customer Service Center.
+2026-05-22,Busan-Gyeongnam,Air Purifier,Online,5,"The filter replacement alerts are accurate, so upkeep is easy."
+2026-05-23,Daegu-Gyeongbuk,Robot Vacuum,B2B,3,Delivery arrived three days later than scheduled.
+2026-05-24,Gyeonggi-Incheon,Air Purifier,Online,5,I like being able to check the air quality in the app.
+2026-05-24,Seoul,Air Purifier,Online,5,The air feels noticeably cleaner. Sleep mode is almost silent.
+2026-05-24,Daejeon-Chungcheong,Air Purifier,Online,2,It's louder than I expected when it's running.
+2026-05-25,Daejeon-Chungcheong,Smart Lighting,Offline,3,It sometimes loses its connection to the app.
+2026-05-25,Seoul,Robot Vacuum,Online,3,It took a long time to get through to the Customer Service Center.
+2026-05-25,Daejeon-Chungcheong,Air Purifier,Online,3,The replacement filters are a bit pricey.
+2026-05-25,Gyeonggi-Incheon,Air Purifier,Online,3,The replacement filters are a bit pricey.
+2026-05-26,Gyeonggi-Incheon,Robot Vacuum,Online,4,Setting cleaning zones in the app is easy.
+2026-05-26,Gyeonggi-Incheon,Air Purifier,B2B,3,It took a long time to get through to the Customer Service Center.
+2026-05-26,Gyeonggi-Incheon,Air Fryer,B2B,5,"At 6.5 L, it's big enough for a family of four."
+2026-05-26,Gwangju-Jeolla,Robot Vacuum,Online,5,It steers around obstacles well and covers the whole area thoroughly.
+2026-05-26,Daejeon-Chungcheong,Robot Vacuum,Online,4,Setting cleaning zones in the app is easy.
+2026-05-27,Seoul,Air Fryer,Online,2,The coating seems to be peeling off.
+2026-05-27,Seoul,Smart Lighting,Online,3,The package arrived damaged.
+2026-05-27,Gyeonggi-Incheon,Smart Lighting,Offline,4,"Easy to install, and the colors look great."
+2026-05-27,Seoul,Air Purifier,Offline,5,I like being able to check the air quality in the app.
+2026-05-28,Daegu-Gyeongbuk,Robot Vacuum,Offline,5,I'm happy with the mopping performance.
+2026-05-28,Seoul,Robot Vacuum,Offline,5,I'm happy with the mopping performance.
+2026-05-30,Seoul,Robot Vacuum,Offline,5,It steers around obstacles well and covers the whole area thoroughly.
+2026-05-30,Seoul,Air Fryer,Offline,5,Fried food comes out crispy and it's easy to clean.
+2026-05-30,Daegu-Gyeongbuk,Air Fryer,B2B,5,"At 6.5 L, it's big enough for a family of four."
+2026-05-31,Daegu-Gyeongbuk,Robot Vacuum,B2B,2,It sometimes fails to return to the charging dock.
+2026-05-31,Busan-Gyeongnam,Robot Vacuum,Offline,4,Setting cleaning zones in the app is easy.
+2026-05-31,Gyeonggi-Incheon,Air Purifier,Offline,5,"The filter replacement alerts are accurate, so upkeep is easy."
+2026-06-01,Gyeonggi-Incheon,Air Purifier,B2B,3,The replacement filters are a bit pricey.
+2026-06-01,Seoul,Robot Vacuum,Online,4,It steers around obstacles well and covers the whole area thoroughly.
+2026-06-01,Gyeonggi-Incheon,Air Purifier,Offline,3,It's louder than I expected when it's running.
+2026-06-02,Daejeon-Chungcheong,Air Fryer,Online,3,The basket is a little stiff.
+2026-06-03,Busan-Gyeongnam,Air Fryer,Online,4,Fried food comes out crispy and it's easy to clean.
+2026-06-05,Daejeon-Chungcheong,Air Fryer,B2B,5,"At 6.5 L, it's big enough for a family of four."
+2026-06-05,Gyeonggi-Incheon,Robot Vacuum,Online,4,I'm happy with the mopping performance.
+2026-06-06,Daegu-Gyeongbuk,Robot Vacuum,Online,3,It has trouble getting over thresholds.
+2026-06-06,Gyeonggi-Incheon,Air Purifier,Online,5,I like being able to check the air quality in the app.
+2026-06-06,Gyeonggi-Incheon,Air Fryer,Online,5,"The app has plenty of recipes, so cooking has become more fun."
+2026-06-06,Daejeon-Chungcheong,Robot Vacuum,Offline,5,I'm happy with the mopping performance.
+2026-06-07,Gyeonggi-Incheon,Robot Vacuum,B2B,4,I'm happy with the mopping performance.
+2026-06-08,Daejeon-Chungcheong,Air Fryer,Offline,2,The basket is a little stiff.
+2026-06-09,Busan-Gyeongnam,Smart Lighting,B2B,5,It works smoothly with my voice assistant.
+2026-06-09,Daejeon-Chungcheong,Air Fryer,B2B,4,"At 6.5 L, it's big enough for a family of four."
+2026-06-09,Seoul,Air Purifier,Online,5,I like being able to check the air quality in the app.
+2026-06-10,Daejeon-Chungcheong,Robot Vacuum,Online,3,It has trouble getting over thresholds.
+2026-06-10,Seoul,Air Purifier,B2B,3,Delivery arrived three days later than scheduled.
+2026-06-11,Gyeonggi-Incheon,Air Purifier,Online,4,The air feels noticeably cleaner. Sleep mode is almost silent.
+2026-06-11,Gyeonggi-Incheon,Air Purifier,Online,2,Delivery arrived three days later than scheduled.
+2026-06-12,Seoul,Air Purifier,Online,3,It was hard to schedule an after-sales service visit.
+2026-06-12,Gyeonggi-Incheon,Air Purifier,Online,5,The air feels noticeably cleaner. Sleep mode is almost silent.
+2026-06-12,Daegu-Gyeongbuk,Air Purifier,B2B,2,It took a long time to get through to the Customer Service Center.
+2026-06-12,Seoul,Robot Vacuum,Online,4,Setting cleaning zones in the app is easy.
+2026-06-12,Daejeon-Chungcheong,Air Purifier,Offline,4,I like being able to check the air quality in the app.
+2026-06-13,Daegu-Gyeongbuk,Robot Vacuum,Offline,4,Setting cleaning zones in the app is easy.
+2026-06-13,Gyeonggi-Incheon,Smart Lighting,Online,5,It works smoothly with my voice assistant.
+2026-06-13,Daegu-Gyeongbuk,Robot Vacuum,Online,5,It steers around obstacles well and covers the whole area thoroughly.
+2026-06-14,Gyeonggi-Incheon,Robot Vacuum,Online,5,Setting cleaning zones in the app is easy.
+2026-06-15,Busan-Gyeongnam,Robot Vacuum,Online,4,It steers around obstacles well and covers the whole area thoroughly.
+2026-06-16,Gyeonggi-Incheon,Air Fryer,Online,2,The coating seems to be peeling off.
+2026-06-17,Daegu-Gyeongbuk,Air Purifier,Online,4,The air feels noticeably cleaner. Sleep mode is almost silent.
+2026-06-18,Gyeonggi-Incheon,Robot Vacuum,Online,3,It's a bit on the loud side.
+2026-06-18,Daegu-Gyeongbuk,Robot Vacuum,B2B,4,Setting cleaning zones in the app is easy.
+2026-06-18,Gwangju-Jeolla,Air Fryer,Online,3,The coating seems to be peeling off.
+2026-06-19,Seoul,Smart Lighting,Offline,5,"Easy to install, and the colors look great."
+2026-06-20,Busan-Gyeongnam,Smart Lighting,Offline,4,It works smoothly with my voice assistant.
+2026-06-21,Daegu-Gyeongbuk,Robot Vacuum,Online,4,I'm happy with the mopping performance.
+2026-06-22,Gwangju-Jeolla,Robot Vacuum,Offline,3,It's a bit on the loud side.
+2026-06-22,Gyeonggi-Incheon,Smart Lighting,Offline,5,It works smoothly with my voice assistant.
+2026-06-22,Busan-Gyeongnam,Smart Lighting,Online,4,It works smoothly with my voice assistant.
+2026-06-23,Seoul,Air Fryer,Offline,3,It took a long time to get through to the Customer Service Center.
+2026-06-23,Gyeonggi-Incheon,Robot Vacuum,Online,4,It steers around obstacles well and covers the whole area thoroughly.
+2026-06-23,Seoul,Robot Vacuum,Online,5,It steers around obstacles well and covers the whole area thoroughly.
+2026-06-24,Daejeon-Chungcheong,Air Purifier,Online,2,It's louder than I expected when it's running.
+2026-06-24,Daejeon-Chungcheong,Robot Vacuum,Online,3,It has trouble getting over thresholds.
+2026-06-24,Seoul,Air Purifier,Online,4,"The filter replacement alerts are accurate, so upkeep is easy."
+2026-06-25,Daegu-Gyeongbuk,Robot Vacuum,Offline,5,Setting cleaning zones in the app is easy.
+2026-06-25,Daegu-Gyeongbuk,Air Purifier,Offline,5,I like being able to check the air quality in the app.
+2026-06-25,Gwangju-Jeolla,Robot Vacuum,B2B,5,It steers around obstacles well and covers the whole area thoroughly.
+2026-06-25,Seoul,Air Purifier,Offline,5,The air feels noticeably cleaner. Sleep mode is almost silent.
+2026-06-26,Gwangju-Jeolla,Air Fryer,Offline,5,Fried food comes out crispy and it's easy to clean.
+2026-06-26,Gwangju-Jeolla,Air Fryer,Offline,5,"At 6.5 L, it's big enough for a family of four."
+2026-06-26,Busan-Gyeongnam,Air Purifier,B2B,5,"The filter replacement alerts are accurate, so upkeep is easy."
+2026-06-27,Seoul,Air Fryer,Offline,5,"At 6.5 L, it's big enough for a family of four."
+2026-06-27,Gwangju-Jeolla,Air Purifier,B2B,5,The air feels noticeably cleaner. Sleep mode is almost silent.
+2026-06-28,Daegu-Gyeongbuk,Air Purifier,B2B,3,The package arrived damaged.
+2026-06-28,Gyeonggi-Incheon,Air Purifier,Offline,2,Delivery arrived three days later than scheduled.
+2026-06-29,Seoul,Robot Vacuum,B2B,3,It has trouble getting over thresholds.
+2026-06-29,Busan-Gyeongnam,Robot Vacuum,Online,2,It has trouble getting over thresholds.
+2026-06-29,Gyeonggi-Incheon,Smart Lighting,Online,5,It works smoothly with my voice assistant.
+2026-06-30,Busan-Gyeongnam,Robot Vacuum,Online,3,It has trouble getting over thresholds.
+2026-06-30,Gwangju-Jeolla,Smart Lighting,Online,2,The brightness steps are too coarse.
+2026-06-30,Gyeonggi-Incheon,Air Fryer,B2B,5,Fried food comes out crispy and it's easy to clean.
+2026-07-01,Gyeonggi-Incheon,Air Purifier,Online,5,"The filter replacement alerts are accurate, so upkeep is easy."
+2026-07-01,Daegu-Gyeongbuk,Air Fryer,B2B,4,Fried food comes out crispy and it's easy to clean.
+2026-07-02,Gyeonggi-Incheon,Robot Vacuum,Online,5,Setting cleaning zones in the app is easy.
+2026-07-03,Daejeon-Chungcheong,Smart Lighting,Online,2,It sometimes loses its connection to the app.
+2026-07-04,Busan-Gyeongnam,Air Purifier,Online,2,It was hard to schedule an after-sales service visit.
+2026-07-04,Gyeonggi-Incheon,Air Fryer,B2B,3,It was hard to schedule an after-sales service visit.
+2026-07-04,Daegu-Gyeongbuk,Robot Vacuum,B2B,3,It sometimes fails to return to the charging dock.
+2026-07-04,Gyeonggi-Incheon,Air Fryer,Online,4,"The app has plenty of recipes, so cooking has become more fun."
+2026-07-04,Gyeonggi-Incheon,Air Purifier,Online,2,The package arrived damaged.
+2026-07-04,Busan-Gyeongnam,Robot Vacuum,Online,1,"I suspect the battery is swelling, so I stopped using it. I'm worried."
+2026-07-05,Busan-Gyeongnam,Robot Vacuum,Online,1,The battery died just two months after purchase. I'm requesting a replacement.
+2026-07-06,Daegu-Gyeongbuk,Air Fryer,B2B,2,It was hard to schedule an after-sales service visit.
+2026-07-06,Daejeon-Chungcheong,Robot Vacuum,B2B,3,It's a bit on the loud side.
+2026-07-07,Gwangju-Jeolla,Air Fryer,Online,4,"At 6.5 L, it's big enough for a family of four."
+2026-07-07,Busan-Gyeongnam,Smart Lighting,Offline,5,"Easy to install, and the colors look great."
+2026-07-08,Seoul,Robot Vacuum,Offline,4,Setting cleaning zones in the app is easy.
+2026-07-08,Seoul,Robot Vacuum,Offline,4,Setting cleaning zones in the app is easy.
+2026-07-08,Busan-Gyeongnam,Robot Vacuum,Online,2,The battery died just two months after purchase. I'm requesting a replacement.
+2026-07-09,Daegu-Gyeongbuk,Robot Vacuum,Offline,5,I'm happy with the mopping performance.
+2026-07-09,Seoul,Air Purifier,Online,3,The replacement filters are a bit pricey.
+2026-07-10,Seoul,Smart Lighting,Online,5,"Easy to install, and the colors look great."
+2026-07-11,Seoul,Air Fryer,B2B,4,Fried food comes out crispy and it's easy to clean.
+2026-07-11,Seoul,Robot Vacuum,B2B,3,It has trouble getting over thresholds.
+2026-07-11,Busan-Gyeongnam,Robot Vacuum,Online,2,"The battery doesn't even last 10 minutes, so it never finishes cleaning."
+2026-07-12,Daegu-Gyeongbuk,Air Fryer,Offline,3,The coating seems to be peeling off.
+2026-07-12,Seoul,Smart Lighting,Offline,5,It works smoothly with my voice assistant.
+2026-07-13,Daegu-Gyeongbuk,Air Fryer,Online,2,Delivery arrived three days later than scheduled.
+2026-07-13,Seoul,Air Fryer,Online,4,"The app has plenty of recipes, so cooking has become more fun."
+2026-07-13,Busan-Gyeongnam,Robot Vacuum,Online,1,It keeps shutting off while charging. I think it's a battery problem.
+2026-07-14,Busan-Gyeongnam,Robot Vacuum,Online,1,"It won't charge. Even on the dock, the light doesn't come on."
+2026-07-15,Gyeonggi-Incheon,Robot Vacuum,Online,5,It steers around obstacles well and covers the whole area thoroughly.
+2026-07-15,Gwangju-Jeolla,Air Purifier,Online,5,The air feels noticeably cleaner. Sleep mode is almost silent.
+2026-07-15,Busan-Gyeongnam,Robot Vacuum,Online,1,The battery died just two months after purchase. I'm requesting a replacement.
+2026-07-16,Daejeon-Chungcheong,Air Fryer,Online,4,Fried food comes out crispy and it's easy to clean.
+2026-07-16,Seoul,Robot Vacuum,Online,4,It steers around obstacles well and covers the whole area thoroughly.
+2026-07-17,Seoul,Air Purifier,Online,4,"The filter replacement alerts are accurate, so upkeep is easy."
+2026-07-17,Busan-Gyeongnam,Smart Lighting,Online,2,The brightness steps are too coarse.
+2026-07-17,Seoul,Air Purifier,Online,3,Delivery arrived three days later than scheduled.
+2026-07-18,Gwangju-Jeolla,Smart Lighting,Online,3,The brightness steps are too coarse.
+2026-07-18,Gyeonggi-Incheon,Robot Vacuum,Online,3,Delivery arrived three days later than scheduled.
+2026-07-18,Gyeonggi-Incheon,Air Fryer,B2B,2,Delivery arrived three days later than scheduled.
+2026-07-18,Busan-Gyeongnam,Robot Vacuum,Offline,1,The battery died just two months after purchase. I'm requesting a replacement.
+2026-07-19,Gwangju-Jeolla,Air Purifier,Online,3,It's louder than I expected when it's running.
+2026-07-19,Daejeon-Chungcheong,Air Purifier,B2B,5,The air feels noticeably cleaner. Sleep mode is almost silent.
+2026-07-20,Seoul,Air Purifier,Offline,5,The air feels noticeably cleaner. Sleep mode is almost silent.
+2026-07-21,Daejeon-Chungcheong,Air Purifier,Offline,5,"The filter replacement alerts are accurate, so upkeep is easy."
+2026-07-21,Gyeonggi-Incheon,Smart Lighting,Online,4,"Easy to install, and the colors look great."
+2026-07-23,Daegu-Gyeongbuk,Air Purifier,B2B,5,"The filter replacement alerts are accurate, so upkeep is easy."
+2026-07-23,Gwangju-Jeolla,Air Purifier,B2B,5,I like being able to check the air quality in the app.
+2026-07-23,Seoul,Air Fryer,Offline,2,It gives off a smell when preheating.
+2026-07-24,Daegu-Gyeongbuk,Air Fryer,Online,5,Fried food comes out crispy and it's easy to clean.
+2026-07-24,Gyeonggi-Incheon,Air Purifier,Offline,2,The Wi-Fi connection drops often.
+2026-07-24,Busan-Gyeongnam,Air Purifier,Online,4,"The filter replacement alerts are accurate, so upkeep is easy."
+2026-07-24,Gyeonggi-Incheon,Robot Vacuum,Online,5,Setting cleaning zones in the app is easy.
+2026-07-25,Busan-Gyeongnam,Robot Vacuum,Online,2,"The battery doesn't even last 10 minutes, so it never finishes cleaning."
+2026-07-25,Busan-Gyeongnam,Robot Vacuum,B2B,1,"It won't charge. Even on the dock, the light doesn't come on."
+2026-07-25,Daegu-Gyeongbuk,Robot Vacuum,Online,5,It steers around obstacles well and covers the whole area thoroughly.
+2026-07-25,Daejeon-Chungcheong,Robot Vacuum,B2B,4,I'm happy with the mopping performance.
+2026-07-25,Gwangju-Jeolla,Air Fryer,Offline,4,Fried food comes out crispy and it's easy to clean.
+2026-07-26,Seoul,Air Purifier,Online,4,I like being able to check the air quality in the app.
+2026-07-26,Daejeon-Chungcheong,Robot Vacuum,B2B,2,It took a long time to get through to the Customer Service Center.
+2026-07-26,Gyeonggi-Incheon,Air Purifier,Online,5,I like being able to check the air quality in the app.
+2026-07-27,Seoul,Smart Lighting,Online,5,"Easy to install, and the colors look great."
+2026-07-27,Daejeon-Chungcheong,Air Fryer,Offline,2,The basket is a little stiff.
+2026-07-27,Busan-Gyeongnam,Air Purifier,Online,5,The air feels noticeably cleaner. Sleep mode is almost silent.
+2026-07-28,Daejeon-Chungcheong,Air Fryer,Offline,4,"The app has plenty of recipes, so cooking has become more fun."
+2026-07-29,Gyeonggi-Incheon,Robot Vacuum,Offline,5,I'm happy with the mopping performance.
+2026-07-29,Gyeonggi-Incheon,Air Purifier,Online,5,I like being able to check the air quality in the app.
+2026-07-29,Daegu-Gyeongbuk,Air Fryer,Online,5,"At 6.5 L, it's big enough for a family of four."
+2026-07-29,Daejeon-Chungcheong,Air Purifier,Offline,3,The replacement filters are a bit pricey.
+2026-07-29,Busan-Gyeongnam,Robot Vacuum,B2B,1,"I requested after-sales service, but the battery is out of stock and I've been waiting two weeks."
+2026-07-30,Gyeonggi-Incheon,Air Purifier,Online,3,The Wi-Fi connection drops often.
+2026-07-30,Gyeonggi-Incheon,Air Purifier,Online,4,"The filter replacement alerts are accurate, so upkeep is easy."
+2026-07-30,Seoul,Air Purifier,Offline,5,I like being able to check the air quality in the app.
+2026-07-30,Busan-Gyeongnam,Robot Vacuum,B2B,1,It keeps shutting off while charging. I think it's a battery problem.
+2026-07-31,Gwangju-Jeolla,Air Purifier,Online,5,The air feels noticeably cleaner. Sleep mode is almost silent.
+2026-07-31,Gwangju-Jeolla,Air Purifier,Offline,3,The Wi-Fi connection drops often.
+2026-07-31,Seoul,Air Fryer,B2B,5,"At 6.5 L, it's big enough for a family of four."
+2026-07-31,Gwangju-Jeolla,Robot Vacuum,Online,4,I'm happy with the mopping performance.
+2026-07-31,Busan-Gyeongnam,Robot Vacuum,Online,1,"It won't charge. Even on the dock, the light doesn't come on."
+2026-07-31,Busan-Gyeongnam,Robot Vacuum,B2B,1,"It won't charge. Even on the dock, the light doesn't come on."
+2026-07-31,Busan-Gyeongnam,Robot Vacuum,Online,1,"It won't charge. Even on the dock, the light doesn't come on."
+2026-08-01,Daejeon-Chungcheong,Robot Vacuum,B2B,3,It's a bit on the loud side.
+2026-08-01,Seoul,Smart Lighting,Offline,5,"Easy to install, and the colors look great."
+2026-08-01,Gyeonggi-Incheon,Robot Vacuum,Online,3,It has trouble getting over thresholds.
+2026-08-01,Busan-Gyeongnam,Robot Vacuum,Offline,1,"I suspect the battery is swelling, so I stopped using it. I'm worried."
+2026-08-02,Daejeon-Chungcheong,Air Purifier,Online,5,The air feels noticeably cleaner. Sleep mode is almost silent.
+2026-08-02,Seoul,Air Purifier,Online,5,I like being able to check the air quality in the app.
+2026-08-03,Gyeonggi-Incheon,Air Purifier,B2B,5,I like being able to check the air quality in the app.
+2026-08-03,Gyeonggi-Incheon,Robot Vacuum,B2B,4,Setting cleaning zones in the app is easy.
+2026-08-03,Daegu-Gyeongbuk,Air Fryer,Online,5,Fried food comes out crispy and it's easy to clean.
+2026-08-03,Gyeonggi-Incheon,Air Purifier,Online,3,The Wi-Fi connection drops often.
+2026-08-03,Gyeonggi-Incheon,Robot Vacuum,B2B,3,It sometimes fails to return to the charging dock.
+2026-08-03,Busan-Gyeongnam,Robot Vacuum,Online,1,"I suspect the battery is swelling, so I stopped using it. I'm worried."
+2026-08-05,Busan-Gyeongnam,Air Purifier,B2B,5,I like being able to check the air quality in the app.
+2026-08-05,Gyeonggi-Incheon,Air Fryer,Online,3,The package arrived damaged.
+2026-08-05,Busan-Gyeongnam,Robot Vacuum,B2B,1,"I requested after-sales service, but the battery is out of stock and I've been waiting two weeks."
+2026-08-06,Gyeonggi-Incheon,Robot Vacuum,Online,5,It steers around obstacles well and covers the whole area thoroughly.
+2026-08-06,Seoul,Air Purifier,B2B,3,The Wi-Fi connection drops often.
+2026-08-06,Gwangju-Jeolla,Air Fryer,Online,3,It gives off a smell when preheating.
+2026-08-07,Gyeonggi-Incheon,Robot Vacuum,Online,4,Setting cleaning zones in the app is easy.
+2026-08-08,Gyeonggi-Incheon,Air Purifier,Online,5,The air feels noticeably cleaner. Sleep mode is almost silent.
+2026-08-08,Busan-Gyeongnam,Robot Vacuum,Online,1,The battery died just two months after purchase. I'm requesting a replacement.
+2026-08-08,Busan-Gyeongnam,Robot Vacuum,Online,2,"I requested after-sales service, but the battery is out of stock and I've been waiting two weeks."
+2026-08-09,Busan-Gyeongnam,Robot Vacuum,Online,1,"The battery doesn't even last 10 minutes, so it never finishes cleaning."
+2026-08-09,Gyeonggi-Incheon,Air Purifier,Online,5,I like being able to check the air quality in the app.
+2026-08-10,Seoul,Robot Vacuum,Online,2,It was hard to schedule an after-sales service visit.
+2026-08-10,Busan-Gyeongnam,Robot Vacuum,Offline,1,"The battery doesn't even last 10 minutes, so it never finishes cleaning."
+2026-08-10,Busan-Gyeongnam,Robot Vacuum,Online,1,"The battery doesn't even last 10 minutes, so it never finishes cleaning."
+2026-08-10,Busan-Gyeongnam,Robot Vacuum,Offline,1,"I suspect the battery is swelling, so I stopped using it. I'm worried."
+2026-08-11,Busan-Gyeongnam,Robot Vacuum,Offline,2,"I requested after-sales service, but the battery is out of stock and I've been waiting two weeks."
+2026-08-11,Busan-Gyeongnam,Robot Vacuum,B2B,1,"It won't charge. Even on the dock, the light doesn't come on."
+2026-08-11,Busan-Gyeongnam,Robot Vacuum,Online,1,The battery died just two months after purchase. I'm requesting a replacement.
+2026-08-12,Daegu-Gyeongbuk,Robot Vacuum,Offline,2,The package arrived damaged.
+2026-08-12,Busan-Gyeongnam,Air Fryer,Offline,5,"At 6.5 L, it's big enough for a family of four."
+2026-08-12,Seoul,Air Purifier,Online,5,"The filter replacement alerts are accurate, so upkeep is easy."
+2026-08-12,Busan-Gyeongnam,Robot Vacuum,Online,2,The battery died just two months after purchase. I'm requesting a replacement.
+2026-08-12,Busan-Gyeongnam,Robot Vacuum,Online,1,It keeps shutting off while charging. I think it's a battery problem.
+2026-08-13,Daegu-Gyeongbuk,Air Fryer,Online,5,"The app has plenty of recipes, so cooking has become more fun."
+2026-08-13,Daejeon-Chungcheong,Robot Vacuum,Online,5,It steers around obstacles well and covers the whole area thoroughly.
+2026-08-13,Daejeon-Chungcheong,Air Fryer,Offline,5,"The app has plenty of recipes, so cooking has become more fun."
+2026-08-13,Gwangju-Jeolla,Air Fryer,Offline,4,"The app has plenty of recipes, so cooking has become more fun."
+2026-08-13,Busan-Gyeongnam,Robot Vacuum,Online,1,The battery died just two months after purchase. I'm requesting a replacement.
+2026-08-14,Busan-Gyeongnam,Air Fryer,Online,2,The package arrived damaged.
+2026-08-14,Busan-Gyeongnam,Robot Vacuum,Online,1,"I suspect the battery is swelling, so I stopped using it. I'm worried."
+2026-08-14,Busan-Gyeongnam,Robot Vacuum,Offline,1,"It won't charge. Even on the dock, the light doesn't come on."
+2026-08-15,Busan-Gyeongnam,Air Purifier,Online,5,"The filter replacement alerts are accurate, so upkeep is easy."
+2026-08-15,Busan-Gyeongnam,Robot Vacuum,B2B,1,The battery died just two months after purchase. I'm requesting a replacement.
+2026-08-16,Seoul,Smart Lighting,B2B,5,It works smoothly with my voice assistant.
+2026-08-16,Daegu-Gyeongbuk,Air Purifier,Offline,4,I like being able to check the air quality in the app.
+2026-08-16,Gwangju-Jeolla,Air Purifier,Online,4,"The filter replacement alerts are accurate, so upkeep is easy."
+2026-08-16,Gyeonggi-Incheon,Air Purifier,Offline,5,I like being able to check the air quality in the app.
+2026-08-17,Gwangju-Jeolla,Robot Vacuum,Online,5,Setting cleaning zones in the app is easy.
+2026-08-17,Daegu-Gyeongbuk,Robot Vacuum,Online,4,I'm happy with the mopping performance.
+2026-08-17,Busan-Gyeongnam,Robot Vacuum,Online,1,"I requested after-sales service, but the battery is out of stock and I've been waiting two weeks."
+2026-08-18,Seoul,Smart Lighting,Online,5,It works smoothly with my voice assistant.
+2026-08-18,Busan-Gyeongnam,Robot Vacuum,Online,1,"I suspect the battery is swelling, so I stopped using it. I'm worried."
+2026-08-19,Seoul,Robot Vacuum,B2B,4,Setting cleaning zones in the app is easy.
+2026-08-19,Gwangju-Jeolla,Air Fryer,Online,2,It gives off a smell when preheating.
+2026-08-19,Busan-Gyeongnam,Robot Vacuum,B2B,1,"I suspect the battery is swelling, so I stopped using it. I'm worried."
+2026-08-20,Gyeonggi-Incheon,Air Purifier,Offline,4,"The filter replacement alerts are accurate, so upkeep is easy."
+2026-08-20,Busan-Gyeongnam,Smart Lighting,Online,2,The brightness steps are too coarse.
+2026-08-21,Seoul,Air Purifier,Offline,3,The replacement filters are a bit pricey.
+2026-08-22,Busan-Gyeongnam,Air Purifier,Offline,3,The Wi-Fi connection drops often.
+2026-08-22,Seoul,Air Fryer,Offline,4,Fried food comes out crispy and it's easy to clean.
+2026-08-22,Busan-Gyeongnam,Robot Vacuum,Online,1,It keeps shutting off while charging. I think it's a battery problem.
+2026-08-23,Daegu-Gyeongbuk,Robot Vacuum,Online,4,I'm happy with the mopping performance.
+2026-08-23,Daegu-Gyeongbuk,Air Purifier,B2B,3,The package arrived damaged.
+2026-08-23,Gwangju-Jeolla,Robot Vacuum,B2B,5,Setting cleaning zones in the app is easy.
+2026-08-24,Daegu-Gyeongbuk,Air Fryer,Online,2,Delivery arrived three days later than scheduled.
+2026-08-24,Gyeonggi-Incheon,Robot Vacuum,Online,3,It sometimes fails to return to the charging dock.
+2026-08-24,Busan-Gyeongnam,Air Purifier,Online,3,It's louder than I expected when it's running.
+2026-08-25,Gyeonggi-Incheon,Air Purifier,Online,3,Delivery arrived three days later than scheduled.
+2026-08-25,Seoul,Air Fryer,Offline,3,The package arrived damaged.
+2026-08-25,Busan-Gyeongnam,Robot Vacuum,Offline,1,"The battery doesn't even last 10 minutes, so it never finishes cleaning."
+2026-08-25,Busan-Gyeongnam,Robot Vacuum,Online,2,"I suspect the battery is swelling, so I stopped using it. I'm worried."
+2026-08-26,Gyeonggi-Incheon,Air Purifier,Online,5,The air feels noticeably cleaner. Sleep mode is almost silent.
+2026-08-26,Seoul,Air Fryer,Offline,3,It gives off a smell when preheating.
+2026-08-26,Busan-Gyeongnam,Air Purifier,Online,3,The replacement filters are a bit pricey.
+2026-08-26,Seoul,Air Fryer,B2B,4,"The app has plenty of recipes, so cooking has become more fun."
+2026-08-26,Daejeon-Chungcheong,Air Fryer,Online,5,"At 6.5 L, it's big enough for a family of four."
+2026-08-26,Daejeon-Chungcheong,Robot Vacuum,B2B,5,It steers around obstacles well and covers the whole area thoroughly.
+2026-08-26,Seoul,Smart Lighting,Online,4,"Easy to install, and the colors look great."
+2026-08-26,Busan-Gyeongnam,Robot Vacuum,Online,1,"I requested after-sales service, but the battery is out of stock and I've been waiting two weeks."
+2026-08-26,Busan-Gyeongnam,Robot Vacuum,Offline,1,"I suspect the battery is swelling, so I stopped using it. I'm worried."
+2026-08-26,Busan-Gyeongnam,Robot Vacuum,Online,1,"I suspect the battery is swelling, so I stopped using it. I'm worried."
+2026-08-26,Busan-Gyeongnam,Robot Vacuum,Offline,1,"I requested after-sales service, but the battery is out of stock and I've been waiting two weeks."
+2026-08-27,Seoul,Air Fryer,B2B,2,The basket is a little stiff.
+2026-08-27,Daegu-Gyeongbuk,Air Purifier,Online,5,"The filter replacement alerts are accurate, so upkeep is easy."
+2026-08-27,Busan-Gyeongnam,Robot Vacuum,Online,1,"The battery doesn't even last 10 minutes, so it never finishes cleaning."
+2026-08-27,Busan-Gyeongnam,Robot Vacuum,Online,1,The battery died just two months after purchase. I'm requesting a replacement.
+2026-08-27,Busan-Gyeongnam,Robot Vacuum,Online,2,"It won't charge. Even on the dock, the light doesn't come on."
+2026-08-28,Daegu-Gyeongbuk,Air Purifier,Offline,2,It's louder than I expected when it's running.
+2026-08-28,Daejeon-Chungcheong,Air Purifier,Offline,4,The air feels noticeably cleaner. Sleep mode is almost silent.
+2026-08-28,Seoul,Air Purifier,Online,5,I like being able to check the air quality in the app.
+2026-08-29,Gwangju-Jeolla,Air Purifier,Online,4,I like being able to check the air quality in the app.
+2026-08-29,Gyeonggi-Incheon,Robot Vacuum,Online,3,It's a bit on the loud side.
+2026-08-30,Seoul,Robot Vacuum,Online,3,It sometimes fails to return to the charging dock.
+2026-08-30,Daegu-Gyeongbuk,Air Purifier,B2B,3,The Wi-Fi connection drops often.
+2026-08-31,Seoul,Robot Vacuum,Online,3,It sometimes fails to return to the charging dock.
+2026-08-31,Busan-Gyeongnam,Air Purifier,Offline,5,"The filter replacement alerts are accurate, so upkeep is easy."
+2026-08-31,Seoul,Air Purifier,Offline,5,"The filter replacement alerts are accurate, so upkeep is easy."
+2026-09-01,Busan-Gyeongnam,Robot Vacuum,Online,2,"I suspect the battery is swelling, so I stopped using it. I'm worried."
+2026-09-01,Seoul,Robot Vacuum,Online,5,I'm happy with the mopping performance.
+2026-09-01,Gyeonggi-Incheon,Robot Vacuum,B2B,3,It sometimes fails to return to the charging dock.
+2026-09-01,Busan-Gyeongnam,Air Fryer,Online,5,Fried food comes out crispy and it's easy to clean.
+2026-09-01,Busan-Gyeongnam,Robot Vacuum,Online,2,"I requested after-sales service, but the battery is out of stock and I've been waiting two weeks."
+2026-09-01,Busan-Gyeongnam,Robot Vacuum,Online,1,"The battery doesn't even last 10 minutes, so it never finishes cleaning."
+2026-09-01,Busan-Gyeongnam,Robot Vacuum,Offline,1,"I requested after-sales service, but the battery is out of stock and I've been waiting two weeks."
+2026-09-01,Busan-Gyeongnam,Robot Vacuum,Online,2,"I suspect the battery is swelling, so I stopped using it. I'm worried."
+2026-09-02,Busan-Gyeongnam,Air Purifier,Offline,5,The air feels noticeably cleaner. Sleep mode is almost silent.
+2026-09-02,Seoul,Air Purifier,Offline,5,"The filter replacement alerts are accurate, so upkeep is easy."
+2026-09-02,Gyeonggi-Incheon,Robot Vacuum,B2B,3,It's a bit on the loud side.
+2026-09-02,Seoul,Robot Vacuum,Offline,5,Setting cleaning zones in the app is easy.
+2026-09-02,Busan-Gyeongnam,Robot Vacuum,Online,1,The battery died just two months after purchase. I'm requesting a replacement.
+2026-09-03,Busan-Gyeongnam,Robot Vacuum,Offline,1,It keeps shutting off while charging. I think it's a battery problem.
+2026-09-03,Seoul,Air Purifier,Online,5,I like being able to check the air quality in the app.
+2026-09-03,Daegu-Gyeongbuk,Smart Lighting,Online,2,The brightness steps are too coarse.
+2026-09-03,Busan-Gyeongnam,Air Fryer,Online,5,Fried food comes out crispy and it's easy to clean.
+2026-09-03,Seoul,Air Purifier,Online,4,"The filter replacement alerts are accurate, so upkeep is easy."
+2026-09-03,Gyeonggi-Incheon,Robot Vacuum,B2B,2,It was hard to schedule an after-sales service visit.
+2026-09-04,Seoul,Robot Vacuum,Online,2,It has trouble getting over thresholds.
+2026-09-04,Busan-Gyeongnam,Air Purifier,Online,3,It's louder than I expected when it's running.
+2026-09-04,Busan-Gyeongnam,Robot Vacuum,Offline,2,It keeps shutting off while charging. I think it's a battery problem.
+2026-09-04,Busan-Gyeongnam,Robot Vacuum,Offline,2,The battery died just two months after purchase. I'm requesting a replacement.
+2026-09-05,Seoul,Air Purifier,Online,5,I like being able to check the air quality in the app.
+2026-09-05,Gyeonggi-Incheon,Smart Lighting,Online,5,It works smoothly with my voice assistant.
+2026-09-05,Gwangju-Jeolla,Air Fryer,Online,5,"At 6.5 L, it's big enough for a family of four."
+2026-09-06,Seoul,Air Fryer,Online,2,The basket is a little stiff.
+2026-09-06,Busan-Gyeongnam,Robot Vacuum,Offline,1,"I suspect the battery is swelling, so I stopped using it. I'm worried."
+2026-09-06,Busan-Gyeongnam,Robot Vacuum,B2B,2,"It won't charge. Even on the dock, the light doesn't come on."
+2026-09-07,Gyeonggi-Incheon,Air Fryer,Offline,5,"The app has plenty of recipes, so cooking has become more fun."
+2026-09-07,Seoul,Air Purifier,Online,5,I like being able to check the air quality in the app.
+2026-09-07,Seoul,Air Purifier,B2B,5,I like being able to check the air quality in the app.
+2026-09-08,Gyeonggi-Incheon,Air Purifier,Offline,5,I like being able to check the air quality in the app.
+2026-09-08,Daejeon-Chungcheong,Robot Vacuum,B2B,4,I'm happy with the mopping performance.
+2026-09-08,Daejeon-Chungcheong,Air Purifier,Offline,3,The Wi-Fi connection drops often.
+2026-09-09,Seoul,Air Fryer,Offline,3,The basket is a little stiff.
+2026-09-09,Seoul,Air Purifier,Online,4,"The filter replacement alerts are accurate, so upkeep is easy."
+2026-09-09,Gyeonggi-Incheon,Robot Vacuum,Offline,2,It sometimes fails to return to the charging dock.
+2026-09-09,Busan-Gyeongnam,Air Purifier,Online,3,Delivery arrived three days later than scheduled.
+2026-09-09,Seoul,Robot Vacuum,Online,3,Delivery arrived three days later than scheduled.
+2026-09-10,Daegu-Gyeongbuk,Robot Vacuum,Online,3,It sometimes fails to return to the charging dock.
+2026-09-10,Gyeonggi-Incheon,Robot Vacuum,B2B,5,It steers around obstacles well and covers the whole area thoroughly.
+2026-09-10,Gyeonggi-Incheon,Air Fryer,Offline,5,"The app has plenty of recipes, so cooking has become more fun."
+2026-09-11,Gyeonggi-Incheon,Air Purifier,Online,4,"The filter replacement alerts are accurate, so upkeep is easy."
+2026-09-11,Daejeon-Chungcheong,Air Purifier,Offline,4,"The filter replacement alerts are accurate, so upkeep is easy."
+2026-09-11,Seoul,Air Purifier,Offline,5,The air feels noticeably cleaner. Sleep mode is almost silent.
+2026-09-11,Daegu-Gyeongbuk,Air Fryer,Offline,5,"At 6.5 L, it's big enough for a family of four."
+2026-09-11,Busan-Gyeongnam,Smart Lighting,Offline,4,"Easy to install, and the colors look great."
+2026-09-11,Busan-Gyeongnam,Robot Vacuum,Offline,3,It's a bit on the loud side.
+2026-09-11,Gwangju-Jeolla,Air Purifier,Online,4,The air feels noticeably cleaner. Sleep mode is almost silent.
+2026-09-12,Daejeon-Chungcheong,Air Purifier,Online,2,The replacement filters are a bit pricey.
+2026-09-13,Busan-Gyeongnam,Air Purifier,Online,3,The replacement filters are a bit pricey.
+2026-09-13,Busan-Gyeongnam,Air Fryer,Online,4,"At 6.5 L, it's big enough for a family of four."
+2026-09-14,Seoul,Smart Lighting,Offline,4,"Easy to install, and the colors look great."
+2026-09-14,Gwangju-Jeolla,Robot Vacuum,Offline,5,Setting cleaning zones in the app is easy.
+2026-09-14,Busan-Gyeongnam,Robot Vacuum,Online,1,"I suspect the battery is swelling, so I stopped using it. I'm worried."
+2026-09-15,Gyeonggi-Incheon,Robot Vacuum,Online,2,It's a bit on the loud side.
+2026-09-15,Gyeonggi-Incheon,Robot Vacuum,Online,4,It steers around obstacles well and covers the whole area thoroughly.
+2026-09-15,Daejeon-Chungcheong,Air Fryer,Online,5,"The app has plenty of recipes, so cooking has become more fun."
+2026-09-15,Daejeon-Chungcheong,Air Fryer,Online,3,The basket is a little stiff.
+2026-09-15,Busan-Gyeongnam,Robot Vacuum,Online,2,"I suspect the battery is swelling, so I stopped using it. I'm worried."
+2026-09-16,Gwangju-Jeolla,Air Purifier,Online,5,"The filter replacement alerts are accurate, so upkeep is easy."
+2026-09-16,Seoul,Air Fryer,Offline,3,It gives off a smell when preheating.
+2026-09-16,Seoul,Air Purifier,Online,5,"The filter replacement alerts are accurate, so upkeep is easy."
+2026-09-16,Busan-Gyeongnam,Robot Vacuum,Online,1,It keeps shutting off while charging. I think it's a battery problem.
+2026-09-17,Seoul,Air Fryer,Offline,4,"At 6.5 L, it's big enough for a family of four."
+2026-09-18,Daegu-Gyeongbuk,Robot Vacuum,Offline,4,It steers around obstacles well and covers the whole area thoroughly.
+2026-09-18,Gyeonggi-Incheon,Smart Lighting,Offline,2,It was hard to schedule an after-sales service visit.
+2026-09-18,Busan-Gyeongnam,Robot Vacuum,Offline,2,The battery died just two months after purchase. I'm requesting a replacement.
+2026-09-19,Busan-Gyeongnam,Robot Vacuum,Offline,4,Setting cleaning zones in the app is easy.
+2026-09-19,Daegu-Gyeongbuk,Air Purifier,Online,3,The Wi-Fi connection drops often.
+2026-09-19,Busan-Gyeongnam,Robot Vacuum,Online,2,The battery died just two months after purchase. I'm requesting a replacement.
+2026-09-19,Busan-Gyeongnam,Robot Vacuum,Online,2,The battery died just two months after purchase. I'm requesting a replacement.
+2026-09-19,Busan-Gyeongnam,Robot Vacuum,Offline,1,It keeps shutting off while charging. I think it's a battery problem.
+2026-09-19,Busan-Gyeongnam,Robot Vacuum,Offline,1,"I suspect the battery is swelling, so I stopped using it. I'm worried."
+2026-09-20,Seoul,Air Purifier,Online,5,I like being able to check the air quality in the app.
+2026-09-20,Busan-Gyeongnam,Robot Vacuum,Online,1,The battery died just two months after purchase. I'm requesting a replacement.
+2026-09-21,Seoul,Robot Vacuum,B2B,4,It steers around obstacles well and covers the whole area thoroughly.
+2026-09-21,Seoul,Air Fryer,Offline,4,"At 6.5 L, it's big enough for a family of four."
+2026-09-21,Busan-Gyeongnam,Robot Vacuum,Online,1,It keeps shutting off while charging. I think it's a battery problem.
+2026-09-22,Gyeonggi-Incheon,Air Fryer,Offline,4,"At 6.5 L, it's big enough for a family of four."
+2026-09-22,Seoul,Robot Vacuum,B2B,5,Setting cleaning zones in the app is easy.
+2026-09-22,Daejeon-Chungcheong,Smart Lighting,Offline,3,It sometimes loses its connection to the app.
+2026-09-23,Daegu-Gyeongbuk,Air Purifier,Online,5,The air feels noticeably cleaner. Sleep mode is almost silent.
+2026-09-23,Seoul,Air Purifier,Online,2,The Wi-Fi connection drops often.
+2026-09-23,Seoul,Robot Vacuum,Online,5,Setting cleaning zones in the app is easy.
+2026-09-24,Busan-Gyeongnam,Robot Vacuum,Offline,5,Setting cleaning zones in the app is easy.
+2026-09-24,Busan-Gyeongnam,Robot Vacuum,Online,1,"It won't charge. Even on the dock, the light doesn't come on."
+2026-09-24,Busan-Gyeongnam,Robot Vacuum,Online,2,It keeps shutting off while charging. I think it's a battery problem.
+2026-09-25,Daegu-Gyeongbuk,Robot Vacuum,Online,4,Setting cleaning zones in the app is easy.
+2026-09-26,Seoul,Air Purifier,Online,3,The package arrived damaged.
+2026-09-26,Gwangju-Jeolla,Robot Vacuum,Offline,3,It's a bit on the loud side.
+2026-09-26,Seoul,Air Fryer,Offline,4,"At 6.5 L, it's big enough for a family of four."
+2026-09-27,Seoul,Robot Vacuum,Online,5,Setting cleaning zones in the app is easy.
+2026-09-27,Daejeon-Chungcheong,Air Purifier,Offline,4,"The filter replacement alerts are accurate, so upkeep is easy."
+2026-09-27,Busan-Gyeongnam,Robot Vacuum,Online,1,"I requested after-sales service, but the battery is out of stock and I've been waiting two weeks."
+2026-09-28,Daejeon-Chungcheong,Air Purifier,B2B,5,I like being able to check the air quality in the app.
+2026-09-30,Seoul,Smart Lighting,Offline,5,"Easy to install, and the colors look great."
+2026-09-30,Daejeon-Chungcheong,Smart Lighting,Offline,4,It works smoothly with my voice assistant.
+2026-09-30,Seoul,Air Purifier,Online,5,"The filter replacement alerts are accurate, so upkeep is easy."
+2026-09-30,Gyeonggi-Incheon,Robot Vacuum,Offline,3,It's a bit on the loud side.
+2026-09-30,Busan-Gyeongnam,Robot Vacuum,Online,2,"The battery doesn't even last 10 minutes, so it never finishes cleaning."
+2026-10-01,Seoul,Robot Vacuum,Online,3,It's a bit on the loud side.
+2026-10-01,Gyeonggi-Incheon,Smart Lighting,Online,5,"Easy to install, and the colors look great."
+2026-10-01,Daejeon-Chungcheong,Air Purifier,Online,3,It's louder than I expected when it's running.
+2026-10-02,Gyeonggi-Incheon,Air Purifier,Offline,5,"The filter replacement alerts are accurate, so upkeep is easy."
+2026-10-02,Daejeon-Chungcheong,Robot Vacuum,Offline,4,I'm happy with the mopping performance.
+2026-10-02,Gyeonggi-Incheon,Smart Lighting,Online,2,The brightness steps are too coarse.
+2026-10-02,Gyeonggi-Incheon,Robot Vacuum,Online,3,It has trouble getting over thresholds.
+2026-10-02,Gyeonggi-Incheon,Air Fryer,Offline,4,"At 6.5 L, it's big enough for a family of four."
+2026-10-02,Busan-Gyeongnam,Robot Vacuum,Online,1,It keeps shutting off while charging. I think it's a battery problem.
+2026-10-03,Daejeon-Chungcheong,Air Purifier,Online,3,The Wi-Fi connection drops often.
+2026-10-03,Busan-Gyeongnam,Air Purifier,Online,5,I like being able to check the air quality in the app.
+2026-10-03,Seoul,Air Purifier,Online,2,The Wi-Fi connection drops often.
+2026-10-04,Gyeonggi-Incheon,Air Fryer,Online,5,Fried food comes out crispy and it's easy to clean.
+2026-10-04,Busan-Gyeongnam,Smart Lighting,Offline,4,"Easy to install, and the colors look great."
+2026-10-04,Daegu-Gyeongbuk,Air Purifier,Online,4,I like being able to check the air quality in the app.
+2026-10-05,Seoul,Robot Vacuum,Online,5,I'm happy with the mopping performance.
+2026-10-05,Daejeon-Chungcheong,Air Purifier,Online,4,"The filter replacement alerts are accurate, so upkeep is easy."
+2026-10-06,Busan-Gyeongnam,Robot Vacuum,Offline,1,"I suspect the battery is swelling, so I stopped using it. I'm worried."
+2026-10-07,Gyeonggi-Incheon,Robot Vacuum,Offline,4,I'm happy with the mopping performance.
+2026-10-07,Busan-Gyeongnam,Robot Vacuum,Online,1,"It won't charge. Even on the dock, the light doesn't come on."
+2026-10-07,Gyeonggi-Incheon,Air Fryer,Online,3,The coating seems to be peeling off.
+2026-10-08,Daegu-Gyeongbuk,Smart Lighting,B2B,3,Delivery arrived three days later than scheduled.
+2026-10-08,Gyeonggi-Incheon,Air Purifier,Offline,5,I like being able to check the air quality in the app.
+2026-10-08,Gyeonggi-Incheon,Air Purifier,Offline,3,The replacement filters are a bit pricey.
+2026-10-08,Busan-Gyeongnam,Robot Vacuum,Online,1,"I requested after-sales service, but the battery is out of stock and I've been waiting two weeks."
+2026-10-09,Daejeon-Chungcheong,Robot Vacuum,Online,4,It steers around obstacles well and covers the whole area thoroughly.
+2026-10-09,Busan-Gyeongnam,Smart Lighting,Online,5,It works smoothly with my voice assistant.
+2026-10-09,Daejeon-Chungcheong,Smart Lighting,Offline,3,It sometimes loses its connection to the app.
+2026-10-09,Busan-Gyeongnam,Robot Vacuum,Online,1,"It won't charge. Even on the dock, the light doesn't come on."
+2026-10-10,Busan-Gyeongnam,Air Purifier,Offline,3,The Wi-Fi connection drops often.
+2026-10-10,Gyeonggi-Incheon,Air Purifier,Offline,3,The replacement filters are a bit pricey.
+2026-10-11,Seoul,Smart Lighting,Offline,2,It sometimes loses its connection to the app.
+2026-10-12,Daegu-Gyeongbuk,Robot Vacuum,B2B,5,It steers around obstacles well and covers the whole area thoroughly.
+2026-10-12,Gyeonggi-Incheon,Air Fryer,Online,5,"The app has plenty of recipes, so cooking has become more fun."
+2026-10-14,Busan-Gyeongnam,Robot Vacuum,Offline,1,The battery died just two months after purchase. I'm requesting a replacement.
+2026-10-16,Gyeonggi-Incheon,Air Purifier,Online,4,"The filter replacement alerts are accurate, so upkeep is easy."
+2026-10-16,Gyeonggi-Incheon,Air Purifier,Offline,4,The air feels noticeably cleaner. Sleep mode is almost silent.
+2026-10-17,Gyeonggi-Incheon,Air Purifier,B2B,5,"The filter replacement alerts are accurate, so upkeep is easy."
+2026-10-17,Busan-Gyeongnam,Robot Vacuum,Offline,1,It keeps shutting off while charging. I think it's a battery problem.
+2026-10-17,Gyeonggi-Incheon,Robot Vacuum,Online,5,It steers around obstacles well and covers the whole area thoroughly.
+2026-10-18,Gwangju-Jeolla,Robot Vacuum,Online,2,It was hard to schedule an after-sales service visit.
+2026-10-18,Gyeonggi-Incheon,Air Fryer,Offline,4,"At 6.5 L, it's big enough for a family of four."
+2026-10-20,Busan-Gyeongnam,Air Fryer,Offline,5,"The app has plenty of recipes, so cooking has become more fun."
+2026-10-20,Seoul,Robot Vacuum,Offline,3,It sometimes fails to return to the charging dock.
+2026-10-20,Seoul,Air Fryer,Offline,4,Fried food comes out crispy and it's easy to clean.
+2026-10-20,Busan-Gyeongnam,Robot Vacuum,Online,1,"It won't charge. Even on the dock, the light doesn't come on."
+2026-10-21,Daejeon-Chungcheong,Air Fryer,Online,5,Fried food comes out crispy and it's easy to clean.
+2026-10-21,Seoul,Robot Vacuum,Online,5,I'm happy with the mopping performance.
+2026-10-21,Seoul,Air Fryer,Offline,3,The coating seems to be peeling off.
+2026-10-21,Gyeonggi-Incheon,Robot Vacuum,Offline,5,I'm happy with the mopping performance.
+2026-10-22,Seoul,Air Purifier,Offline,2,It took a long time to get through to the Customer Service Center.
+2026-10-23,Gyeonggi-Incheon,Air Purifier,Online,4,"The filter replacement alerts are accurate, so upkeep is easy."
+2026-10-23,Busan-Gyeongnam,Robot Vacuum,Offline,3,The package arrived damaged.
+2026-10-23,Seoul,Robot Vacuum,Online,4,Setting cleaning zones in the app is easy.
+2026-10-24,Gwangju-Jeolla,Air Fryer,Offline,3,It gives off a smell when preheating.
+2026-10-24,Gyeonggi-Incheon,Air Fryer,Offline,5,"At 6.5 L, it's big enough for a family of four."
+2026-10-25,Gyeonggi-Incheon,Air Purifier,Online,2,The replacement filters are a bit pricey.
+2026-10-25,Busan-Gyeongnam,Robot Vacuum,B2B,1,"I suspect the battery is swelling, so I stopped using it. I'm worried."
+2026-10-26,Busan-Gyeongnam,Air Purifier,B2B,3,The package arrived damaged.
+2026-10-26,Seoul,Air Fryer,Online,5,Fried food comes out crispy and it's easy to clean.
+2026-10-26,Busan-Gyeongnam,Robot Vacuum,Online,1,"It won't charge. Even on the dock, the light doesn't come on."
+2026-10-27,Daegu-Gyeongbuk,Robot Vacuum,Offline,3,It sometimes fails to return to the charging dock.
+2026-10-28,Busan-Gyeongnam,Robot Vacuum,Online,1,"I suspect the battery is swelling, so I stopped using it. I'm worried."
+2026-10-29,Seoul,Smart Lighting,Online,2,It was hard to schedule an after-sales service visit.
+2026-10-29,Seoul,Air Fryer,Online,3,It was hard to schedule an after-sales service visit.
+2026-10-29,Gyeonggi-Incheon,Air Fryer,Offline,4,"The app has plenty of recipes, so cooking has become more fun."
+2026-10-29,Busan-Gyeongnam,Smart Lighting,Offline,5,"Easy to install, and the colors look great."
+2026-10-29,Seoul,Robot Vacuum,Online,4,Setting cleaning zones in the app is easy.
+2026-10-30,Busan-Gyeongnam,Robot Vacuum,B2B,3,It has trouble getting over thresholds.
+2026-10-30,Busan-Gyeongnam,Air Fryer,Online,4,"At 6.5 L, it's big enough for a family of four."
+2026-10-31,Busan-Gyeongnam,Smart Lighting,Online,4,"Easy to install, and the colors look great."
+2026-10-31,Gyeonggi-Incheon,Robot Vacuum,B2B,4,Setting cleaning zones in the app is easy.
+2026-10-31,Gwangju-Jeolla,Robot Vacuum,Online,5,It steers around obstacles well and covers the whole area thoroughly.
+2026-10-31,Gwangju-Jeolla,Air Purifier,Online,3,The Wi-Fi connection drops often.
+2026-10-31,Busan-Gyeongnam,Robot Vacuum,Offline,2,"I suspect the battery is swelling, so I stopped using it. I'm worried."

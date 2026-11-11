@@ -23,6 +23,7 @@ from . import bootstrap, chat, models
 from .agents_def import agent_specs
 from .config import settings
 from .foundry import foundry
+from .i18n import pick
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(name)s %(message)s")
 log = logging.getLogger("web")
@@ -82,7 +83,7 @@ async def require_auth(request: Request) -> None:
     if settings.auth_mode != "code":
         return
     if not _valid_cookie(request.cookies.get(SESSION_COOKIE)):
-        raise HTTPException(status_code=401, detail="로그인이 필요합니다.")
+        raise HTTPException(status_code=401, detail=pick("로그인이 필요합니다.", "Please sign in first."))
 
 
 class LoginBody(BaseModel):
@@ -93,7 +94,7 @@ class LoginBody(BaseModel):
 async def login(body: LoginBody, response: Response, request: Request) -> dict[str, Any]:
     if settings.auth_mode == "code" and not hmac.compare_digest(body.code.strip(), settings.access_code):
         await asyncio.sleep(0.6)
-        raise HTTPException(status_code=401, detail="접속 코드가 올바르지 않습니다.")
+        raise HTTPException(status_code=401, detail=pick("접속 코드가 올바르지 않습니다.", "The access code is incorrect."))
     response.set_cookie(SESSION_COOKIE, _make_cookie(), max_age=SESSION_TTL, httponly=True, samesite="lax",
                         secure=request.url.scheme == "https" or request.headers.get("x-forwarded-proto") == "https")
     return {"ok": True}
@@ -108,7 +109,7 @@ async def logout(response: Response) -> dict[str, Any]:
 @app.get("/api/session")
 async def session(request: Request) -> dict[str, Any]:
     authed = settings.auth_mode != "code" or _valid_cookie(request.cookies.get(SESSION_COOKIE))
-    return {"authenticated": authed, "auth_mode": settings.auth_mode}
+    return {"authenticated": authed, "auth_mode": settings.auth_mode, "lang": settings.lang}
 
 
 @app.get("/healthz")
@@ -144,7 +145,9 @@ async def config() -> dict[str, Any]:
         "region": settings.region,
         "project": settings.project_name,
         "account": settings.account_name,
-        "user": {"name": os.environ.get("DEMO_USER_NAME", "김민준"), "team": os.environ.get("DEMO_USER_TEAM", "영업1팀 · 데모 계정")},
+        "lang": settings.lang,
+        "user": {"name": os.environ.get("DEMO_USER_NAME", pick("김민준", "Minjun Kim")),
+                 "team": os.environ.get("DEMO_USER_TEAM", pick("영업1팀 · 데모 계정", "Sales Team 1 · Demo account"))},
         "agents": [
             {"key": s.key, "name": s.name, "title": s.title, "subtitle": s.subtitle, "icon": s.icon, "color": s.color, "model": s.model,
              "capabilities": s.capabilities, "starters": s.starters, "accepts": s.accepts}
@@ -166,10 +169,10 @@ async def sample_file(kind: str, name: str) -> FileResponse:
     """데모용 가상 샘플(영수증 이미지·분석 CSV·사규 PDF)을 내려줍니다."""
     folder = SAMPLE_DIRS.get(kind)
     if not folder:
-        raise HTTPException(404, "알 수 없는 종류입니다.")
+        raise HTTPException(404, pick("알 수 없는 종류입니다.", "Unknown sample type."))
     path = (settings.seed_dir / folder / name).resolve()
     if settings.seed_dir.resolve() not in path.parents or not path.is_file():
-        raise HTTPException(404, "파일을 찾을 수 없습니다.")
+        raise HTTPException(404, pick("파일을 찾을 수 없습니다.", "File not found."))
     return FileResponse(path)
 
 
@@ -244,10 +247,11 @@ ALLOWED_UPLOADS = {".pdf", ".txt", ".md", ".csv", ".json", ".docx", ".xlsx", ".p
 async def upload(file: UploadFile = File(...)) -> dict[str, Any]:
     ext = os.path.splitext(file.filename or "")[1].lower()
     if ext not in ALLOWED_UPLOADS:
-        raise HTTPException(400, f"지원하지 않는 형식입니다 ({ext}). 가능: {', '.join(sorted(ALLOWED_UPLOADS))}")
+        allowed = ", ".join(sorted(ALLOWED_UPLOADS))
+        raise HTTPException(400, pick(f"지원하지 않는 형식입니다 ({ext}). 가능: {allowed}", f"Unsupported file type ({ext}). Allowed: {allowed}"))
     data = await file.read()
     if len(data) > 20 * 1024 * 1024:
-        raise HTTPException(413, "파일은 20MB 이하만 올릴 수 있습니다.")
+        raise HTTPException(413, pick("파일은 20MB 이하만 올릴 수 있습니다.", "Files must be 20 MB or smaller."))
     uploaded = await foundry.openai.files.create(purpose="assistants", file=(file.filename, data))
     return {"file_id": uploaded.id, "name": file.filename, "size": len(data)}
 

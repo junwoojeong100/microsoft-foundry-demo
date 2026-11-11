@@ -1,0 +1,18 @@
+00:00 Opening
+01:43 Foundry architecture
+02:15 Deploy — one azd up
+03:50 Employee experience · Knowledge search (Contoso Guide)
+04:59 Employee experience · Task automation (Contoso Pay)
+05:51 Employee experience · Data analysis (Contoso Analyst)
+06:47 Employee experience · Latest knowledge via MCP (Contoso Architect)
+07:20 Employee experience · General chat and model choice
+08:41 Employee experience · Safety guardrails
+09:41 Agents as code
+10:31 Admin · Models (Foundry portal)
+11:43 Admin · Agents
+12:29 Admin · Guardrails
+12:54 Admin · Tracing
+13:24 Admin · Evaluation
+13:58 Admin · Operations and governance
+14:56 Enterprise adoption checklist
+15:56 Summary and next steps

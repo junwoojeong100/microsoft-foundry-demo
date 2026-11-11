@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Foundry demo — slides</title>
+<style>
+  @font-face { font-family: 'Pretendard'; src: url('/src/web/static/fonts/PretendardVariable.woff2') format('woff2-variations'); font-weight: 45 920; }
+  :root { --brand: #0f6cbd; --brand2: #6d4ae0; --ink: #e8edf8; --mut: #93a0bd; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; overflow: hidden; font-family: 'Pretendard', 'Apple SD Gothic Neo', sans-serif; color: var(--ink); -webkit-font-smoothing: antialiased; }
+  body { background: #0a0f1d; }
+  .bg { position: fixed; inset: 0; background:
+    radial-gradient(900px 520px at 12% -8%, rgba(15,108,189,.55), transparent 62%),
+    radial-gradient(820px 520px at 105% 108%, rgba(109,74,224,.5), transparent 60%),
+    radial-gradient(500px 300px at 60% 40%, rgba(56,189,248,.08), transparent 70%), #0a0f1d; }
+  .grid { position: fixed; inset: 0; background-image: linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px); background-size: 48px 48px; mask-image: radial-gradient(ellipse at 50% 40%, #000 0, transparent 75%); }
+  section { position: fixed; inset: 0 0 78px 0; display: none; padding: 54px 80px 20px; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+  section.on { display: flex; }
+  .logo { width: 92px; height: 92px; border-radius: 26px; background: linear-gradient(135deg, #0f6cbd, #6d4ae0); display: grid; place-items: center; box-shadow: 0 18px 50px rgba(79,70,229,.5); margin: 0 auto 26px; }
+  h1 { font-size: 82px; letter-spacing: -.045em; line-height: 1.05; margin: 0 0 14px; font-weight: 800; background: linear-gradient(120deg, #fff 30%, #9ec9ff 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  h2 { font-size: 30px; font-weight: 500; color: #c3cde3; margin: 0 0 28px; letter-spacing: -.02em; }
+  .pills { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+  .pill { padding: 9px 18px; border-radius: 999px; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.16); font-weight: 600; font-size: 18px; }
+  .pill.a { background: rgba(15,108,189,.35); border-color: rgba(96,165,250,.5); }
+  .fade { opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s ease; }
+  [data-step~="1"] .s1, [data-step~="2"] .s2, [data-step~="3"] .s3, [data-step~="4"] .s4, [data-step~="5"] .s5, [data-step~="6"] .s6, [data-step~="7"] .s7 { opacity: 1; transform: none; }
+  h3.title { font-size: 46px; letter-spacing: -.035em; margin: 0 0 34px; font-weight: 800; }
+  .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; width: 100%; max-width: 1240px; }
+  .card { text-align: left; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.14); border-radius: 22px; padding: 28px 28px 26px; }
+  .card .ic { width: 54px; height: 54px; border-radius: 16px; display: grid; place-items: center; margin-bottom: 16px; }
+  .card h4 { margin: 0 0 6px; font-size: 27px; letter-spacing: -.03em; }
+  .card .pain { color: #ffb4a8; font-size: 18px; margin-bottom: 14px; }
+  .card .ans { color: #c9f2d8; font-size: 18px; border-top: 1px dashed rgba(255,255,255,.2); padding-top: 14px; line-height: 1.55; }
+  .card .ans b { color: #fff; }
+  .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; width: 100%; max-width: 1280px; }
+  .step { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.14); border-radius: 22px; padding: 28px 24px; text-align: left; min-height: 250px; }
+  .step .n { width: 46px; height: 46px; border-radius: 50%; background: linear-gradient(135deg, #0f6cbd, #6d4ae0); display: grid; place-items: center; font-weight: 800; font-size: 22px; margin-bottom: 16px; }
+  .step h4 { margin: 0 0 8px; font-size: 26px; letter-spacing: -.03em; } .step p { margin: 0; color: #b4bfd6; font-size: 18px; line-height: 1.6; }
+  /* architecture */
+  .arch { position: relative; width: 1290px; height: 560px; }
+  .box { position: absolute; border-radius: 18px; border: 1.5px solid rgba(255,255,255,.2); background: rgba(255,255,255,.06); padding: 14px 18px; text-align: left; }
+  .box .t { font-weight: 800; font-size: 19px; letter-spacing: -.02em; display: flex; gap: 9px; align-items: center; }
+  .box .d { color: #aab6cf; font-size: 15px; margin-top: 4px; line-height: 1.5; }
+  .box.foundry { border-color: rgba(96,165,250,.65); background: rgba(15,108,189,.12); box-shadow: 0 0 0 1px rgba(96,165,250,.2), 0 20px 60px rgba(15,108,189,.25); }
+  .tag { display: inline-block; font-size: 13.5px; font-weight: 700; padding: 3px 10px; border-radius: 99px; background: rgba(255,255,255,.1); margin: 4px 4px 0 0; }
+  .tag.t1 { background: rgba(59,130,246,.3); } .tag.t2 { background: rgba(124,58,237,.35); } .tag.t3 { background: rgba(16,185,129,.3); } .tag.t4 { background: rgba(8,145,178,.35); }
+  svg.links { position: absolute; inset: 0; pointer-events: none; }
+  .link { stroke: #60a5fa; stroke-width: 2.5; fill: none; stroke-dasharray: 8 7; animation: dash 1.2s linear infinite; opacity: 0; transition: opacity .6s; }
+  [data-step~="1"] .l1, [data-step~="2"] .l2, [data-step~="3"] .l3, [data-step~="6"] .l4 { opacity: 1; }
+  @keyframes dash { to { stroke-dashoffset: -30; } }
+  .pillars { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; width: 100%; max-width: 1180px; }
+  .pillar { display: flex; gap: 20px; text-align: left; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.14); border-radius: 22px; padding: 26px 28px; }
+  .pillar .ic { flex: none; width: 60px; height: 60px; border-radius: 18px; display: grid; place-items: center; }
+  .pillar h4 { margin: 0 0 6px; font-size: 27px; letter-spacing: -.03em; } .pillar p { margin: 0; color: #b4bfd6; font-size: 19px; line-height: 1.55; }
+  .code { font-family: Menlo, monospace; background: #0d1117; border: 1px solid #263044; border-radius: 14px; padding: 18px 28px; font-size: 28px; color: #7ee787; box-shadow: 0 14px 40px rgba(0,0,0,.4); }
+  .code span { color: #8b949e; }
+  .chap .num { font-size: 120px; font-weight: 900; letter-spacing: -.06em; background: linear-gradient(135deg, #38bdf8, #a78bfa); -webkit-background-clip: text; background-clip: text; color: transparent; line-height: 1; margin-bottom: 10px; }
+  .chap h1 { font-size: 66px; } .chap h2 { font-size: 28px; margin: 0; }
+
+  /* Foundry platform map */
+  .wm { width: 100%; max-width: 1260px; display: flex; flex-direction: column; gap: 18px; }
+  .wm-top { display: flex; align-items: center; justify-content: center; gap: 14px; padding: 18px 26px; border-radius: 20px; border: 1.5px dashed rgba(255,255,255,.3); background: rgba(255,255,255,.04); font-size: 24px; font-weight: 700; letter-spacing: -.02em; }
+  .wm-top span { color: #9fb0cf; font-weight: 500; font-size: 19px; }
+  .wm-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .wm-p { text-align: left; border-radius: 20px; padding: 22px 24px; border: 1px solid color-mix(in srgb, var(--c) 55%, transparent); background: linear-gradient(160deg, color-mix(in srgb, var(--c) 22%, transparent), rgba(255,255,255,.04)); }
+  .wm-p .ic { width: 50px; height: 50px; border-radius: 15px; background: var(--c); display: grid; place-items: center; margin-bottom: 12px; }
+  .wm-p h4 { margin: 0 0 6px; font-size: 26px; letter-spacing: -.03em; } .wm-p p { margin: 0; color: #c0cbe0; font-size: 18px; line-height: 1.55; }
+  .wm-base { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; padding: 16px 20px; border-radius: 20px; background: linear-gradient(90deg, rgba(15,108,189,.35), rgba(109,74,224,.35)); border: 1px solid rgba(147,197,253,.4); }
+  .wm-base span { display: inline-flex; gap: 8px; align-items: center; font-size: 19px; font-weight: 700; padding: 6px 14px; border-radius: 99px; background: rgba(255,255,255,.1); }
+  /* code slide */
+  .codewrap { display: grid; width: 100%; max-width: 1240px; }
+  .codewrap .win { grid-area: 1 / 1; }
+  .win.b { opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s ease; }
+  [data-step~="3"] .win.a { opacity: 0 !important; transform: translateY(-14px) !important; } [data-step~="3"] .win.b { opacity: 1; transform: none; }
+  .win { text-align: left; background: #0d1117; border: 1px solid #263044; border-radius: 16px; box-shadow: 0 18px 50px rgba(0,0,0,.45); overflow: hidden; }
+  .win .bar { display: flex; align-items: center; gap: 8px; padding: 12px 16px; background: #161b22; border-bottom: 1px solid #263044; font-size: 17px; color: #9fb0cf; font-weight: 600; }
+  .win .bar i { width: 12px; height: 12px; border-radius: 50%; background: #ff5f56; } .win .bar i:nth-child(2) { background: #ffbd2e; } .win .bar i:nth-child(3) { background: #27c93f; } .win .bar b { margin-left: 10px; color: #e6edf3; }
+  .win pre { margin: 0; padding: 16px 0 18px; font: 500 19.5px/1.55 Menlo, 'Nanum Gothic Coding', monospace; color: #e6edf3; white-space: pre; }
+  .win pre .ln { display: block; padding: 0 22px; border-left: 4px solid transparent; transition: background .5s, border-color .5s, opacity .5s; }
+  .win pre.dim .ln { opacity: .42; } .win pre.dim .ln.hl { opacity: 1; background: rgba(56,139,253,.16); border-left-color: #58a6ff; }
+  .hljs-keyword, .hljs-literal, .hljs-built_in { color: #ff7b72; } .hljs-string { color: #a5d6ff; } .hljs-comment { color: #8b949e; font-style: normal; }
+  .hljs-title, .hljs-title.function_, .hljs-title.class_ { color: #d2a8ff; } .hljs-number { color: #79c0ff; } .hljs-attr, .hljs-params { color: #e6edf3; } .hljs-meta { color: #79c0ff; }
+  .codenote { margin-top: 20px; display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
+  .codenote .pill { font-size: 20px; padding: 10px 20px; }
+  /* enterprise checklist */
+  .ent { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; width: 100%; max-width: 1300px; }
+  .ent .e { text-align: left; border-radius: 20px; padding: 22px 24px 20px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.14); display: flex; flex-direction: column; gap: 6px; min-height: 238px; }
+  .ent .e .top { display: flex; align-items: center; gap: 14px; margin-bottom: 4px; }
+  .ent .e .ic { flex: none; width: 48px; height: 48px; border-radius: 14px; display: grid; place-items: center; }
+  .ent .e h4 { margin: 0; font-size: 26px; letter-spacing: -.03em; } .ent .e p { margin: 0; color: #b9c4da; font-size: 18px; line-height: 1.55; flex: 1; }
+  .chip2 { align-self: flex-start; font-size: 16.5px; font-weight: 700; padding: 6px 13px; border-radius: 99px; margin-top: 8px; }
+  .chip2.ok { background: rgba(16,185,129,.2); color: #86efac; border: 1px solid rgba(16,185,129,.5); }
+  .chip2.todo { background: rgba(245,158,11,.18); color: #fcd34d; border: 1px solid rgba(245,158,11,.5); }
+  .chip2.info { background: rgba(96,165,250,.18); color: #93c5fd; border: 1px solid rgba(96,165,250,.5); }
+  .grow { flex: 1; }
+</style>
+</head>
+<body>
+<div class="bg"></div><div class="grid"></div>
+
+<section id="title"><div class="logo" id="ic-logo"></div>
+  <h1 class="fade s1">Microsoft Foundry</h1><h2 class="fade s2">The AI platform for the enterprise — Contoso AI demo</h2>
+  <div class="pills fade s3"><span class="pill a">Contoso AI</span><span class="pill">Korea Central · single region</span><span class="pill">GPT-6.1</span><span class="pill">Agents · Guardrails · Evaluations</span><span class="pill">One azd up</span></div></section>
+
+<section id="problem"><h3 class="title">AI stalls at the pilot — three walls to company-wide adoption</h3>
+  <div class="cards">
+    <div class="card fade s1"><div class="ic" style="background:#2563eb" data-ic="plug"></div><h4>Connect</h4><div class="pain">Our documents and systems — safely?</div><div class="ans"><b>Agents + tools</b><br>Document search · code execution · MCP · functions</div></div>
+    <div class="card fade s2"><div class="ic" style="background:#7c3aed" data-ic="git-compare"></div><h4>Choose</h4><div class="pain">New models every week — which one?</div><div class="ans"><b>Model catalog + Model Router</b><br>Call models from many vendors the same way</div></div>
+    <div class="card fade s3"><div class="ic" style="background:#059669" data-ic="shield-check"></div><h4>Prove</h4><div class="pain">Quality and security — even in production?</div><div class="ans"><b>Evaluation · guardrails · tracing</b><br>Proven with numbers and code</div></div>
+  </div></section>
+
+<section id="agenda"><h3 class="title">What we'll show today</h3>
+  <div class="steps">
+    <div class="step fade s1"><div class="n">1</div><h4>Deploy in one go</h4><p>One azd up line: Foundry · models · guardrails · web app</p></div>
+    <div class="step fade s2"><div class="n">2</div><h4>Employee experience</h4><p>A ChatGPT-style app · document search · task automation · data analysis</p></div>
+    <div class="step fade s3"><div class="n">3</div><h4>Admin experience</h4><p>Foundry portal · models · agents · guardrails · tracing · evaluation</p></div>
+    <div class="step fade s4"><div class="n">4</div><h4>Adoption checklist</h4><p>Security · data · cost — the six questions asked first</p></div>
+  </div></section>
+
+<section id="arch"><h3 class="title" style="margin-bottom:22px">Architecture — one region, one project, keyless access</h3>
+  <div class="arch">
+    <svg class="links" viewBox="0 0 1290 560">
+      <path class="link l1" d="M232 96 H300" /><path class="link l2" d="M572 96 H640" />
+      <path class="link l3" d="M797 372 V430" /><path class="link l3" d="M1132 372 V430" /><path class="link l4" d="M572 262 H640" /><path class="link l4" d="M232 262 H300" />
+    </svg>
+    <div class="box fade s1" style="left:0;top:30px;width:232px;height:132px"><div class="t" data-ic="user-round">Employee</div><div class="d">Opens a ChatGPT-style<br>web app in the browser</div></div>
+    <div class="box fade s1" style="left:300px;top:30px;width:272px;height:132px"><div class="t" data-ic="boxes">Web app</div><div class="d">Azure Container Apps<br>FastAPI + static front end<br>Access code → Entra ID</div></div>
+    <div class="box fade s6" style="left:300px;top:215px;width:272px;height:132px;border-color:rgba(251,191,36,.6);background:rgba(251,191,36,.08)"><div class="t" data-ic="sliders-horizontal">Admin · Foundry portal</div><div class="d">ai.azure.com<br>Models · agents · guardrails<br>Tracing · evaluation · quota</div></div>
+    <div class="box fade s6" style="left:0;top:215px;width:232px;height:132px;border-color:rgba(251,191,36,.6);background:rgba(251,191,36,.08)"><div class="t" data-ic="user-check">Operator</div><div class="d">IT · security · AI ops team<br>Entra ID sign-in + role permissions</div></div>
+    <div class="box foundry fade s2" style="left:640px;top:0;width:650px;height:372px;padding:18px 20px">
+      <div class="t" style="font-size:22px" data-ic="sparkles">Microsoft Foundry · project contoso-ai <span class="tag" style="margin-left:auto">Korea Central</span></div>
+      <div class="d" style="margin-bottom:6px">One resource · one endpoint · one permission model</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:10px">
+        <div class="box fade s4" style="position:static;padding:12px 14px;min-height:128px"><div class="t" data-ic="bot">Agents ×4</div><div style="margin-top:4px"><span class="tag t1">file_search</span><span class="tag t2">Code Interpreter</span><span class="tag t3">Function calling</span><span class="tag t4">MCP</span></div></div>
+        <div class="box fade s3" style="position:static;padding:12px 14px;min-height:128px"><div class="t" data-ic="cpu">Models ×9</div><div style="margin-top:4px"><span class="tag">GPT-6.1 Sol/Terra</span><span class="tag">Model Router</span><span class="tag">Embeddings</span><span class="tag">DeepSeek</span><span class="tag">Kimi</span><span class="tag">Llama</span><span class="tag">Mistral</span><span class="tag">Grok</span></div></div>
+        <div class="box fade s5" style="position:static;padding:12px 14px;min-height:96px"><div class="t" data-ic="shield-check">Guardrails</div><div class="d">Content filters · Prompt Shields<br>PII detection · policy as code</div></div>
+        <div class="box fade s5" style="position:static;padding:12px 14px;min-height:96px"><div class="t" data-ic="flask-conical">Evaluation · tracing</div><div class="d">Built-in evaluators · agent step tracing<br>Quality as a score</div></div>
+      </div>
+    </div>
+    <div class="box fade s7" style="left:640px;top:430px;width:315px;height:112px"><div class="t" data-ic="key-round">Entra ID · managed identity</div><div class="d">No keys · least-privilege RBAC<br>MFA · SSO integration</div></div>
+    <div class="box fade s7" style="left:975px;top:430px;width:315px;height:112px"><div class="t" data-ic="activity">Application Insights</div><div class="d">Log Analytics connected<br>Traces · latency · tokens</div></div>
+  </div></section>
+
+
+<section id="what"><h3 class="title" style="margin-bottom:26px">Microsoft Foundry — one platform for AI apps and agents</h3>
+  <div class="wm">
+    <div class="wm-top fade s1"><span style="display:contents" data-ic="boxes"></span>Your apps · agents · business systems <span>Web · mobile · Teams · internal systems</span></div>
+    <div class="wm-grid">
+      <div class="wm-p fade s2" style="--c:#2563eb"><div class="ic" data-ic="cpu"></div><h4>Models</h4><p>GPT-6.1 · partner and open models<br>Model Router · fine-tuning</p></div>
+      <div class="wm-p fade s2" style="--c:#7c3aed"><div class="ic" data-ic="bot"></div><h4>Agents</h4><p>Agent Service · conversation memory<br>Versioning · human approval</p></div>
+      <div class="wm-p fade s2" style="--c:#0891b2"><div class="ic" data-ic="plug"></div><h4>Tools · knowledge</h4><p>File search · code execution · MCP<br>Web search · internal functions</p></div>
+      <div class="wm-p fade s3" style="--c:#dc2626"><div class="ic" data-ic="shield-check"></div><h4>Guardrails</h4><p>Content safety · Prompt Shields<br>Personal data · indirect-attack defense</p></div>
+      <div class="wm-p fade s3" style="--c:#d97706"><div class="ic" data-ic="flask-conical"></div><h4>Evaluation</h4><p>Built-in evaluators · agent evaluation<br>Quality before vs. after deployment</p></div>
+      <div class="wm-p fade s3" style="--c:#059669"><div class="ic" data-ic="activity"></div><h4>Tracing · operations</h4><p>Step-by-step tracing · Application Insights<br>Latency · tokens · quota</p></div>
+    </div>
+    <div class="wm-base fade s4"><span data-ic="key-round">Microsoft Entra ID</span><span data-ic="user-check">Azure RBAC</span><span data-ic="network">Network isolation</span><span data-ic="gauge">Azure Monitor</span><span data-ic="shield-check">Defender · Purview</span></div>
+  </div></section>
+
+<section id="code"><h3 class="title" style="margin-bottom:20px">Agents are built in code — one block to define, one to call</h3>
+  <div class="codewrap">
+    <div class="win a fade s1"><div class="bar"><i></i><i></i><i></i><b>agents_def.py</b>Definition — model + instructions + tools</div><pre id="code-def"></pre></div>
+    <div class="win b"><div class="bar"><i></i><i></i><i></i><b>chat.py</b>Call — keyless · streaming</div><pre id="code-call"></pre></div>
+  </div>
+  <div class="codenote fade s5"><span class="pill a">Edit instructions or tools → new version</span><span class="pill">Compare versions in the portal</span><span class="pill">UI just draws events</span></div></section>
+
+<section id="enterprise"><h3 class="title" style="margin-bottom:26px">Enterprise adoption checklist — the six questions asked first</h3>
+  <div class="ent">
+    <div class="e fade s1"><div class="top"><div class="ic" style="background:#2563eb" data-ic="key-round"></div><h4>Access control</h4></div><p>Microsoft Entra ID · Azure RBAC<br>Least privilege for people and apps</p><span class="chip2 ok">✔ This demo: managed identity, no keys</span></div>
+    <div class="e fade s1"><div class="top"><div class="ic" style="background:#7c3aed" data-ic="network"></div><h4>Networking</h4></div><p>Private endpoints · virtual networks<br>No exposure to the public internet</p><span class="chip2 todo">▲ In production: isolate</span></div>
+    <div class="e fade s2"><div class="top"><div class="ic" style="background:#059669" data-ic="lock"></div><h4>Data protection</h4></div><p>Customer data is not used to train base models<br>Encrypted at rest · customer-managed keys</p><span class="chip2 ok">✔ Built in</span></div>
+    <div class="e fade s2"><div class="top"><div class="ic" style="background:#0891b2" data-ic="map-pin"></div><h4>Processing location</h4></div><p>Pick resource region + deployment type<br>Global · Data Zone · Regional</p><span class="chip2 info">ⓘ This demo: Global Standard</span></div>
+    <div class="e fade s3"><div class="top"><div class="ic" style="background:#dc2626" data-ic="shield-check"></div><h4>Security · governance</h4></div><p>Defender for Cloud · Purview<br>Azure Policy · audit logs</p><span class="chip2 todo">▲ In production: turn on</span></div>
+    <div class="e fade s3"><div class="top"><div class="ic" style="background:#d97706" data-ic="coins"></div><h4>Cost control</h4></div><p>Pay-per-token · quota · budget alerts<br>Provisioned throughput for steady performance</p><span class="chip2 ok">✔ This demo: per-deployment quota</span></div>
+  </div></section>
+
+<section id="chapter" class="chap"><div class="num" id="c-num">1</div><h1 id="c-title">Title</h1><h2 id="c-sub">Subtitle</h2></section>
+
+<section id="summary"><h3 class="title">What we saw today</h3>
+  <div class="pillars">
+    <div class="pillar fade s1"><div class="ic" style="background:#2563eb" data-ic="rocket"></div><div><h4>Deploy in one go</h4><p>One command deploys models, agents, guardrails and observability as code</p></div></div>
+    <div class="pillar fade s2"><div class="ic" style="background:#059669" data-ic="bot"></div><div><h4>Employees use a ChatGPT-style app</h4><p>Answers from documents, handles tasks, analyzes data (human approval)</p></div></div>
+    <div class="pillar fade s3"><div class="ic" style="background:#7c3aed" data-ic="sliders-horizontal"></div><div><h4>Admins work in the Foundry portal</h4><p>Models · agents · guardrails · tracing · evaluation in one place</p></div></div>
+    <div class="pillar fade s4"><div class="ic" style="background:#d4322a" data-ic="shield-check"></div><div><h4>Proven with code and numbers</h4><p>Guardrails as code, quality as evaluation scores, operations through tracing</p></div></div>
+  </div></section>
+
+<section id="next"><h3 class="title">Next steps</h3>
+  <div class="steps" style="grid-template-columns:repeat(3,1fr);max-width:1180px">
+    <div class="step fade s1" style="min-height:200px"><div class="n">1</div><h4>Pick one task</h4><p>The most repetitive one, driven by rules and documents</p></div>
+    <div class="step fade s2" style="min-height:200px"><div class="n">2</div><h4>Connect documents + 20 evaluation questions</h4><p>Attach the knowledge, then score it with questions that have known answers</p></div>
+    <div class="step fade s3" style="min-height:200px"><div class="n">3</div><h4>Deploy it yourself</h4><p>Recreate today's environment from this repository</p></div>
+  </div>
+  <div class="code fade s4" style="margin-top:30px">$ azd up <span># about 10 minutes — models · agents · guardrails · web app</span></div></section>
+
+<script type="module">
+  import { ICONS } from '/src/web/static/vendor/icons.js';
+  const svg = (name, size) => `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${ICONS[name] || ''}</svg>`;
+
+  import hljs from '/src/web/static/vendor/highlight.mjs';
+  const DEF = [
+    'from azure.ai.projects.models import PromptAgentDefinition, FileSearchTool, MCPTool',
+    '',
+    'agent = project.agents.create_version(        # a new version is created',
+    '    agent_name="contoso-guide",',
+    '    definition=PromptAgentDefinition(',
+    '        model="gpt-6.1-terra",                # one line: the deployment name',
+    '        instructions=KNOWLEDGE,               # instructions',
+    '        tools=[                               # tools — added just by connecting them',
+    '            FileSearchTool(vector_store_ids=[vs.id]),',
+    '            MCPTool(server_label="mslearn",',
+    '                    server_url="https://learn.microsoft.com/api/mcp"),',
+    '        ],',
+    '    ),',
+    ')',
+  ];
+  const DEF_HL = [5, 6, 7, 8, 9, 10, 11];
+  const CALL = [
+    'project = AIProjectClient(',
+    '    endpoint=FOUNDRY_PROJECT_ENDPOINT,',
+    '    credential=DefaultAzureCredential(),     # no keys · Entra ID',
+    ')',
+    'openai = project.get_openai_client()',
+    '',
+    'stream = openai.responses.create(',
+    '    conversation=conv.id,                    # conversation memory',
+    '    input="How many days of annual leave after 4 years?",',
+    '    extra_body={"agent_reference": {',
+    '        "name": "contoso-guide",          # just name the agent',
+    '        "type": "agent_reference"}},',
+    '    stream=True,                             # tool calls, sources, tokens arrive as events',
+    ')',
+  ];
+  const CALL_HL = [2, 10, 12];
+  function renderCode(id, lines, hl) {
+    const html = hljs.highlight(lines.join('\n'), { language: 'python' }).value.split('\n');
+    document.getElementById(id).innerHTML = html.map((l, i) => `<span class="ln${hl.includes(i) ? ' hl' : ''}">${l || ' '}</span>`).join('');
+  }
+  renderCode('code-def', DEF, DEF_HL);
+  renderCode('code-call', CALL, CALL_HL);
+  document.getElementById('ic-logo').innerHTML = svg('sparkles', 46);
+  document.querySelectorAll('[data-ic]').forEach((el) => { const n = el.dataset.ic; const big = el.classList.contains('ic'); el.insertAdjacentHTML('afterbegin', svg(n, big ? 28 : 22)); });
+  window.__slide = {
+    show(name, params = {}) {
+      document.querySelectorAll('section').forEach((s) => s.classList.toggle('on', s.id === name));
+      document.body.dataset.step = '';
+      if (name === 'chapter') { document.getElementById('c-num').textContent = params.n; document.getElementById('c-title').textContent = params.title; document.getElementById('c-sub').textContent = params.sub || ''; document.body.dataset.step = '1 2 3'; }
+    },
+    step(n) {
+      document.body.dataset.step = Array.from({ length: n }, (_, i) => i + 1).join(' ');
+      document.getElementById('code-def')?.classList.toggle('dim', n === 2);
+      document.getElementById('code-call')?.classList.toggle('dim', n === 4);
+    },
+  };
+  window.__ready = true;
+</script>
+</body>
+</html>

@@ -4,6 +4,7 @@
     python recording/compose.py --check            # 장면별 길이·내레이션 겹침·누락 점검만
     python recording/compose.py                    # 최종 영상 + 챕터 + 자막(SRT) + 썸네일·포스터
     python recording/compose.py --crf 28           # 용량을 더 줄이고 싶을 때(숫자가 클수록 작고 거칩니다)
+    REC_LANG=en python recording/compose.py        # 영어판: raw_en/ + audio_en/ → video/microsoft-foundry-demo-en.mp4
 
 하는 일
   1) 장면마다 '내레이션이 놓일 시각'(scene.json 의 says)에 맞춰 음성 트랙을 만들고, 영상 길이와 정확히 같게 맞춥니다.
@@ -21,18 +22,20 @@ import sys
 import tempfile
 
 sys.path.insert(0, str(pathlib.Path(__file__).parent))
+from lang import LANG, SUFFIX, pick  # noqa: E402
 from recorder import split_caption  # noqa: E402
 
 ROOT = pathlib.Path(__file__).resolve().parent
 REPO = ROOT.parent
-RAW = ROOT / "raw"
-AUDIO = ROOT / "audio"
+RAW = ROOT / f"raw{SUFFIX}"
+AUDIO = ROOT / f"audio{SUFFIX}"
 OUT_DIR = REPO / "video"
-BASENAME = "microsoft-foundry-demo-ko"
+BASENAME = f"microsoft-foundry-demo-{LANG}"
 SR = 48000
+VIDEO_TITLE = pick("Microsoft Foundry 데모 — Contoso AI (한국어)", "Microsoft Foundry demo — Contoso AI (English)")
 
 # (장면, 챕터 제목) — 챕터 제목이 있으면 그 장면(앞이 장 구분 카드면 카드부터)에서 새 챕터가 시작됩니다.
-ORDER: list[tuple[str, str | None]] = [
+ORDER_KO: list[tuple[str, str | None]] = [
     ("S00_title", "오프닝"),
     ("S01_intro", None),
     ("S02_arch", "Foundry 구조"),
@@ -56,6 +59,31 @@ ORDER: list[tuple[str, str | None]] = [
     ("S12a_ent", "엔터프라이즈 도입 체크리스트"),
     ("S12_outro", "정리와 다음 단계"),
 ]
+ORDER_EN: list[tuple[str, str | None]] = [
+    ("S00_title", "Opening"),
+    ("S01_intro", None),
+    ("S02_arch", "Foundry architecture"),
+    ("C02_chapter", "Deploy — one azd up"),
+    ("S03_deploy", None),
+    ("C03_chapter", "Employee experience · Knowledge search (Contoso Guide)"),
+    ("S05_knowledge", None),
+    ("S06_pay", "Employee experience · Task automation (Contoso Pay)"),
+    ("S07_analyst", "Employee experience · Data analysis (Contoso Analyst)"),
+    ("S08_architect", "Employee experience · Latest knowledge via MCP (Contoso Architect)"),
+    ("S09_chat", "Employee experience · General chat and model choice"),
+    ("S10_safety", "Employee experience · Safety guardrails"),
+    ("S10b_code", "Agents as code"),
+    ("C04_chapter", "Admin · Models (Foundry portal)"),
+    ("P01_models", None),
+    ("P02_agents", "Admin · Agents"),
+    ("P03_guard", "Admin · Guardrails"),
+    ("P04_trace", "Admin · Tracing"),
+    ("P05_eval", "Admin · Evaluation"),
+    ("P06_ops", "Admin · Operations and governance"),
+    ("S12a_ent", "Enterprise adoption checklist"),
+    ("S12_outro", "Summary and next steps"),
+]
+ORDER = pick(ORDER_KO, ORDER_EN)
 
 
 def run(cmd: list[str], **kw) -> subprocess.CompletedProcess:
@@ -87,7 +115,7 @@ def check(scenes: list[dict]) -> list[str]:
     problems: list[str] = []
     manifest = json.loads((AUDIO / "manifest.json").read_text())
     t0 = 0.0
-    print(f"{'시작':>8}  {'길이':>7}  장면")
+    print(f"{pick('시작', 'start'):>8}  {pick('길이', 'length'):>7}  {pick('장면', 'scene')}")
     for s in scenes:
         says = s["says"]
         print(f"{fmt(t0):>8}  {s['real']:7.1f}  {s['name']}  (내레이션 {len(says)}개)")
@@ -228,7 +256,7 @@ def main() -> None:
 
         (tmp_p / "videos.txt").write_text("\n".join(f"file '{s['file']}'" for s in scenes))
         chapters = build_chapters(scenes)
-        title = "Microsoft Foundry 데모 — Contoso AI (한국어)"
+        title = VIDEO_TITLE
         meta = tmp_p / "chapters.ffmeta"
         write_chapters(chapters, meta, OUT_DIR / f"{args.out}.chapters.txt", title)
         write_srt(scenes, OUT_DIR / f"{args.out}.srt")
@@ -241,11 +269,15 @@ def main() -> None:
              "-c:v", "libx264", "-preset", args.preset, "-crf", str(args.crf), "-g", "60", "-pix_fmt", "yuv420p", "-r", "30",
              "-c:a", "aac", "-b:a", "80k", "-ar", str(SR), "-ac", "1", "-shortest", "-movflags", "+faststart", str(out)])
     thumb = OUT_DIR / f"{args.out}.thumbnail.png"
-    # 타이틀 슬라이드가 다 채워진 시점(24초)의 화면에서 아래 자막 바(976px 아래)를 잘라 썸네일로 씁니다
-    run(["ffmpeg", "-y", "-loglevel", "error", "-ss", "24", "-i", str(out), "-frames:v", "1", "-vf", "crop=1920:976:0:0", str(thumb)])
-    # 웹 플레이어의 포스터(16:9 전체 화면): 타이틀 내레이션이 끝나 자막이 지워진 직후(31.2초)의 프레임
+    t_thumb, t_poster = 24.0, 31.2  # 한국어판: 타이틀 내레이션(28초)이 시작되고 24초 · 끝나고 2.4초 뒤의 프레임
+    if LANG != "ko":  # 다른 언어: 타이틀 내레이션 길이에서 계산한다
+        title_say = next(e for sc in scenes if sc["name"] == "S00_title" for e in sc["says"] if e["key"] == "0_title")
+        t_thumb, t_poster = title_say["t"] + title_say["dur"] - 3.0, title_say["t"] + title_say["dur"] + 0.6
+    # 타이틀 슬라이드가 다 채워진 시점의 화면에서 아래 자막 바(976px 아래)를 잘라 썸네일로 씁니다
+    run(["ffmpeg", "-y", "-loglevel", "error", "-ss", f"{t_thumb:.2f}", "-i", str(out), "-frames:v", "1", "-vf", "crop=1920:976:0:0", str(thumb)])
+    # 웹 플레이어의 포스터(16:9 전체 화면): 타이틀 내레이션이 끝나 자막이 지워진 직후의 프레임
     poster = OUT_DIR / f"{args.out}.poster.jpg"
-    run(["ffmpeg", "-y", "-loglevel", "error", "-ss", "31.2", "-i", str(out), "-frames:v", "1", "-q:v", "3", str(poster)])
+    run(["ffmpeg", "-y", "-loglevel", "error", "-ss", f"{t_poster:.2f}", "-i", str(out), "-frames:v", "1", "-q:v", "3", str(poster)])
     size = out.stat().st_size / 1e6
     print(f"\n✔ {out.relative_to(REPO)}  {size:.1f}MB  {probe_duration(out) / 60:.1f}분")
     if size > 95:

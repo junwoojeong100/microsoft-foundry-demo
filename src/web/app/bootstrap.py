@@ -21,16 +21,21 @@ from azure.ai.projects.models import PromptAgentDefinition
 from .agents_def import AgentSpec, agent_specs
 from .config import settings
 from .foundry import foundry
+from .i18n import pick
 
 log = logging.getLogger("bootstrap")
 
 VECTOR_STORE_NAME = "contoso-knowledge"
 
+STEP_VECTOR_STORE = pick("지식 소스(벡터 스토어)", "Knowledge source (vector store)")
+STEP_DATA_FILES = pick("분석용 데이터 파일", "Analysis data files")
+STEP_PROJECT = pick("Foundry 프로젝트 연결", "Foundry project connection")
+
 
 @dataclass
 class BootstrapState:
     state: str = "idle"  # idle | running | ready | error
-    message: str = "대기 중"
+    message: str = pick("대기 중", "Waiting to start")
     steps: list[dict[str, Any]] = field(default_factory=list)
     started_at: float = 0.0
     finished_at: float = 0.0
@@ -77,12 +82,12 @@ async def _ensure_vector_store() -> str:
         if vs.name == VECTOR_STORE_NAME:
             counts = vs.file_counts
             if (vs.metadata or {}).get("seed_hash") == seed_hash and counts.completed == len(knowledge) and counts.failed == 0:
-                state.step("지식 소스(벡터 스토어)", "done", f"기존 {counts.completed}개 문서 사용")
+                state.step(STEP_VECTOR_STORE, "done", pick(f"기존 {counts.completed}개 문서 사용", f"Using {counts.completed} existing documents"))
                 return vs.id
             await oc.vector_stores.delete(vs.id)  # 내용이 달라졌다면 다시 만듭니다
             break
 
-    state.step("지식 소스(벡터 스토어)", "running", f"사규 PDF {len(knowledge)}개 업로드·임베딩 중")
+    state.step(STEP_VECTOR_STORE, "running", pick(f"사규 PDF {len(knowledge)}개 업로드·임베딩 중", f"Uploading and embedding {len(knowledge)} policy PDFs"))
     vs = await oc.vector_stores.create(name=VECTOR_STORE_NAME, metadata={"seed_hash": seed_hash, "app": "contoso-ai-portal"})
 
     async def upload(path):
@@ -90,7 +95,7 @@ async def _ensure_vector_store() -> str:
             await oc.vector_stores.files.upload_and_poll(vector_store_id=vs.id, file=(path.name, f.read()))
 
     await asyncio.gather(*[upload(p) for p in knowledge])
-    state.step("지식 소스(벡터 스토어)", "done", f"{len(knowledge)}개 문서 인덱싱 완료")
+    state.step(STEP_VECTOR_STORE, "done", pick(f"{len(knowledge)}개 문서 인덱싱 완료", f"{len(knowledge)} documents indexed"))
     return vs.id
 
 
@@ -106,7 +111,7 @@ async def _ensure_data_files() -> list[str]:
             continue
         uploaded = await oc.files.create(purpose="assistants", file=(path.name, path.read_bytes()))
         ids.append(uploaded.id)
-    state.step("분석용 데이터 파일", "done", f"{len(ids)}개 (Code Interpreter용)")
+    state.step(STEP_DATA_FILES, "done", pick(f"{len(ids)}개 (Code Interpreter용)", f"{len(ids)} files (for Code Interpreter)"))
     return ids
 
 
@@ -132,13 +137,17 @@ async def _latest_version(name: str):
 async def _ensure_agents(ctx: dict[str, Any]) -> None:
     pc = foundry.project
     for spec in agent_specs():
-        state.step(f"에이전트 · {spec.title}", "running")
+        step_title = pick(f"에이전트 · {spec.title}", f"Agent · {spec.title}")
+        state.step(step_title, "running")
         latest = await _latest_version(spec.name)
         if latest is None and spec.baseline_instructions:
             base = _definition(spec, ctx, baseline=True)
             await pc.agents.create_version(
                 agent_name=spec.name, definition=base,
-                description="초기 프로토타입 — 모델만 연결 (지식 없음). 평가 비교의 기준 버전",
+                description=pick(
+                    "초기 프로토타입 — 모델만 연결 (지식 없음). 평가 비교의 기준 버전",
+                    "Initial prototype — model only (no knowledge). Baseline version for the evaluation comparison",
+                ),
                 metadata={"role": "baseline", "hash": _definition_hash(base), "app": "contoso-ai-portal"},
             )
             latest = await _latest_version(spec.name)
@@ -153,7 +162,7 @@ async def _ensure_agents(ctx: dict[str, Any]) -> None:
                 metadata={"role": "final", "hash": digest, "app": "contoso-ai-portal"},
             )
         state.agents[spec.key] = {"name": spec.name, "version": version.version}
-        state.step(f"에이전트 · {spec.title}", "done", f"{spec.name} v{version.version}")
+        state.step(step_title, "done", f"{spec.name} v{version.version}")
 
 
 async def run_bootstrap() -> BootstrapState:
@@ -162,19 +171,19 @@ async def run_bootstrap() -> BootstrapState:
     delay = 10.0
     while True:
         try:
-            state.step("Foundry 프로젝트 연결", "running")
+            state.step(STEP_PROJECT, "running")
             await foundry.list_deployments()  # 권한(RBAC) 전파 확인용
-            state.step("Foundry 프로젝트 연결", "done", settings.project_name)
+            state.step(STEP_PROJECT, "done", settings.project_name)
             vs_id = await _ensure_vector_store()
             files = await _ensure_data_files()
             state.vector_store_id, state.data_file_ids = vs_id, files
             await _ensure_agents({"vector_store_id": vs_id, "data_file_ids": files})
             state.state, state.finished_at = "ready", time.time()
-            state.message = "모든 준비가 끝났습니다"
+            state.message = pick("모든 준비가 끝났습니다", "Everything is ready")
             return state
         except Exception as exc:  # RBAC 전파 지연 등은 재시도
             state.state = "running"
-            state.message = f"재시도 대기: {type(exc).__name__}: {str(exc)[:160]}"
+            state.message = pick(f"재시도 대기: {type(exc).__name__}: {str(exc)[:160]}", f"Waiting to retry: {type(exc).__name__}: {str(exc)[:160]}")
             log.warning("bootstrap 실패 — %.0f초 후 재시도: %s", delay, exc)
             await asyncio.sleep(delay)
             delay = min(delay * 1.5, 60.0)

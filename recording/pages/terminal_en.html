@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>azd up — replay of the real run</title>
+<link rel="stylesheet" href="vendor/xterm.css">
+<style>
+  @font-face { font-family: 'Pretendard'; src: url('vendor/PretendardVariable.woff2') format('woff2-variations'); font-weight: 45 920; }
+  @font-face { font-family: 'NanumCoding'; src: url('vendor/nanum-gothic-coding-korean-400-normal.woff2') format('woff2'); font-weight: 400; size-adjust: 119%; unicode-range: U+AC00-D7A3, U+1100-11FF, U+3130-318F, U+3000-303F; }
+  @font-face { font-family: 'NanumCoding'; src: url('vendor/nanum-gothic-coding-korean-700-normal.woff2') format('woff2'); font-weight: 700; size-adjust: 119%; unicode-range: U+AC00-D7A3, U+1100-11FF, U+3130-318F, U+3000-303F; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; overflow: hidden; font-family: 'Pretendard', 'Apple SD Gothic Neo', sans-serif; }
+  body { background: radial-gradient(1100px 600px at 15% -10%, #1d3a6e 0, transparent 60%), radial-gradient(900px 500px at 100% 110%, #3b2a7a 0, transparent 55%), #0b1020; color: #e6ebf5; }
+  .stage { height: calc(100vh - 78px); display: grid; grid-template-columns: minmax(0, 1fr) 330px; gap: 22px; padding: 26px 28px 20px; }
+  .win { background: #0d1117; border: 1px solid #263044; border-radius: 14px; box-shadow: 0 24px 60px rgba(0,0,0,.55); overflow: hidden; display: flex; flex-direction: column; min-width: 0; }
+  .bar { height: 42px; display: flex; align-items: center; gap: 8px; padding: 0 16px; background: linear-gradient(#232a3a, #1a2030); border-bottom: 1px solid #2a3348; font-size: 14px; color: #aab4c8; }
+  .bar i { width: 12px; height: 12px; border-radius: 50%; display: inline-block; } .bar i:nth-child(1) { background: #ff5f57; } .bar i:nth-child(2) { background: #febc2e; } .bar i:nth-child(3) { background: #28c840; }
+  .bar .title { margin-left: 10px; font-weight: 600; } .bar .grow { flex: 1; }
+  .clock { background: rgba(245,158,11,.16); border: 1px solid rgba(245,158,11,.45); color: #fbbf24; padding: 3px 11px; border-radius: 99px; font-weight: 700; font-variant-numeric: tabular-nums; }
+  #termwrap { flex: 1; padding: 12px 14px; min-height: 0; overflow: hidden; }
+  .xterm .xterm-viewport { overflow: hidden !important; }
+  .panel { background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1); border-radius: 14px; padding: 18px 18px 14px; backdrop-filter: blur(6px); align-self: start; }
+  .panel h3 { margin: 0 0 12px; font-size: 15px; letter-spacing: .02em; color: #9fb0cf; font-weight: 700; }
+  .st { display: flex; align-items: center; gap: 12px; padding: 9px 4px; font-size: 16px; color: #7f8aa3; transition: color .3s; }
+  .st .dot { width: 22px; height: 22px; border-radius: 50%; border: 2px solid #3a4560; display: grid; place-items: center; font-size: 12px; flex: none; transition: .3s; }
+  .st.on { color: #fff; font-weight: 700; } .st.on .dot { border-color: #38bdf8; background: rgba(56,189,248,.15); box-shadow: 0 0 0 5px rgba(56,189,248,.12); animation: pul 1.4s infinite; }
+  .st.done { color: #b8c3dc; } .st.done .dot { border-color: #22c55e; background: #22c55e; color: #052e16; }
+  @keyframes pul { 50% { box-shadow: 0 0 0 9px rgba(56,189,248,.04); } }
+  .note { margin-top: 12px; font-size: 13.5px; color: #8fa0bf; line-height: 1.55; border-top: 1px solid rgba(255,255,255,.1); padding-top: 12px; }
+  .note b { color: #fbbf24; }
+</style>
+</head>
+<body>
+<div class="stage">
+  <div class="win">
+    <div class="bar"><i></i><i></i><i></i><span class="title" id="title">Terminal — azd up</span><span class="grow"></span><span class="clock">⏱ Real elapsed <span id="clk">00:00</span></span></div>
+    <div id="termwrap"><div id="term"></div></div>
+  </div>
+  <div class="panel">
+    <h3>Deployment stages · real run</h3>
+    <div id="stages"></div>
+    <div class="note">The clock shows <b>real elapsed time</b>. Waiting periods are compressed in the video (the output is a recording of the real run).</div>
+  </div>
+</div>
+<script src="vendor/xterm.js"></script>
+<script>
+  // config is injected by the recorder as window.__TERM_CFG: { cols, rows, events:[[c, data]], map:[{c0,c1,dur}], stages:[{name, c}], command, title }
+  const fmt = (s) => String(Math.floor(s / 60)).padStart(2, '0') + ':' + String(Math.floor(s % 60)).padStart(2, '0');
+  let term;
+  function setup(cfg) {
+    term = new Terminal({ cols: cfg.cols, rows: cfg.rows, fontFamily: 'Menlo, NanumCoding, "Apple SD Gothic Neo", monospace', fontSize: 15.5, lineHeight: 1.16, cursorBlink: false, allowProposedApi: true,
+      theme: { background: '#0d1117', foreground: '#d7dde8', cursor: '#d7dde8', black: '#1b2130', brightBlack: '#5b6683', green: '#3fb950', brightGreen: '#56d364', cyan: '#39c5cf', brightCyan: '#56d4dd', blue: '#58a6ff', brightBlue: '#79c0ff', yellow: '#d29922', brightYellow: '#e3b341', red: '#f85149', brightRed: '#ff7b72', magenta: '#bc8cff', brightMagenta: '#d2a8ff' } });
+    term.open(document.getElementById('term'));
+    document.getElementById('title').textContent = cfg.title || 'Terminal';
+    document.getElementById('stages').innerHTML = cfg.stages.map((s, i) => `<div class="st" id="st${i}"><span class="dot"></span>${s.name}</div>`).join('');
+  }
+  // replay time (r) → cast time (c)
+  function toCast(map, r) {
+    let acc = 0;
+    for (const m of map) { if (r <= acc + m.dur) return m.c0 + (m.c1 - m.c0) * ((r - acc) / m.dur); acc += m.dur; }
+    return map[map.length - 1].c1;
+  }
+  window.__term = {
+    _t0: 0,
+    t() { return this._t0 ? (performance.now() - this._t0) / 1000 : -1; },
+    async play(cfg) {
+      await document.fonts.ready;
+      setup(cfg);
+      const total = cfg.map.reduce((a, m) => a + m.dur, 0);
+      term.write('\x1b[1;32m➜\x1b[0m \x1b[1;36mmicrosoft-foundry-demo\x1b[0m \x1b[33m$\x1b[0m ');
+      for (const ch of cfg.command) { term.write(ch); await new Promise(r => setTimeout(r, 75)); }
+      await new Promise(r => setTimeout(r, 500)); term.write('\r\n');
+      const events = cfg.events; let i = 0; const t0 = performance.now(); this._t0 = t0;
+      await new Promise((resolve) => {
+        const tick = () => {
+          const r = (performance.now() - t0) / 1000; const c = toCast(cfg.map, r);
+          let buf = ''; while (i < events.length && events[i][0] <= c) buf += events[i++][1];
+          if (buf) term.write(buf);
+          document.getElementById('clk').textContent = fmt(c);
+          let cur = -1; cfg.stages.forEach((s, k) => { if (c >= s.c) cur = k; });
+          cfg.stages.forEach((s, k) => { const el = document.getElementById('st' + k); el.className = 'st ' + (k < cur ? 'done' : k === cur ? (cur === cfg.stages.length - 1 ? 'done' : 'on') : ''); el.querySelector('.dot').textContent = el.classList.contains('done') ? '✓' : ''; });
+          if (r >= total) return resolve();
+          requestAnimationFrame(tick);
+        }; requestAnimationFrame(tick);
+      });
+      if (i < events.length) term.write(events.slice(i).map(e => e[1]).join(''));
+      await new Promise(r => setTimeout(r, 400));
+    },
+  };
+</script>
+</body>
+</html>
